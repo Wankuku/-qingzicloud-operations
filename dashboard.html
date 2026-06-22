@@ -231,9 +231,9 @@
             <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">05-06月</span>
           </div>
           <div class="space-y-2.5 mb-4">
-            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计发布</span><span class="text-sm font-extrabold text-indigo-600">114篇</span></div>
-            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计阅读</span><span class="text-sm font-extrabold text-indigo-600">9,485</span></div>
-            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">整体篇均</span><span class="text-sm font-extrabold text-emerald-600">190</span></div>
+            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计发布</span><span class="text-sm font-extrabold text-indigo-600">36篇</span></div>
+            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计阅读</span><span class="text-sm font-extrabold text-indigo-600">13,061</span></div>
+            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">整体篇均</span><span class="text-sm font-extrabold text-emerald-600">362</span></div>
             <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">爆款门槛</span><span class="text-sm font-extrabold text-amber-600">≥1,000</span></div>
             <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">爆款数量</span><span class="text-sm font-extrabold text-purple-600">6篇</span></div>
           </div>
@@ -496,8 +496,8 @@
 
       <!-- 全部列表 -->
       <div class="card p-6">
-        <h3 class="section-title mb-4">📖 全部历史文章（36篇·2026年完整）</h3>
-        <div class="        <div class="space-y-1 scroll-area">
+        <h3 class="section-title mb-4">📖 全部历史文章（36篇·2026年）</h3>
+        <div class="space-y-1 scroll-area">
           <div class="text-xs font-bold text-red-600 px-3 py-2 mt-2 mb-1 border-t-2 border-red-300">— 6月 全部10篇 =====</div>
           <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-red-50 border border-red-300 border">
             <div class="col-span-1 text-slate-700">06/22</div>
@@ -862,10 +862,13 @@
             <div class="col-span-1 text-right text-slate-400">—</div>
           </div>
           <div class="text-center text-xs text-slate-400 py-3 border-t border-dashed border-slate-200">— 其余0篇低阅读文章已省略，详见完整数据库 —</div>
-        </div>
+                </div>
+      </div>
     </div>
 
-TAB 5: 流量来源 -->
+
+    <!-- ================================================================ -->
+    <!-- TAB 5: 流量来源 -->
     <!-- ================================================================ -->
     <div id="tab-sources" class="tab-content">
 
@@ -1297,7 +1300,7 @@ TAB 5: 流量来源 -->
     data: {
       labels: ['推荐','聊天会话','朋友圈','公众号主页','公众号消息','搜一搜','其他'],
       datasets: [{
-        data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
+        data: [7115, 626, 480, 260, 191, 56, 31],
         backgroundColor: ['#7C3AED','#60A5FA','#34D399','#94A3B8','#818CF8','#FBBF24','#CBD5E1'],
         borderWidth: 0, borderRadius: 6, hoverOffset: 4
       }]
@@ -1315,21 +1318,13 @@ TAB 5: 流量来源 -->
   new Chart(document.getElementById('weeklyRecChart'), {
     type: 'bar',
     data: {
-      labels: ['W18
-04/28-05/04','W19
-05/05-05/11','W20
-05/12-05/18','W21
-05/19-05/25','W22
-05/26-06/01','W23
-06/02-06/08','W24
-06/09-06/15','W25
-06/22-06/28'],
+      labels: ['W18\n04/28-05/04','W19\n05/05-05/11','W20\n05/12-05/18','W21\n05/19-05/25','W22\n05/26-06/01','W23\n06/02-06/08','W24\n06/09-06/15','W25\n06/22-06/28'],
       datasets: [
         {
           label: '推荐占比%',
-          data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
-          backgroundColor: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0].map(v => v === 0 ? 'rgba(203,213,225,0.4)' : v >= 80 ? 'rgba(124,58,237,0.9)' : v >= 50 ? 'rgba(124,58,237,0.6)' : 'rgba(124,58,237,0.35)') =>
-            v === null ? 'rgba(203,213,225,0.4)' :
+          data: [60.0,36.1,85.0,79.1,80.5,12.2,25.0,0.0],
+          backgroundColor: [60.0,36.1,85.0,79.1,80.5,12.2,25.0,0.0].map((v,i) =>
+            v === 0 ? 'rgba(203,213,225,0.4)' :
             v >= 80 ? 'rgba(124,58,237,0.9)' :
             v >= 50 ? 'rgba(124,58,237,0.6)' :
             'rgba(124,58,237,0.35)'
@@ -1367,8 +1362,8 @@ TAB 5: 流量来源 -->
     data: {
       labels: ['第1周','第2周','第3周','第4周','第5周'],
       datasets: [
-        { label: '5月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '6月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false }
+        { label: '5月', data: [32,209,1143,3142,3914], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
+        { label: '6月', data: [212,321,318,212,null], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false }
       ]
     },
     options: {
@@ -1391,7 +1386,7 @@ TAB 5: 流量来源 -->
       labels: ['06/01','06/02','06/03','06/04','06/05','06/06','06/07','06/08','06/09','06/10','06/11','06/12','06/13','06/14','06/15','06/16','06/17','06/18','06/19','06/20','06/21'],
       datasets: [{
         label: '阅读',
-        data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
+        data: [42,99,44,27,89,39,127,36,127,69,29,37,28,50,54,20,0,34,18,25,45],
         backgroundColor: [42,99,44,27,89,39,127,36,127,69,29,37,28,50,54,20,0,34,18,25,45].map(v =>
           v === 0 ? 'rgba(203,213,225,0.6)' : v >= 100 ? 'rgba(5,150,105,0.9)' : 'rgba(79,70,229,0.75)'
         ),
