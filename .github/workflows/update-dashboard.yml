@@ -1,0 +1,74 @@
+name: Update Dashboard
+
+on:
+  schedule:
+    - cron: '0 1 * * 5'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Get WeChat Token
+        id: token
+        run: |
+          RESP=$(curl -s --get \
+            -d "appid=${{ secrets.WX_APPID }}" \
+            -d "secret=${{ secrets.WX_APPSECRET }}" \
+            -d "grant_type=client_credential" \
+            "https://api.weixin.qq.com/cgi-bin/token")
+          echo "Token resp: $RESP"
+          TOKEN="$(echo $RESP | python3 -c 'import sys,json;print(json.load(sys.stdin).get("access_token",""))')"
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT
+          echo "Token obtained"
+
+      - name: Fetch Draft List
+        id: drafts
+        run: |
+          TOKEN="${{ steps.token.outputs.token }}"
+          RESP=$(curl -s "https://api.weixin.qq.com/cgi-bin/draft/batchget?access_token=$TOKEN" -H "Content-Type: application/json" -d '{"offset":0,"count":20,"no_content":0}')
+          echo "Draft resp: $RESP"
+          echo "drafts=$RESP" >> $GITHUB_OUTPUT
+
+      - name: Update Dashboard HTML
+        run: |
+          python3 << 'PYEOF_INNER'
+          import json, datetime, re
+
+          with open('dashboard.html', 'r', encoding='utf-8') as f:
+              html = f.read()
+
+          draft_json = '''${{ steps.drafts.outputs.drafts }}'''
+          try:
+              data = json.loads(draft_json)
+              items = data.get('item', [])
+              rows = ''
+              for i, item in enumerate(items, 1):
+                  news = item.get('content', {}).get('news_item', [{}])[0]
+                  title = news.get('title', '未知')
+                  ts = item.get('update_time', 0)
+                  dt = datetime.datetime.fromtimestamp(ts).strftime('%m/%d %H:%M') if ts else 'N/A'
+                  rows += f'<tr><td>{i}</td><td>{title}</td><td>{dt}</td></tr>'
+          except Exception as e:
+              rows = f'<tr><td colspan="3">解析失败: {e}</td></tr>'
+
+          pattern = r'(<table[^>]*id="draft-table"[^>]*>)(.*?)(</table>)'
+          new_html = re.sub(pattern, r'\1' + rows + r'\3', html, flags=re.DOTALL)
+
+          with open('dashboard.html', 'w', encoding='utf-8') as f:
+              f.write(new_html)
+          print('Done')
+          PYEOF_INNER
+
+      - name: Commit and Push
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add dashboard.html
+          git diff --staged --quiet && echo "No changes" || git commit -m "ci: auto update $(date '+%Y-%m-%d %H:%M')"
+          git push
