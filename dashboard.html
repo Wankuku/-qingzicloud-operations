@@ -110,7 +110,9 @@
         <div class="flex items-center gap-3 ml-9 md:ml-0">
           <div class="bg-white/15 border border-white/25 rounded-xl px-4 py-2 text-center">
             <div class="text-indigo-200 text-xs">数据状态</div>
-            <div class="text-white font-bold text-sm">5月✅ · 6月✅</div>
+            <div class="text-white font-bold text-sm"><!-- DATA_STATUS_MONTHS -->
+1月待填 · 2月待填 · 3月待填 · 4月待填 · 5月✅ · 6月✅ · 7月待填 · 8月待填 · 9月待填 · 10月待填 · 11月待填 · 12月待填
+</div>
           </div>
           <a href="https://decide-armed-orientation-teddy.trycloudflare.com/dashboard.html" target="_blank"
              class="bg-white text-indigo-700 hover:bg-indigo-50 text-xs font-bold px-4 py-2 rounded-xl shadow-md border border-white/30 transition">
@@ -228,14 +230,14 @@
         <div class="card p-5" style="border-top: 3px solid #7C3AED;">
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-extrabold text-slate-800 text-sm">🏆 累计战报</h3>
-            <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">05-06月</span>
+            <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">2026年02月-{{LATEST_MONTH}}月</span>
           </div>
           <div class="space-y-2.5 mb-4">
-            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计发布</span><span class="text-sm font-extrabold text-indigo-600">114篇</span></div>
-            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计阅读</span><span class="text-sm font-extrabold text-indigo-600">9,485</span></div>
-            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">整体篇均</span><span class="text-sm font-extrabold text-emerald-600">190</span></div>
+            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计发布</span><span class="text-sm font-extrabold text-indigo-600">84篇</span></div>
+            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">累计阅读</span><span class="text-sm font-extrabold text-indigo-600">12,103</span></div>
+            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">整体篇均</span><span class="text-sm font-extrabold text-emerald-600">144</span></div>
             <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">爆款门槛</span><span class="text-sm font-extrabold text-amber-600">≥1,000</span></div>
-            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">爆款数量</span><span class="text-sm font-extrabold text-purple-600">6篇</span></div>
+            <div class="flex justify-between items-center"><span class="text-xs text-slate-500 font-medium">爆款数量</span><span class="text-sm font-extrabold text-purple-600">8篇</span></div>
           </div>
           <div class="bg-slate-50 rounded-2xl p-3 space-y-1.5">
             <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">全部爆款</div>
@@ -251,7 +253,7 @@
 
       <!-- 5月vs6月图 -->
       <div class="card p-6">
-        <h3 class="section-title mb-5">📊 每月每周阅读对比</h3>
+        <h3 class="section-title mb-5">📊 每月阅读对比（全年1-12月）</h3>
         <canvas id="compareChart" height="90"></canvas>
       </div>
     </div>
@@ -445,7 +447,7 @@
         </span>
         <span class="bg-white border-2 border-indigo-100 rounded-2xl px-5 py-2.5 text-xs shadow-sm">
           <span class="text-slate-400 font-bold">累计阅读</span>
-          <span class="font-black text-indigo-600 ml-2 text-base">13,061</span><span class="text-slate-400 text-xs">人</span>
+          <span class="font-black text-indigo-600 ml-2 text-base">12,103</span><span class="text-slate-400 text-xs">人</span>
         </span>
         <span class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl px-5 py-2.5 text-xs shadow-sm">
           <span class="text-slate-500 font-bold">覆盖话题</span>
@@ -496,372 +498,105 @@
 
       <!-- 全部列表 -->
       <div class="card p-6">
-        <h3 class="section-title mb-4">📖 全部历史文章（36篇·2026年完整）</h3>
+        <h3 class="section-title mb-4">📖 全部历史文章（{{TOTAL_COUNT}}篇·2026年02月起累计）</h3>
         <div class="        <div class="space-y-1 scroll-area">
-          <div class="text-xs font-bold text-red-600 px-3 py-2 mt-2 mb-1 border-t-2 border-red-300">— 6月 全部10篇 =====</div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-red-50 border border-red-300 border">
-            <div class="col-span-1 text-slate-700">06/22</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">卖园区：5000万卖出去了，1.2亿的血亏是怎么漏掉的？<span class="text-xs bg-red-500 text-white px-1 rounded ml-1">NEW</span></div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-700 font-bold">25</div>
-            <div class="col-span-1 text-right text-slate-400">2</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/07</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">13号文落地一个月：城投被剥马甲后，还有几条活路</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">131🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/05</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">停车场运营：我见过最狠的算账，有城投月收38万还亏60万</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">69📈</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/10</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">产业园运营：三种模式，有的城投算完账就放弃了</div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">55📈</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/09</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">53📈</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/02</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">工业上楼：城投跟不跟？算完这笔账，答案清楚了</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">37</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/21</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了</div>
-            <div class="col-span-2 text-blue-600">保租房</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">36</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/14</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">园区的“流量”金矿，城投只挖了1%</div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">35</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/08</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">EOD 真实案例：某长三角地市 14 亿生态项目，3 年回本怎么算的</div>
-            <div class="col-span-2 text-blue-600">其他</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">33</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">06/15</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">“代建、代运营”的尽头，是自己下场做生意</div>
-            <div class="col-span-2 text-blue-600">其他</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">33</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="text-xs font-bold text-blue-600 px-3 py-2 mt-2 mb-1 border-t-2 border-blue-300">— 5月 全部12篇 =====</div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/28</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div>
-            <div class="col-span-2 text-blue-600">城市更新</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1429🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/20</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1326🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/15</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">委托运营合同怎么签：三个条款不写进去，后面全是坑</div>
-            <div class="col-span-2 text-blue-600">委托运营</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1295🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/25</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1150🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/31</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">保障房运营的三个生死线：空置率、租金差、运营成本</div>
-            <div class="col-span-2 text-blue-600">保租房</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1148🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/17</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">某城投园区从"烂尾"到"满租"，三年复盘</div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1087🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/27</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1040🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/23</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">1028🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/18</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">园区轻资产运营：如何让入驻企业"留下来、多消费"？</div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">972🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/19</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">产业园同质化：100个园区99个长得一样，凭什么选你？</div>
-            <div class="col-span-2 text-blue-600">产业园</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">319🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/06</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">长沙保障房改造：领导算完账当场沉默了</div>
-            <div class="col-span-2 text-blue-600">保租房</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">184🔥</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-white border-transparent border">
-            <div class="col-span-1 text-slate-600">05/30</div>
-            <div class="col-span-4 text-slate-700 font-medium truncate">“算力”这趟车，城投上了到底是乘客还是燃料</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-600 font-bold">59📈</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="text-xs font-bold text-slate-400 px-3 py-2 mt-2 mb-1 border-t-2 border-dashed border-slate-300">— 2026年2-4月 冷启动期（推荐极低）—</div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">01/16</div>
-            <div class="col-span-4 text-slate-500 truncate">别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！</div>
-            <div class="col-span-2 text-blue-600">其他</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">2</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">02/05</div>
-            <div class="col-span-4 text-slate-500 truncate">上海的“老破小”，最终会被谁“买断”？答案将影响你未来10年的财富！</div>
-            <div class="col-span-2 text-blue-600">其他</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">8</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">02/16</div>
-            <div class="col-span-4 text-slate-500 truncate">🧨 岁序更新，金马迎春</div>
-            <div class="col-span-2 text-blue-600">其他</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">5</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">02/20</div>
-            <div class="col-span-4 text-slate-500 truncate">轻骑逐火，盘活生金｜「轻资运营局」2026新年寄语 & 年度内容规划</div>
-            <div class="col-span-2 text-blue-600">公众号运营</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">6</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">02/28</div>
-            <div class="col-span-4 text-slate-500 truncate">【内部整理】保租房投资决策“秘籍”：2大模式优劣分析+可套用测算模型，直接抄作业！</div>
-            <div class="col-span-2 text-blue-600">保租房</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">11</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/13</div>
-            <div class="col-span-4 text-slate-500 truncate">2026年政府资产盘活：为什么"轻资产模式"才是城投转型的救命稻草？</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">6</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/23</div>
-            <div class="col-span-4 text-slate-500 truncate">化债进入"主动化债"时代：各地的债务高风险地区，现在都怎么样了</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">5</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/24</div>
-            <div class="col-span-4 text-slate-500 truncate">REITs扩围：城市更新和商业楼宇，这次真的能上市了</div>
-            <div class="col-span-2 text-blue-600">城市更新</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">9</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/25</div>
-            <div class="col-span-4 text-slate-500 truncate">政府资产运维的钱，都花在哪里了</div>
-            <div class="col-span-2 text-blue-600">其他</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">4</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/26</div>
-            <div class="col-span-4 text-slate-500 truncate">城投年报里的"增收不增利"，到底什么意思</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">6</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/27</div>
-            <div class="col-span-4 text-slate-500 truncate">化债后半场的城投融资：哪些路通了，哪些路堵了</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">1</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/28</div>
-            <div class="col-span-4 text-slate-500 truncate">城投轻资产运营，你可能连第一步就走错了</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">2</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/29</div>
-            <div class="col-span-4 text-slate-500 truncate">政府资产盘活的真相：不是没钱，是没人敢担事</div>
-            <div class="col-span-2 text-blue-600">资产盘活</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">1</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 row rounded-xl bg-slate-100 border border-slate-300 border">
-            <div class="col-span-1 text-slate-500">04/30</div>
-            <div class="col-span-4 text-slate-500 truncate">三资盘活：湖北安徽模式，对其他城投有什么启发</div>
-            <div class="col-span-2 text-blue-600">城投转型</div>
-            <div class="col-span-1 text-right text-slate-500 font-bold">2</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">0</div>
-            <div class="col-span-1 text-right text-slate-400">—</div>
-          </div>
-          <div class="text-center text-xs text-slate-400 py-3 border-t border-dashed border-slate-200">— 其余0篇低阅读文章已省略，详见完整数据库 —</div>
+<div class="text-xs font-bold text-red-600 px-3 py-2 mt-2 mb-1 border-t-2 border-red-300">— 2026年6月 20篇 730阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/21</div><div class="col-span-4 text-slate-700 font-medium truncate">写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">36</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/20</div><div class="col-span-4 text-slate-700 font-medium truncate">35万亿十五五规划落地：城投手里有哪些还没被讨论的机会？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">11</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/19</div><div class="col-span-4 text-slate-700 font-medium truncate">城投做能源托管，本质上是一场圈地运动——圈的是用电用户</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">16</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/18</div><div class="col-span-4 text-slate-700 font-medium truncate">商办批量改公寓：一场豪赌，正在拉开差距</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">30</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/16</div><div class="col-span-4 text-slate-700 font-medium truncate">经营性债务来袭：那120亿的债转股是怎么谈下来的</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">16</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/15</div><div class="col-span-4 text-slate-700 font-medium truncate">“代建、代运营”的尽头，是自己下场做生意</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">33</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/14</div><div class="col-span-4 text-slate-700 font-medium truncate">园区的“流量”金矿，城投只挖了1%</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">35</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/13</div><div class="col-span-4 text-slate-700 font-medium truncate">「六张网」7万亿砸下来，城投能接住哪一张？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">22</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/12</div><div class="col-span-4 text-slate-700 font-medium truncate">城投资产盘活：五个坑，踩了三个就翻不了身</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">32</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/11</div><div class="col-span-4 text-slate-700 font-medium truncate">13号文落地一个月，城投的三笔账怎么算？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">24</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/10</div><div class="col-span-4 text-slate-700 font-medium truncate">产业园运营：三种模式，有的城投算完账就放弃了</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">55</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/09</div><div class="col-span-4 text-slate-700 font-medium truncate">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">53</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/08</div><div class="col-span-4 text-slate-700 font-medium truncate">EOD 真实案例：某长三角地市 14 亿生态项目，3 年回本怎么算的</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">33</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/07</div><div class="col-span-4 text-slate-700 font-medium truncate">13号文落地一个月：城投被剥马甲后，还有几条活路</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">131</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">25</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/06</div><div class="col-span-4 text-slate-700 font-medium truncate">"35%"上缴大棒：国企利润上交新规后，城投还剩多少肉？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">19</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/05</div><div class="col-span-4 text-slate-700 font-medium truncate">停车场运营：我见过最狠的算账，有城投月收38万还亏60万</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">69</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">26</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/04</div><div class="col-span-4 text-slate-700 font-medium truncate">帮城投做REITs预审材料，我总结了5个被拒原因，第3个最不应该</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">25</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/03</div><div class="col-span-4 text-slate-700 font-medium truncate">两业融合三年：城投的钱投进去了，效果怎么样？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">23</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/02</div><div class="col-span-4 text-slate-700 font-medium truncate">工业上楼：城投跟不跟？算完这笔账，答案清楚了</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">37</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/01</div><div class="col-span-4 text-slate-700 font-medium truncate">招商率卡在60%，问题不在招商——城投园区最常见的那个第一个错</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">30</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-blue-600 px-3 py-2 mt-2 mb-1 border-t-2 border-blue-300">— 2026年5月 29篇 11,218阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/31</div><div class="col-span-4 text-slate-700 font-medium truncate">保障房运营的三个生死线：空置率、租金差、运营成本</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1148🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">7</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/30</div><div class="col-span-4 text-slate-700 font-medium truncate">“算力”这趟车，城投上了到底是乘客还是燃料</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">59</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">5</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/29</div><div class="col-span-4 text-slate-700 font-medium truncate">强制配储取消后，城投发现储能突然能赚钱了：有项目靠容量电价，年收入多了300万</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">13</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/28</div><div class="col-span-4 text-slate-700 font-medium truncate">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div><div class="col-span-2 text-blue-600">城市更新</div><div class="col-span-1 text-right text-slate-700 font-bold">1429🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">29</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/27</div><div class="col-span-4 text-slate-700 font-medium truncate">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">1040🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/25</div><div class="col-span-4 text-slate-700 font-medium truncate">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">1150🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">4</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/24</div><div class="col-span-4 text-slate-700 font-medium truncate">144亿收入，4.5%利润率：城投年报最薄利的一幕</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">10</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/23</div><div class="col-span-4 text-slate-700 font-medium truncate">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">1028🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">7</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/22</div><div class="col-span-4 text-slate-700 font-medium truncate">曲江撤销管委会：过多少文旅城投，死在这条路上</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">20</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/21</div><div class="col-span-4 text-slate-700 font-medium truncate">保租房定价：租金怎么定才不踩红线？一套算法模型</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">13</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/20</div><div class="col-span-4 text-slate-700 font-medium truncate">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1326🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">33</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/19</div><div class="col-span-4 text-slate-700 font-medium truncate">产业园同质化：100个园区99个长得一样，凭什么选你？</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">319</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">15</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/19</div><div class="col-span-4 text-slate-700 font-medium truncate">某地级市城投"委托运营"3年后：500万教训换来的复盘</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">47</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-blue-50 border border-blue-100"><div class="col-span-1 text-slate-500">05/18</div><div class="col-span-4 text-slate-700 font-medium truncate">园区轻资产运营：如何让入驻企业"留下来、多消费"？</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">972📈</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">84</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/17</div><div class="col-span-4 text-slate-700 font-medium truncate">某城投园区从"烂尾"到"满租"，三年复盘</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">1087🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">19</div><div class="col-span-1 text-right text-slate-400">2</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/16</div><div class="col-span-4 text-slate-700 font-medium truncate">某地级市城投：如何用"委托运营"撬动民营资本</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">24</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-amber-50 border border-amber-200"><div class="col-span-1 text-slate-500">05/15</div><div class="col-span-4 text-slate-700 font-medium truncate">委托运营合同怎么签：三个条款不写进去，后面全是坑</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1295🔥</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">71</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/15</div><div class="col-span-4 text-slate-700 font-medium truncate">财政部新设债务司：城投的紧箍咒，不是松了，是换了个人念</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">5</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/14</div><div class="col-span-4 text-slate-700 font-medium truncate">跟政府谈了100次：我发现有1条规矩，破了就全盘皆输</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">7</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/12</div><div class="col-span-4 text-slate-700 font-medium truncate">80万亿资产睡在账上：城投守着金矿，却挣扎在温饱问题里</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">7</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/11</div><div class="col-span-4 text-slate-700 font-medium truncate">REITs/ABS/委托运营：三条路选错一条，白干十年</div><div class="col-span-2 text-blue-600">REITs</div><div class="col-span-1 text-right text-slate-700 font-bold">13</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/10</div><div class="col-span-4 text-slate-700 font-medium truncate">国企利润上交中央：城投又得多掏多少钱？算完惊了</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">5</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/09</div><div class="col-span-4 text-slate-700 font-medium truncate">土地财政死了：城投的饭票，还剩几张？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/08</div><div class="col-span-4 text-slate-700 font-medium truncate">一个改造项目算不清账？业主亏掉了一套别墅的钱</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">3</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/06</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙保障房改造：领导算完账当场沉默了</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">184</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">13</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/05</div><div class="col-span-4 text-slate-700 font-medium truncate">土储专项债重启：有人已经拿到钱了，你还在等什么？</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">6</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/04</div><div class="col-span-4 text-slate-700 font-medium truncate">7000家城投消失了：资产和债务到底去了哪里？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/02</div><div class="col-span-4 text-slate-700 font-medium truncate">为什么你的园区招了三年还招不满</div><div class="col-span-2 text-blue-600">产业园</div><div class="col-span-1 text-right text-slate-700 font-bold">5</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">05/01</div><div class="col-span-4 text-slate-700 font-medium truncate">长租公寓和保障房，不懂行的话，听起来很美，做起来很惨</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-amber-600 px-3 py-2 mt-2 mb-1 border-t-2 border-amber-300">— 2026年2-4月 冷启动期（推荐极低）—</div>
+<div class="text-xs text-amber-500 px-3 py-1 mb-1">📌 组内排序：4月→3月→2月（从新到旧）</div>
+<div class="text-xs font-bold text-slate-600 px-3 py-2 mt-2 mb-1 border-t-2 border-slate-300">— 2026年4月 9篇 53阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/30</div><div class="col-span-4 text-slate-700 font-medium truncate">三资盘活：湖北安徽模式，对其他城投有什么启发</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">7</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/29</div><div class="col-span-4 text-slate-700 font-medium truncate">政府资产盘活的真相：不是没钱，是没人敢担事</div><div class="col-span-2 text-blue-600">城市更新</div><div class="col-span-1 text-right text-slate-700 font-bold">3</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/28</div><div class="col-span-4 text-slate-700 font-medium truncate">城投轻资产运营，你可能连第一步就走错了</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">12</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/27</div><div class="col-span-4 text-slate-700 font-medium truncate">化债后半场的城投融资：哪些路通了，哪些路堵了</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/26</div><div class="col-span-4 text-slate-700 font-medium truncate">城投年报里的"增收不增利"，到底什么意思</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">6</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/25</div><div class="col-span-4 text-slate-700 font-medium truncate">政府资产运维的钱，都花在哪里了</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">4</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/24</div><div class="col-span-4 text-slate-700 font-medium truncate">REITs扩围：城市更新和商业楼宇，这次真的能上市了</div><div class="col-span-2 text-blue-600">城市更新</div><div class="col-span-1 text-right text-slate-700 font-bold">9</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/23</div><div class="col-span-4 text-slate-700 font-medium truncate">化债进入"主动化债"时代：各地的债务高风险地区，现在都怎么样了</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">5</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">04/13</div><div class="col-span-4 text-slate-700 font-medium truncate">2026年政府资产盘活：为什么"轻资产模式"才是城投转型的救命稻草？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">6</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-slate-600 px-3 py-2 mt-2 mb-1 border-t-2 border-slate-300">— 2026年2月 4篇 22阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">02/28</div><div class="col-span-4 text-slate-700 font-medium truncate">【内部整理】保租房投资决策“秘籍”：2大模式优劣分析+可套用测算模型，直接抄作业！</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">3</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">02/20</div><div class="col-span-4 text-slate-700 font-medium truncate">轻骑逐火，盘活生金｜「轻资运营局」2026新年寄语 & 年度内容规划</div><div class="col-span-2 text-blue-600">城市更新</div><div class="col-span-1 text-right text-slate-700 font-bold">6</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">02/16</div><div class="col-span-4 text-slate-700 font-medium truncate">🧨 岁序更新，金马迎春</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">5</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">02/05</div><div class="col-span-4 text-slate-700 font-medium truncate">上海的“老破小”，最终会被谁“买断”？答案将影响你未来10年的财富！</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">8</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-slate-600 px-3 py-2 mt-2 mb-1 border-t-2 border-slate-300">— 2026年1月 1篇 2阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">01/16</div><div class="col-span-4 text-slate-700 font-medium truncate">别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">2</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-slate-600 px-3 py-2 mt-2 mb-1 border-t-2 border-slate-300">— 2025年12月 4篇 7阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">12/12</div><div class="col-span-4 text-slate-700 font-medium truncate">湖南省人民政府办公厅关于持续推进城市更新行动的实施意见 （湘政办发〔2025〕49号）</div><div class="col-span-2 text-blue-600">城市更新</div><div class="col-span-1 text-right text-slate-700 font-bold">3</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">12/10</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙保租房房东、租客必看！12月新规重塑小区公共收益，你的钱袋要“变天”了？</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">12/04</div><div class="col-span-4 text-slate-700 font-medium truncate">“存量商品房”可以作为保租房吗？这是楼市新出路还是权宜之计？</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">12/01</div><div class="col-span-4 text-slate-700 font-medium truncate">2026年巨变！保障性租赁住房主力房源，原来是它！</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">2</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-slate-600 px-3 py-2 mt-2 mb-1 border-t-2 border-slate-300">— 2025年11月 5篇 38阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">11/23</div><div class="col-span-4 text-slate-700 font-medium truncate">重磅！长沙大批“国资”入场，“十五五”黄金窗口期来了！</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">11/14</div><div class="col-span-4 text-slate-700 font-medium truncate">黄金地段“老破小”的生死局：是彻底倒下，还是即将“焕发二春”？</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">11/05</div><div class="col-span-4 text-slate-700 font-medium truncate">十五五规划下，保障性租赁住房的“破圈”与“升级”</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">11/01</div><div class="col-span-4 text-slate-700 font-medium truncate">812号令正式生效！租赁住房想‘活下来’，这3道‘报建生死关’必须闯——尤其是消防验收</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">34</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">11/01</div><div class="col-span-4 text-slate-700 font-medium truncate">“人工智能+”时代，轻资产如何“智”取保障性租赁住房新蓝海？——一位运营者的深度思考</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-slate-600 px-3 py-2 mt-2 mb-1 border-t-2 border-slate-300">— 2025年10月 7篇 27阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">10/27</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙国有老资产变身“青年社区”：一场政策与市场的双赢实验</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">20</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">10/26</div><div class="col-span-4 text-slate-700 font-medium truncate">酒店业寒冬与长租公寓崛起：租赁行业的结构性变革</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">10/25</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">2</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">10/25</div><div class="col-span-4 text-slate-700 font-medium truncate">湘江新区保障性租赁住房项目2024年12月公示名单</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">10/25</div><div class="col-span-4 text-slate-700 font-medium truncate">保障性租赁租房步入“双轨+双循环”时代</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">10/08</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙市住房和城乡建设局等12部门 关于进一步优化房地产发展措施的通知</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">10/08</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙市住房和城乡建设局 关于加快推进住宅小区智慧物业建设的通知</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="text-xs font-bold text-slate-600 px-3 py-2 mt-2 mb-1 border-t-2 border-slate-300">— 2025年9月 5篇 6阅读 =====</div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">09/30</div><div class="col-span-4 text-slate-700 font-medium truncate">喜迎中秋，欢度国庆！</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">09/25</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙市保障性租赁住房项目申请认定申报实施细则  (长住建发〔2025〕10号文件)</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">2</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">09/25</div><div class="col-span-4 text-slate-700 font-medium truncate">《长沙市中央财政支持住房租赁市场发展试点资金分配方案》的通知  长财综[2020]2号</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">09/25</div><div class="col-span-4 text-slate-700 font-medium truncate">长沙市住房租赁合同范本（2025版）</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+<div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">09/25</div><div class="col-span-4 text-slate-700 font-medium truncate">中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知</div><div class="col-span-2 text-blue-600">其他</div><div class="col-span-1 text-right text-slate-700 font-bold">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
+        </div>
+
         </div>
     </div>
 
@@ -953,7 +688,22 @@ TAB 5: 流量来源 -->
       <!-- 5月渠道构成 + 推荐TOP8 -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
         <div class="card p-5">
-          <h3 class="section-title mb-4">🍩 5月渠道构成（8,759次）</h3>
+          <!-- ========== 流量来源年度结构（1月-12月）==========
+每年1-12月各建立一个"渠道构成+TOP10"模块
+当前数据：5月（完整）其他月份待导入
+============================================= -->
+<h3 class="section-title mb-4">🍩 1月渠道构成（待导入）</h3>
+</div>
+<div class="card p-5">
+<h3 class="section-title mb-4">🔥 1月推荐爆款 TOP 10（待导入）</h3>
+</div>
+</div>
+<!-- 2月-4月占位 -->
+<div class="card p-5">
+<h3 class="section-title mb-4">🍩 2-4月 冷启动期渠道构成（低推荐）</h3>
+</div>
+<div class="card p-5">
+<h3 class="section-title mb-4">🍩 5月渠道构成（8,759次）</h3>
           <canvas id="channelChart" height="180"></canvas>
           <div class="mt-3 space-y-1.5">
             <div class="flex justify-between items-center text-xs"><span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-purple-500"></span>推荐</span><span class="font-black text-purple-600">7,115 <span class="text-slate-400 font-normal">(81.2%)</span></span></div>
@@ -1040,7 +790,7 @@ TAB 5: 流量来源 -->
       <!-- 6月话题分布 -->
       <div class="card p-6 mb-5">
         <div class="flex items-center justify-between mb-4">
-          <h3 class="section-title">📅 6月话题分布（21篇）</h3>
+          <h3 class="section-title">📅 1-12月话题分布（年度累计）</h3>
           <span class="text-xs font-bold text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">7个话题</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1094,7 +844,7 @@ TAB 5: 流量来源 -->
 
         <!-- 已覆盖话题 -->
         <div class="card p-5">
-          <h3 class="section-title mb-4">✅ 已覆盖话题（12个·避免重复）</h3>
+          <h3 class="section-title mb-4">✅ 已覆盖话题（{{COVERED_COUNT}}个·2026年02月起累计·避免重复）</h3>
           <div class="space-y-3.5">
             <div>
               <div class="flex justify-between items-center mb-1.5">
@@ -1171,7 +921,7 @@ TAB 5: 流量来源 -->
 
         <!-- 未覆盖话题 -->
         <div class="card p-5">
-          <h3 class="section-title mb-4">🗺️ 未覆盖话题（可写）</h3>
+          <h3 class="section-title mb-4">🗺️ 未覆盖话题（2026年02月起累计·可写）</h3>
           <div class="space-y-3">
             <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-4">
               <div class="flex items-center justify-between mb-1.5">
@@ -1359,13 +1109,14 @@ TAB 5: 流量来源 -->
     }
   });
 
-  // 月度对比（1-12月）
+  // 月度对比
   new Chart(document.getElementById('compareChart'), {
     type: 'bar',
     data: {
       labels: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
       datasets: [
-        { label: '阅读', data: [0,0,0,0,0,0,0,0,0,0,0,0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false }
+        { label: '5月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
+        { label: '6月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false }
       ]
     },
     options: {
@@ -1379,7 +1130,9 @@ TAB 5: 流量来源 -->
         y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B' }, border: { color: 'rgba(0,0,0,0.06)' }, beginAtZero: true }
       }
     }
-  });// 6月趋势
+  });
+
+  // 6月趋势
   new Chart(document.getElementById('juneChart'), {
     type: 'bar',
     data: {
@@ -1409,4 +1162,132 @@ TAB 5: 流量来源 -->
 </body>
 </html>
 
+<script>
+  function showTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
+  // 流量来源饼图
+  new Chart(document.getElementById('channelChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['推荐','聊天会话','朋友圈','公众号主页','公众号消息','搜一搜','其他'],
+      datasets: [{
+        data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
+        backgroundColor: ['#7C3AED','#60A5FA','#34D399','#94A3B8','#818CF8','#FBBF24','#CBD5E1'],
+        borderWidth: 0, borderRadius: 6, hoverOffset: 4
+      }]
+    },
+    options: {
+      responsive: true, cutout: '58%',
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: '#1E293B', titleColor: '#F8FAFC', bodyColor: '#CBD5E1', cornerRadius: 10, padding: 12, callbacks: { label: ctx => ' ' + ctx.label + ' ' + ctx.raw + '次 (' + Math.round(ctx.raw/8759*100) + '%)' } }
+      }
+    }
+  });
+
+  // 每周推荐占比趋势（含5月全5周+6月W23-W25）
+  new Chart(document.getElementById('weeklyRecChart'), {
+    type: 'bar',
+    data: {
+      labels: ['W18
+04/28-05/04','W19
+05/05-05/11','W20
+05/12-05/18','W21
+05/19-05/25','W22
+05/26-06/01','W23
+06/02-06/08','W24
+06/09-06/15','W25
+06/22-06/28'],
+      datasets: [
+        {
+          label: '推荐占比%',
+          data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
+          backgroundColor: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0].map(v => v === 0 ? 'rgba(203,213,225,0.4)' : v >= 80 ? 'rgba(124,58,237,0.9)' : v >= 50 ? 'rgba(124,58,237,0.6)' : 'rgba(124,58,237,0.35)') =>
+            v === null ? 'rgba(203,213,225,0.4)' :
+            v >= 80 ? 'rgba(124,58,237,0.9)' :
+            v >= 50 ? 'rgba(124,58,237,0.6)' :
+            'rgba(124,58,237,0.35)'
+          ),
+          borderRadius: 6, borderSkipped: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1E293B', titleColor: '#F8FAFC', bodyColor: '#CBD5E1',
+          cornerRadius: 10, padding: 12,
+          callbacks: {
+            label: ctx => {
+              const v = ctx.raw;
+              if(v === null) return '数据待更新';
+              return '推荐占比 ' + v + '%';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B', font: { size: 9 }, maxRotation: 0 }, border: { color: 'rgba(0,0,0,0.06)' } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B', callback: v => v+'%' }, border: { color: 'rgba(0,0,0,0.06)' }, beginAtZero: true, max: 100 }
+      }
+    }
+  });
+
+  // 月度对比
+  new Chart(document.getElementById('compareChart'), {
+    type: 'bar',
+    data: {
+      labels: ['第1周','第2周','第3周','第4周','第5周'],
+      datasets: [
+        { label: '5月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
+        { label: '6月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: '#475569', font: { weight: '700' } } },
+        tooltip: { backgroundColor: '#1E293B', titleColor: '#F8FAFC', bodyColor: '#CBD5E1', borderColor: '#475569', borderWidth: 1, cornerRadius: 10, padding: 12, callbacks: { label: ctx => ctx.dataset.label + ' ' + ctx.raw + '阅读' } }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B', font: { weight: '600' } }, border: { color: 'rgba(0,0,0,0.06)' } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B' }, border: { color: 'rgba(0,0,0,0.06)' }, beginAtZero: true }
+      }
+    }
+  });
+
+  // 6月趋势
+  new Chart(document.getElementById('juneChart'), {
+    type: 'bar',
+    data: {
+      labels: ['06/01','06/02','06/03','06/04','06/05','06/06','06/07','06/08','06/09','06/10','06/11','06/12','06/13','06/14','06/15','06/16','06/17','06/18','06/19','06/20','06/21'],
+      datasets: [{
+        label: '阅读',
+        data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
+        backgroundColor: [42,99,44,27,89,39,127,36,127,69,29,37,28,50,54,20,0,34,18,25,45].map(v =>
+          v === 0 ? 'rgba(203,213,225,0.6)' : v >= 100 ? 'rgba(5,150,105,0.9)' : 'rgba(79,70,229,0.75)'
+        ),
+        borderRadius: 6, borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: '#1E293B', titleColor: '#F8FAFC', bodyColor: '#CBD5E1', borderColor: '#475569', borderWidth: 1, cornerRadius: 10, padding: 12, callbacks: { label: ctx => ctx.raw === 0 ? '未发布' : '阅读 ' + ctx.raw } }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B', font: { size: 9 }, maxRotation: 45 }, border: { color: 'rgba(0,0,0,0.06)' } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B' }, border: { color: 'rgba(0,0,0,0.06)' }, beginAtZero: true }
+      }
+    }
+  });
+</script>
