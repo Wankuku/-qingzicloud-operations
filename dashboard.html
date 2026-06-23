@@ -1279,8 +1279,6 @@ TAB 5: 流量来源 -->
     <a href="https://decide-armed-orientation-teddy.trycloudflare.com/dashboard.html" target="_blank" class="text-indigo-500 font-medium underline">📊 数据看板</a>
   </footer>
 
-</body>
-</html>
 
 <script>
   function showTab(name, btn) {
@@ -1328,7 +1326,12 @@ TAB 5: 流量来源 -->
         {
           label: '推荐占比%',
           data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
-          backgroundColor: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0].map(v => v === 0 ? 'rgba(203,213,225,0.4)' : v >= 80 ? 'rgba(124,58,237,0.9)' : v >= 50 ? 'rgba(124,58,237,0.6)' : 'rgba(124,58,237,0.35)'),
+          backgroundColor: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0].map(v => v === 0 ? 'rgba(203,213,225,0.4)' : v >= 80 ? 'rgba(124,58,237,0.9)' : v >= 50 ? 'rgba(124,58,237,0.6)' : 'rgba(124,58,237,0.35)') =>
+            v === null ? 'rgba(203,213,225,0.4)' :
+            v >= 80 ? 'rgba(124,58,237,0.9)' :
+            v >= 50 ? 'rgba(124,58,237,0.6)' :
+            'rgba(124,58,237,0.35)'
+          ),
           borderRadius: 6, borderSkipped: false,
         }
       ]
@@ -1403,3 +1406,7 @@ TAB 5: 流量来源 -->
     }
   });
 </script>
+</body>
+</html>
+
+
