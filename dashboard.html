@@ -498,8 +498,19 @@
 
       <!-- 全部列表 -->
       <div class="card p-6">
-        <h3 class="section-title mb-4">📖 全部历史文章（{{TOTAL_COUNT}}篇·2026年02月起累计）</h3>
+        <h3 class="section-title mb-4">📖 全部历史文章（108篇）</h3>
         <div class="        <div class="space-y-1 scroll-area">
+          <!-- 表头 -->
+          <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 bg-slate-100 border-b-2 border-slate-300 rounded-t-xl font-black text-slate-600 sticky top-0">
+            <div class="col-span-1">日期</div>
+            <div class="col-span-4">推文名称</div>
+            <div class="col-span-2">话题类型</div>
+            <div class="col-span-1 text-right">阅读数</div>
+            <div class="col-span-1 text-right">点赞</div>
+            <div class="col-span-1 text-right">分享</div>
+            <div class="col-span-1 text-right">留言</div>
+            <div class="col-span-1 text-right">在读</div>
+          </div>
 <div class="text-xs font-bold text-red-600 px-3 py-2 mt-2 mb-1 border-t-2 border-red-300">— 2026年6月 20篇 730阅读 =====</div>
 <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/21</div><div class="col-span-4 text-slate-700 font-medium truncate">写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了</div><div class="col-span-2 text-blue-600">保租房</div><div class="col-span-1 text-right text-slate-700 font-bold">36</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">1</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
 <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-white border-transparent"><div class="col-span-1 text-slate-500">06/20</div><div class="col-span-4 text-slate-700 font-medium truncate">35万亿十五五规划落地：城投手里有哪些还没被讨论的机会？</div><div class="col-span-2 text-blue-600">城投转型</div><div class="col-span-1 text-right text-slate-700 font-bold">11</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">0</div><div class="col-span-1 text-right text-slate-400">—</div></div>
@@ -703,6 +714,11 @@ TAB 5: 流量来源 -->
 <h3 class="section-title mb-4">🍩 2-4月 冷启动期渠道构成（低推荐）</h3>
 </div>
 <div class="card p-5">
+<!-- ========== 流量来源：12个独立模块（12月→1月，从新到旧）==========
+每个模块：左边"x月渠道构成（xxx次）"，右边"x月推荐爆款 TOP 10"
+当前数据：5月（完整）
+其他月份待导入数据后生成
+============================================================= -->
 <h3 class="section-title mb-4">🍩 5月渠道构成（8,759次）</h3>
           <canvas id="channelChart" height="180"></canvas>
           <div class="mt-3 space-y-1.5">
@@ -1107,15 +1123,14 @@ TAB 5: 流量来源 -->
     data: {
       labels: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
       datasets: [
-        { label: '5月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '6月', data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false }
+        { label: '月均阅读', data: [null,null,null,null,53.0,51,null,null,null,null,null,null], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false }
       ]
     },
     options: {
       responsive: true,
       plugins: {
         legend: { labels: { color: '#475569', font: { weight: '700' } } },
-        tooltip: { backgroundColor: '#1E293B', titleColor: '#F8FAFC', bodyColor: '#CBD5E1', borderColor: '#475569', borderWidth: 1, cornerRadius: 10, padding: 12, callbacks: { label: ctx => ctx.dataset.label + ' ' + ctx.raw + '阅读' } }
+        tooltip: { backgroundColor: '#1E293B', titleColor: '#F8FAFC', bodyColor: '#CBD5E1', borderColor: '#475569', borderWidth: 1, cornerRadius: 10, padding: 12, callbacks: { label: ctx => '月均阅读 ' + ctx.raw } }
       },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#64748B', font: { weight: '600' } }, border: { color: 'rgba(0,0,0,0.06)' } },
