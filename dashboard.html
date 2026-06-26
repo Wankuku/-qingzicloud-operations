@@ -2024,37 +2024,8 @@ TAB 5: 流量来源 -->
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // 流量来源饼图
-  new Chart(document.getElementById('channelChart'), {
-    type: 'doughnut',
-    data: {
-      labels: ['推荐','聊天会话','朋友圈','公众号主页','公众号消息','搜一搜','其他'],
-      datasets: [
-        { label: '1月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '2月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(99,102,241,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '3月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(139,92,246,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '4月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(168,85,247,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '5月', data: [60,66,84,85,70,12,25,0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '6月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '7月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(6,182,212,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '8月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(14,165,233,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '9月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(34,211,238,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '10月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(251,191,36,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '11月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(249,115,22,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '12月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(234,88,12,0.85)', borderRadius: 8, borderSkipped: false }
-      ],
-        backgroundColor: ['#7C3AED','#60A5FA','#34D399','#94A3B8','#818CF8','#FBBF24','#CBD5E1'],
-        borderWidth: 0, borderRadius: 6, hoverOffset: 4
-      }]
-    },
-    options: {
-      responsive: true, cutout: '58%',
-      plugins: {
-        legend: { display: false },
-        tooltip: { backgroundColor: '#1E293B', titleColor: '#F8FAFC', bodyColor: '#CBD5E1', cornerRadius: 10, padding: 12, callbacks: { label: ctx => ' ' + ctx.label + ' ' + ctx.raw + '次 (' + Math.round(ctx.raw/8759*100) + '%)' } }
-      }
-    }
-  });
+  // channelChart removed - use per-month charts in sources tab
+  
 
   // 每周推荐占比趋势（含5月全5周+6月W23-W25）
   new Chart(document.getElementById('weeklyRecChart'), {
