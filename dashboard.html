@@ -497,7 +497,7 @@
       <!-- 全部列表 -->
       <div class="card p-6">
         <h3 class="section-title mb-4">📖 全部历史文章（75篇）</h3>
-        <div class="        <div class="space-y-1 scroll-area">
+        <div class="space-y-1 scroll-area">
 
           <div class="grid grid-cols-12 gap-1 text-xs px-3 py-2 rounded-xl bg-slate-100 border border-slate-200 font-bold text-slate-500 mb-1">
             <div class="col-span-1 text-left">日期</div>
@@ -1256,7 +1256,7 @@ TAB 5: 流量来源 -->
     <!-- ================================================================ -->
     <!-- TAB 4: 话题地图（本周/月/历史三段） -->
     <!-- ================================================================ -->
-    <div id="tab-topics" class="tab-content"><div><div>
+    <div id="tab-topics" class="tab-content">
 
 
       <!-- 本周话题 -->
@@ -1273,7 +1273,7 @@ TAB 5: 流量来源 -->
             <span class="bg-slate-50 border border-slate-200 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-full">城投化债 <span class="text-slate-400">1篇</span></span>
             <span class="bg-slate-50 border border-slate-200 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-full">商办/保租房 <span class="text-slate-400">1篇</span></span>
           </div>
-        </div
+        </div>
       <!-- 1月话题分布 -->
       <div class="card p-6 mb-5">
         <div class="flex items-center justify-between mb-4">
@@ -2035,17 +2035,14 @@ TAB 5: 流量来源 -->
         { label: '3月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(139,92,246,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '4月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(168,85,247,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '5月', data: [60,66,84,85,70,12,25,0], backgroundColor: 'rgba(79,70,229,0.85)', borderRadius: 8, borderSkipped: false },
-        { label: '6月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false },
+        { label: '6月', data: [2281,463,286,204,838,35,102,4133], backgroundColor: 'rgba(5,150,105,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '7月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(6,182,212,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '8月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(14,165,233,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '9月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(34,211,238,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '10月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(251,191,36,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '11月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(249,115,22,0.85)', borderRadius: 8, borderSkipped: false },
         { label: '12月', data: [0,0,0,0,0,0,0,0], backgroundColor: 'rgba(234,88,12,0.85)', borderRadius: 8, borderSkipped: false }
-      ],
-        backgroundColor: ['#7C3AED','#60A5FA','#34D399','#94A3B8','#818CF8','#FBBF24','#CBD5E1'],
-        borderWidth: 0, borderRadius: 6, hoverOffset: 4
-      }]
+      ]
     },
     options: {
       responsive: true, cutout: '58%',
@@ -2060,25 +2057,12 @@ TAB 5: 流量来源 -->
   new Chart(document.getElementById('weeklyRecChart'), {
     type: 'bar',
     data: {
-      labels: ['W18
-04/28-05/04','W19
-05/05-05/11','W20
-05/12-05/18','W21
-05/19-05/25','W22
-05/26-06/01','W23
-06/02-06/08','W24
-06/09-06/15','W25
-06/22-06/28'],
+      labels: ['W18 04/28-05/04','W19 05/05-05/11','W20 05/12-05/18','W21 05/19-05/25','W22 05/26-06/01','W23 06/02-06/08','W24 06/09-06/15','W25 06/22-06/28'],
       datasets: [
         {
           label: '推荐占比%',
-          data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
-          backgroundColor: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0].map(v => v === 0 ? 'rgba(203,213,225,0.4)' : v >= 80 ? 'rgba(124,58,237,0.9)' : v >= 50 ? 'rgba(124,58,237,0.6)' : 'rgba(124,58,237,0.35)') =>
-            v === null ? 'rgba(203,213,225,0.4)' :
-            v >= 80 ? 'rgba(124,58,237,0.9)' :
-            v >= 50 ? 'rgba(124,58,237,0.6)' :
-            'rgba(124,58,237,0.35)'
-          ),
+          data: [60.0,66.7,84.6,85.1,73.4,50.5,32.4,14.4],
+          backgroundColor: [60.0,66.7,84.6,85.1,73.4,50.5,32.4,14.4].map(v => v >= 80 ? 'rgba(124,58,237,0.9)' : v >= 50 ? 'rgba(124,58,237,0.6)' : 'rgba(124,58,237,0.35)'),
           borderRadius: 6, borderSkipped: false,
         }
       ]
@@ -2114,7 +2098,7 @@ TAB 5: 流量来源 -->
       datasets: [
         {
           label: '月阅读',
-          data: [2,22,0,53,743,730,0,0,0,0,0,0],
+          data: [2,22,0,53,743,9578,0,0,0,0,0,0],
           backgroundColor: ['rgba(79,70,229,0.55)','rgba(79,70,229,0.55)','rgba(203,213,225,0.35)','rgba(79,70,229,0.55)','rgba(79,70,229,0.55)','rgba(79,70,229,0.55)','rgba(203,213,225,0.35)','rgba(203,213,225,0.35)','rgba(203,213,225,0.35)','rgba(203,213,225,0.35)','rgba(203,213,225,0.35)','rgba(203,213,225,0.35)'].map(v =>
             v === 0 ? 'rgba(203,213,225,0.35)' :
             v >= 5000 ? 'rgba(79,70,229,0.95)' :
@@ -2151,8 +2135,8 @@ TAB 5: 流量来源 -->
       labels: ['06/01','06/02','06/03','06/04','06/05','06/06','06/07','06/08','06/09','06/10','06/11','06/12','06/13','06/14','06/15','06/16','06/17','06/18','06/19','06/20','06/21'],
       datasets: [{
         label: '阅读',
-        data: [60.0,66.7,84.6,85.1,70.1,12.2,25.0,0.0],
-        backgroundColor: [42,99,44,27,89,39,127,36,127,69,29,37,28,50,54,20,0,34,18,25,45].map(v =>
+        data: [1603,824,144,120,128,80,159,81,92,114,88,74,55,60,88,46,23,97,32,38,62],
+        backgroundColor: [1603,824,144,120,128,80,159,81,92,114,88,74,55,60,88,46,23,97,32,38,62].map(v =>
           v === 0 ? 'rgba(203,213,225,0.6)' : v >= 100 ? 'rgba(5,150,105,0.9)' : 'rgba(79,70,229,0.75)'
         ),
         borderRadius: 6, borderSkipped: false,
