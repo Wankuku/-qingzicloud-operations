@@ -33,66 +33,69 @@
     /* ── HERO ── */
     .hero {
       position: relative;
-      background: linear-gradient(160deg, #E8F4F0 0%, #D4EDE6 40%, #C8E6DC 70%, #BFE3D5 100%);
+      background: #E8F4F0;
       overflow: hidden;
     }
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 240' preserveAspectRatio='xMidYMax slice'%3E%3Cg opacity='0.12'%3E%3Crect x='0' y='160' width='45' height='80' rx='4' fill='%230D7C66'/%3E%3Crect x='55' y='130' width='40' height='110' rx='4' fill='%230D7C66'/%3E%3Crect x='105' y='100' width='60' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='175' y='150' width='50' height='90' rx='4' fill='%230D7C66'/%3E%3Crect x='235' y='110' width='55' height='130' rx='4' fill='%230D7C66'/%3E%3Crect x='300' y='90' width='70' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='380' y='140' width='45' height='100' rx='4' fill='%230D7C66'/%3E%3Crect x='435' y='105' width='60' height='135' rx='4' fill='%230D7C66'/%3E%3Crect x='505' y='125' width='50' height='115' rx='4' fill='%230D7C66'/%3E%3Crect x='565' y='145' width='40' height='95' rx='4' fill='%230D7C66'/%3E%3Crect x='615' y='95' width='65' height='145' rx='4' fill='%230D7C66'/%3E%3Crect x='690' y='120' width='50' height='120' rx='4' fill='%230D7C66'/%3E%3Crect x='750' y='80' width='75' height='160' rx='4' fill='%230D7C66'/%3E%3Crect x='835' y='135' width='55' height='105' rx='4' fill='%230D7C66'/%3E%3Crect x='900' y='100' width='60' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='970' y='150' width='45' height='90' rx='4' fill='%230D7C66'/%3E%3Crect x='1025' y='115' width='55' height='125' rx='4' fill='%230D7C66'/%3E%3Crect x='1090' y='90' width='65' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='1165' y='140' width='50' height='100' rx='4' fill='%230D7C66'/%3E%3Crect x='1225' y='105' width='60' height='135' rx='4' fill='%230D7C66'/%3E%3Crect x='1295' y='125' width='55' height='115' rx='4' fill='%230D7C66'/%3E%3Crect x='1360' y='155' width='45' height='85' rx='4' fill='%230D7C66'/%3E%3Crect x='1415' y='110' width='40' height='130' rx='4' fill='%230D7C66'/%3E%3C/svg%3E");
-      background-size: cover;
-      background-position: center bottom;
-      background-repeat: no-repeat;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 400'%3E%3Cg opacity='0.06'%3E%3Crect x='0' y='280' width='60' height='120' rx='4' fill='%230D7C66'/%3E%3Crect x='70' y='240' width='50' height='160' rx='4' fill='%230D7C66'/%3E%3Crect x='130' y='200' width='70' height='200' rx='4' fill='%230D7C66'/%3E%3Crect x='210' y='260' width='55' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='275' y='220' width='65' height='180' rx='4' fill='%230D7C66'/%3E%3Crect x='350' y='180' width='80' height='220' rx='4' fill='%230D7C66'/%3E%3Crect x='440' y='250' width='45' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='495' y='190' width='75' height='210' rx='4' fill='%230D7C66'/%3E%3Crect x='580' y='230' width='60' height='170' rx='4' fill='%230D7C66'/%3E%3Crect x='650' y='270' width='50' height='130' rx='4' fill='%230D7C66'/%3E%3Crect x='710' y='200' width='85' height='200' rx='4' fill='%230D7C66'/%3E%3Crect x='805' y='250' width='55' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='870' y='180' width='70' height='220' rx='4' fill='%230D7C66'/%3E%3Crect x='950' y='240' width='60' height='160' rx='4' fill='%230D7C66'/%3E%3Crect x='1020' y='210' width='80' height='190' rx='4' fill='%230D7C66'/%3E%3Crect x='1110' y='260' width='50' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='1170' y='190' width='65' height='210' rx='4' fill='%230D7C66'/%3E%3Crect x='1245' y='230' width='75' height='170' rx='4' fill='%230D7C66'/%3E%3Crect x='1330' y='270' width='55' height='130' rx='4' fill='%230D7C66'/%3E%3Crect x='1395' y='200' width='45' height='200' rx='4' fill='%230D7C66'/%3E%3C/svg%3E") center bottom / cover no-repeat,
+        linear-gradient(160deg, #E8F4F0 0%, #D4EDE6 40%, #C8E6DC 70%, #BFE3D5 100%);
       opacity: 1;
     }
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: linear-gradient(to bottom, transparent, var(--cream));
+      bottom: -1px; left: 0; right: 0;
+      height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
     }
     .hero-inner {
       position: relative;
       z-index: 2;
-      padding: 48px 48px 80px;
+      padding: 44px 48px 72px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(201,168,76,0.15);
-      border: 1px solid rgba(201,168,76,0.4);
-      color: #0D7C66;
+      background: rgba(13,124,102,0.12);
+      border: 1px solid rgba(13,124,102,0.3);
+      color: var(--teal);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
-      padding: 5px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      animation: fadeSlideDown 0.6s ease both;
     }
     .hero-title {
       font-family: 'Noto Serif SC', serif;
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 900;
-      color: #FFFFFF;
+      color: #0A5C4A;
       line-height: 1.2;
       margin-bottom: 6px;
+      animation: fadeSlideDown 0.6s 0.1s ease both;
     }
     .hero-sub {
       font-size: 14px;
       color: #4A9E88;
       font-weight: 400;
       margin-bottom: 32px;
+      animation: fadeSlideDown 0.6s 0.15s ease both;
     }
     .hero-meta {
       display: flex;
-      gap: 40px;
+      gap: 48px;
       flex-wrap: wrap;
+      animation: fadeSlideDown 0.6s 0.2s ease both;
     }
     .hero-meta-item { text-align: left; }
     .hero-meta-label {
@@ -101,14 +104,15 @@
       letter-spacing: 1.5px;
       color: #4A9E88;
       margin-bottom: 4px;
+      font-weight: 600;
     }
     .hero-meta-value {
-      font-size: 22px;
-      font-weight: 800;
+      font-size: 24px;
+      font-weight: 900;
       color: #0A5C4A;
       line-height: 1;
     }
-    .hero-meta-value .unit {
+    .hero-meta-value .u {
       font-size: 13px;
       font-weight: 400;
       color: #4A9E88;
@@ -116,7 +120,7 @@
     }
     .hero-meta-sub {
       font-size: 11px;
-      color: rgba(255,255,255,0.35);
+      color: #7DC4B0;
       margin-top: 3px;
     }
 
