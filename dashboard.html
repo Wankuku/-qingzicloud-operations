@@ -3,771 +3,1238 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>轻资运营局 · 运营战报</title>
+  <title>轻资运营局 · 运营战报（2026全量）</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #F4F1EC;
-      --card: #FFFFFF;
-      --border: #E8E3DA;
-      --teal: #0D7C66;
-      --teal-mid: #1A9A7A;
-      --teal-light: #E8F5F1;
-      --amber: #D4770C;
-      --amber-light: #FEF3E2;
-      --coral: #C0392B;
-      --coral-light: #FDECEA;
-      --violet: #6C5CE7;
-      --violet-light: #F0EFFE;
-      --indigo: #4F46E5;
-      --indigo-light: #EEF2FF;
-      --text: #2C2C2C;
-      --text-mid: #5A5A5A;
-      --text-light: #9A9A9A;
-      --radius: 16px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter','PingFang SC','Noto Serif SC',sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      background: #E8F4F0;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 400'%3E%3Cg opacity='0.07'%3E%3Crect x='0' y='280' width='60' height='120' rx='4' fill='%230D7C66'/%3E%3Crect x='70' y='240' width='50' height='160' rx='4' fill='%230D7C66'/%3E%3Crect x='130' y='200' width='70' height='200' rx='4' fill='%230D7C66'/%3E%3Crect x='210' y='260' width='55' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='275' y='220' width='65' height='180' rx='4' fill='%230D7C66'/%3E%3Crect x='350' y='180' width='80' height='220' rx='4' fill='%230D7C66'/%3E%3Crect x='440' y='250' width='45' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='495' y='190' width='75' height='210' rx='4' fill='%230D7C66'/%3E%3Crect x='580' y='230' width='60' height='170' rx='4' fill='%230D7C66'/%3E%3Crect x='650' y='270' width='50' height='130' rx='4' fill='%230D7C66'/%3E%3Crect x='710' y='200' width='85' height='200' rx='4' fill='%230D7C66'/%3E%3Crect x='805' y='250' width='55' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='870' y='180' width='70' height='220' rx='4' fill='%230D7C66'/%3E%3Crect x='950' y='240' width='60' height='160' rx='4' fill='%230D7C66'/%3E%3Crect x='1020' y='210' width='80' height='190' rx='4' fill='%230D7C66'/%3E%3Crect x='1110' y='260' width='50' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='1170' y='190' width='65' height='210' rx='4' fill='%230D7C66'/%3E%3Crect x='1245' y='230' width='75' height='170' rx='4' fill='%230D7C66'/%3E%3Crect x='1330' y='270' width='55' height='130' rx='4' fill='%230D7C66'/%3E%3Crect x='1395' y='200' width='45' height='200' rx='4' fill='%230D7C66'/%3E%3C/svg%3E") center bottom / cover no-repeat,
-        linear-gradient(160deg,#E8F4F0 0%,#D4EDE6 40%,#C8E6DC 70%,#BFE3D5 100%);
-      opacity: 1;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -1px; left: 0; right: 0;
-      height: 48px;
-      background: linear-gradient(to bottom,transparent,var(--bg));
-    }
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      padding: 44px 48px 72px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(13,124,102,0.12);
-      border: 1px solid rgba(13,124,102,0.3);
-      color: var(--teal);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin-bottom: 18px;
-      animation: fadeSlideDown 0.6s ease both;
-    }
-    .hero-title {
-      font-family: 'Noto Serif SC',serif;
-      font-size: 34px;
-      font-weight: 900;
-      color: #0A5C4A;
-      line-height: 1.2;
-      margin-bottom: 6px;
-      animation: fadeSlideDown 0.6s 0.1s ease both;
-    }
-    .hero-sub {
-      font-size: 14px;
-      color: #4A9E88;
-      margin-bottom: 32px;
-      animation: fadeSlideDown 0.6s 0.15s ease both;
-    }
-    .hero-meta {
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-      animation: fadeSlideDown 0.6s 0.2s ease both;
-    }
-    .hero-meta-item { text-align: left; }
-    .hero-meta-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #4A9E88;
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
-    .hero-meta-value {
-      font-size: 24px;
-      font-weight: 900;
-      color: #0A5C4A;
-      line-height: 1;
-    }
-    .hero-meta-value .u { font-size: 13px; font-weight: 400; color: #4A9E88; margin-left: 2px; }
-    .hero-meta-sub { font-size: 11px; color: #7DC4B0; margin-top: 3px; }
-
-    /* ── NAV TABS ── */
-    .tab-bar {
-      background: var(--card);
-      border-bottom: 2px solid var(--border);
-      padding: 0 48px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .tab-bar-inner {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      overflow-x: auto;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .tab-btn {
-      padding: 14px 26px;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text-light);
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      border-radius: 12px;
-      border: 2px solid transparent;
-      white-space: nowrap;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .tab-btn:hover { color: var(--teal); background: var(--teal-light); border-color: rgba(13,124,102,0.2); }
-    .tab-btn.active { background: var(--teal); color: white; border-color: var(--teal); }
-    .tab-btn .tab-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.4; transition: opacity 0.2s, transform 0.2s; }
-    .tab-btn.active .tab-dot { opacity: 1; transform: scale(1.4); }
+    * { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+    body { background: #EEF2F7; color: #1E293B; }
+    .card { background: #FFFFFF; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); overflow: hidden; }
+    .kpi { font-size: 2.2rem; font-weight: 900; letter-spacing: -2px; line-height: 1; }
+    .tag-new { background: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE; padding: 2px 8px; border-radius: 999px; }
+    .tag-hot { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; padding: 2px 8px; border-radius: 999px; }
+    .bar { height: 8px; border-radius: 4px; background: #F1F5F9; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s; }
+    .tab-btn { padding: 9px 22px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; border: 2px solid #E2E8F0; background: #FFF; color: #64748B; cursor: pointer; }
+    .tab-btn:hover { border-color: #6366F1; color: #6366F1; background: #EEF2FF; }
+    .tab-btn.active { background: #4F46E5; color: white; border-color: #4F46E5; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-
-    /* ── MAIN ── */
-    .content-wrap { padding: 32px 48px 64px; max-width: 1400px; margin: 0 auto; }
-
-    /* ── CARDS ── */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 32px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04),0 4px 16px rgba(0,0,0,0.03);
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08),0 8px 32px rgba(0,0,0,0.06); transform: translateY(-2px); }
-    .card-title { font-family: 'Noto Serif SC',serif; font-size: 16px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 10px; }
-    .section-title { font-size: 15px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
-
-    /* ── KPI ── */
-    .kpi-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
-    .kpi-pill {
-      background: var(--card);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 10px 18px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    }
-    .kpi-pill:hover { border-color: var(--teal); box-shadow: 0 3px 12px rgba(13,124,102,0.1); transform: translateY(-1px); }
-    .kpi-pill-amber { background: var(--amber-light); border-color: #F0D58C; }
-    .kpi-pill-coral { background: var(--coral-light); border-color: #F5B8B3; }
-    .kpi-pill-teal { background: var(--teal-light); border-color: #A8E0D5; }
-    .kpi-pill-violet { background: var(--violet-light); border-color: #C3BEF5; }
-
-    /* ── CHART ── */
-    .chart-wrap { position: relative; height: 240px; }
-
-    /* ── TABLE ── */
-    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .data-table thead tr { background: #F9F8F5; }
-    .data-table th { padding: 10px 16px; text-align: left; font-weight: 700; color: var(--text-mid); border-bottom: 2px solid var(--border); white-space: nowrap; }
-    .data-table td { padding: 10px 16px; border-bottom: 1px solid #F0EDE8; color: var(--text); }
-    .data-table tr:last-child td { border-bottom: none; }
-    .data-table tbody tr:hover { background: #FAFAF8; }
-
-    /* ── TOP LIST ── */
-    .top-item { display: flex; align-items: center; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border); transition: background 0.15s; }
-    .top-item:last-child { border-bottom: none; }
-    .top-item:hover { background: #FAFAF8; margin: 0 -12px; padding: 11px 12px; border-radius: 10px; }
-    .rank-badge { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
-    .rank-1 { background: linear-gradient(135deg,var(--teal),#2AAA8A); color: white; }
-    .rank-2 { background: linear-gradient(135deg,#94A3B8,#B0BEC5); color: white; }
-    .rank-3 { background: linear-gradient(135deg,#CD7F32,#D4956A); color: white; }
-    .rank-other { background: #F0EDE8; color: var(--text-mid); }
-
-    /* ── CHANNEL ── */
-    .channel-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #F5F3EF; }
-    .channel-row:last-child { border-bottom: none; }
-    .channel-name { width: 90px; font-size: 12px; color: var(--text-mid); font-weight: 600; flex-shrink: 0; }
-    .channel-bar-bg { flex: 1; height: 10px; background: #F0EDE8; border-radius: 10px; overflow: hidden; }
-    .channel-bar-fill { height: 100%; border-radius: 10px; transition: width 1s ease; }
-    .channel-pct { font-size: 11px; font-weight: 700; color: var(--text-mid); width: 42px; text-align: right; flex-shrink: 0; }
-
-    /* ── TOPIC ── */
-    .topic-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid #F0EDE8; }
+    .row { transition: background 0.15s; border-radius: 8px; }
+    .row:hover { background: #F8FAFF; }
+    .scroll-area { max-height: 480px; overflow-y: auto; }
+    .scroll-area::-webkit-scrollbar { width: 4px; }
+    .scroll-area::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 2px; }
+    .badge { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+    .badge-1 { background: linear-gradient(135deg,#F59E0B,#D97706); color: white; }
+    .badge-2 { background: linear-gradient(135deg,#94A3AF,#64748B); color: white; }
+    .badge-3 { background: linear-gradient(135deg,#B45309,#92400E); color: white; }
+    .badge-o { background: #E2E8F0; color: #475569; }
+    .section-title { border-left: 5px solid #4F46E5; padding-left: 14px; color: #0F172A; font-weight: 800; font-size: 1rem; }
+    .topic-row { border-bottom: 1px solid #F1F5F9; }
     .topic-row:last-child { border-bottom: none; }
-    .topic-name { width: 90px; font-size: 13px; font-weight: 700; color: var(--text); flex-shrink: 0; }
-    .topic-count { width: 50px; font-size: 11px; color: var(--text-light); flex-shrink: 0; }
-    .topic-bar-bg { flex: 1; height: 10px; background: #F0EDE8; border-radius: 10px; overflow: hidden; }
-    .topic-bar-fill { height: 100%; border-radius: 10px; background: var(--teal); transition: width 1s ease; }
-    .topic-read { width: 80px; text-align: right; font-size: 12px; font-weight: 800; color: var(--teal); flex-shrink: 0; }
-    .topic-avg { width: 60px; text-align: right; font-size: 11px; color: var(--text-light); flex-shrink: 0; }
-
-    /* ── TAGS ── */
-    .tag { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-    .tag-teal { background: var(--teal-light); color: var(--teal); }
-    .tag-amber { background: var(--amber-light); color: var(--amber); }
-    .tag-coral { background: var(--coral-light); color: var(--coral); }
-    .tag-violet { background: var(--violet-light); color: var(--violet); }
-    .tag-indigo { background: var(--indigo-light); color: var(--indigo); }
-    .tag-new { background: #FFF7ED; color: #C2410C; }
-
-    /* ── BADGE ── */
-    .badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; font-size: 13px; flex-shrink: 0; }
-    .badge-1 { background: linear-gradient(135deg,var(--teal),#2AAA8A); color: white; }
-    .badge-2 { background: linear-gradient(135deg,#94A3B8,#B0BEC5); color: white; }
-    .badge-3 { background: linear-gradient(135deg,#CD7F32,#D4956A); color: white; }
-    .badge-o { background: #F0EDE8; color: var(--text-mid); }
-
-    /* ── BAR ── */
-    .bar { height: 8px; background: #F0EDE8; border-radius: 8px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 8px; background: var(--teal); transition: width 0.8s ease; }
-
-    /* ── MONTH TABS ── */
-    .month-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
-    .month-tab { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; border: 1.5px solid var(--border); background: var(--card); color: var(--text-mid); transition: all 0.2s; }
-    .month-tab:hover { border-color: var(--teal); color: var(--teal); }
-    .month-tab.active { background: var(--teal); border-color: var(--teal); color: white; }
-
-    /* ── FIRE BADGE ── */
-    .fire-badge { background: linear-gradient(135deg,#FEF3E2,#FDE8C8); border: 1px solid #F0D58C; border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #7A4A0A; font-weight: 600; line-height: 1.5; }
-
-    /* ── FOOTER ── */
-    .footer { text-align: center; padding: 32px 48px; font-size: 12px; color: var(--text-light); border-top: 1px solid var(--border); margin-top: 48px; }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeSlideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .animate-in { animation: fadeIn 0.5s ease both; }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-
-    /* grid */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-
-    @media (max-width: 768px) {
-      .hero-inner { padding: 32px 20px 56px; }
-      .hero-title { font-size: 26px; }
-      .content-wrap { padding: 24px 16px 48px; }
-      .two-col { grid-template-columns: 1fr; }
-      .tab-bar { padding: 0 16px; }
-    }
   </style>
 </head>
 <body>
 
-<!-- ═══ HERO ═══ -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">📊 运营战报 · 数据区间：2025-09 至 2026-09</div>
-    <h1 class="hero-title">轻资运营局 · 运营战报</h1>
-    <p class="hero-sub">城市更新与存量资产运营领域 · 公众号数据分析</p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">累计发布</div>
-        <div class="hero-meta-value">113 <span class="u">篇</span></div>
-        <div class="hero-meta-sub">2025-09 起合计</div>
+<!-- ===== HEADER ===== -->
+<header style="background: linear-gradient(160deg, #E8F4F0 0%, #D4EDE6 40%, #C8E6DC 70%, #BFE3D5 100%); position: relative; overflow: hidden;">
+  <!-- 城市剪影纹理 -->
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0.10;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 200" preserveAspectRatio="xMidYMax slice" style="width:100%;height:100%;">
+      <g fill="#0D7C66">
+        <rect x="0" y="140" width="40" height="60" rx="3"/>
+        <rect x="50" y="120" width="35" height="80" rx="3"/>
+        <rect x="95" y="100" width="50" height="100" rx="3"/>
+        <rect x="155" y="130" width="40" height="70" rx="3"/>
+        <rect x="205" y="90" width="55" height="110" rx="3"/>
+        <rect x="270" y="110" width="45" height="90" rx="3"/>
+        <rect x="325" y="80" width="60" height="120" rx="3"/>
+        <rect x="395" y="125" width="35" height="75" rx="3"/>
+        <rect x="440" y="95" width="55" height="105" rx="3"/>
+        <rect x="505" y="115" width="45" height="85" rx="3"/>
+        <rect x="560" y="100" width="50" height="100" rx="3"/>
+        <rect x="620" y="135" width="40" height="65" rx="3"/>
+        <rect x="670" y="85" width="65" height="115" rx="3"/>
+        <rect x="745" y="120" width="45" height="80" rx="3"/>
+        <rect x="800" y="95" width="55" height="105" rx="3"/>
+        <rect x="865" y="110" width="50" height="90" rx="3"/>
+        <rect x="925" y="130" width="40" height="70" rx="3"/>
+        <rect x="975" y="80" width="60" height="120" rx="3"/>
+        <rect x="1045" y="115" width="45" height="85" rx="3"/>
+        <rect x="1100" y="100" width="55" height="100" rx="3"/>
+        <rect x="1165" y="125" width="40" height="75" rx="3"/>
+        <rect x="1215" y="90" width="50" height="110" rx="3"/>
+        <rect x="1275" y="110" width="45" height="90" rx="3"/>
+        <rect x="1330" y="130" width="55" height="70" rx="3"/>
+        <rect x="1395" y="105" width="45" height="95" rx="3"/>
+      </g>
+    </svg>
+  </div>
+  <div class="max-w-7xl mx-auto px-4 md:px-6 py-8" style="position:relative;z-index:1;">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-2xl md:text-3xl font-black" style="color:#0A5C4A;tracking-tight;">轻资运营局 · 运营战报</h1>
+        <p class="text-sm mt-1" style="color:#4A9E88;">政府资产盘活操盘手 · 城投转型风向标</p>
       </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">累计阅读</div>
-        <div class="hero-meta-value">6,609 <span class="u">次</span></div>
-        <div class="hero-meta-sub">2025-09 起合计</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">篇均阅读</div>
-        <div class="hero-meta-value">58 <span class="u">次</span></div>
-        <div class="hero-meta-sub">全部历史篇均</div>
-      </div>
-      <div class="hero-meta-item">
-        <div class="hero-meta-label">历史最高</div>
-        <div class="hero-meta-value">1,088 <span class="u">次</span></div>
-        <div class="hero-meta-sub">2026-05-17 单篇峰值</div>
+      <div class="text-right">
+        <div class="text-xs" style="color:#4A9E88;">最后更新</div>
+        <div class="font-bold" style="color:#0A5C4A;">2026-09-23 23:08</div>
+        <div class="text-xs mt-1" style="color:#7DC4B0;">数据范围：2025-09-01 ~ 2026-09-22</div>
       </div>
     </div>
   </div>
-</div>
+</header>
 
-<!-- ═══ TAB BAR ═══ -->
-<div class="tab-bar">
-  <div class="tab-bar-inner">
-    <button class="tab-btn active" onclick="showTab('overview',this)">
-      <span class="tab-dot"></span>📈 战报总览
-    </button>
-    <button class="tab-btn" onclick="showTab('monthly',this)">
-      <span class="tab-dot"></span>📅 月度战报
-    </button>
-    <button class="tab-btn" onclick="showTab('history',this)">
-      <span class="tab-dot"></span>🏆 历史全榜
-    </button>
-    <button class="tab-btn" onclick="showTab('sources',this)">
-      <span class="tab-dot"></span>📡 流量来源
-    </button>
-    <button class="tab-btn" onclick="showTab('topics',this)">
-      <span class="tab-dot"></span>🗺️ 话题地图
-    </button>
+<main class="max-w-7xl mx-auto px-4 md:px-6 py-6">
+
+  <!-- ===== TABS ===== -->
+  <div class="flex flex-wrap gap-2 mb-6">
+    <button class="tab-btn active" onclick="showTab('overview',this)">📈 战报总览</button>
+    <button class="tab-btn" onclick="showTab('monthly',this)">📅 月度战报</button>
+    <button class="tab-btn" onclick="showTab('history',this)">🏆 历史全榜</button>
+    <button class="tab-btn" onclick="showTab('sources',this)">📡 流量来源</button>
+    <button class="tab-btn" onclick="showTab('topics',this)">🗺️ 话题地图</button>
   </div>
-</div>
 
-<!-- ═══ MAIN ═══ -->
-<main class="content-wrap">
-
-  <!-- ══════════════════════════════════════ -->
+  <!-- ================================================================ -->
   <!-- TAB 1: 战报总览 -->
-  <!-- ══════════════════════════════════════ -->
+  <!-- ================================================================ -->
   <div id="tab-overview" class="tab-content active">
-
     <!-- KPI -->
-    <div class="kpi-strip">
-      <div class="kpi-pill">
-        <span class="text-slate-400 font-bold text-xs">累计发布</span>
-        <span class="font-black text-teal-600 text-base">113</span><span class="text-slate-400 text-xs">篇</span>
-      </div>
-      <div class="kpi-pill">
-        <span class="text-slate-400 font-bold text-xs">累计阅读</span>
-        <span class="font-black text-teal-600 text-base">6,609</span><span class="text-slate-400 text-xs">次</span>
-      </div>
-      <div class="kpi-pill">
-        <span class="text-slate-400 font-bold text-xs">篇均阅读</span>
-        <span class="font-black text-teal-600 text-base">58</span><span class="text-slate-400 text-xs">次</span>
-      </div>
-      <div class="kpi-pill kpi-pill-amber">
-        <span class="text-slate-500 font-bold text-xs">历史最高</span>
-        <span class="font-black text-amber-600 text-base">1,088</span><span class="text-slate-500 text-xs">次</span>
-      </div>
-      <div class="kpi-pill kpi-pill-coral">
-        <span class="text-slate-500 font-bold text-xs">爆款文章</span>
-        <span class="font-black text-coral-600 text-base">3</span><span class="text-slate-500 text-xs">篇(≥500读)</span>
-      </div>
-      <div class="kpi-pill kpi-pill-teal">
-        <span class="text-slate-500 font-bold text-xs">活跃月份</span>
-        <span class="font-black text-teal-600 text-base">11</span><span class="text-slate-500 text-xs">个月</span>
-      </div>
+    <div class="flex flex-wrap items-center gap-3 mb-6">
+      <span class="bg-white border-2 border-indigo-100 rounded-2xl px-4 py-2.5 text-xs shadow-sm">
+        <span class="text-slate-400 font-bold">累计发布</span>
+        <span class="font-black text-indigo-600 ml-1.5 text-base">114</span><span class="text-slate-400 text-xs">篇</span>
+      </span>
+      <span class="bg-white border-2 border-indigo-100 rounded-2xl px-4 py-2.5 text-xs shadow-sm">
+        <span class="text-slate-400 font-bold">累计阅读</span>
+        <span class="font-black text-indigo-600 ml-1.5 text-base">13,042</span><span class="text-slate-400 text-xs">人</span>
+      </span>
+      <span class="bg-white border-2 border-indigo-100 rounded-2xl px-4 py-2.5 text-xs shadow-sm">
+        <span class="text-slate-400 font-bold">篇均阅读</span>
+        <span class="font-black text-emerald-600 ml-1.5 text-base">114</span><span class="text-slate-400 text-xs">人</span>
+      </span>
+      <span class="bg-amber-50 border-2 border-amber-200 rounded-2xl px-4 py-2.5 text-xs shadow-sm">
+        <span class="text-slate-500 font-bold">历史最高</span>
+        <span class="font-black text-amber-600 ml-1.5 text-base">1,450</span>
+      </span>
+      <span class="bg-white border-2 border-orange-100 rounded-2xl px-4 py-2.5 text-xs shadow-sm">
+        <span class="text-slate-400 font-bold">爆款数</span>
+        <span class="font-black text-orange-600 ml-1.5 text-base">8</span><span class="text-slate-400 text-xs">篇</span>
+      </span>
+      <span class="bg-white border-2 border-purple-100 rounded-2xl px-4 py-2.5 text-xs shadow-sm">
+        <span class="text-slate-400 font-bold">爆款率</span>
+        <span class="font-black text-purple-600 ml-1.5 text-base">7%</span>
+      </span>
     </div>
 
     <!-- 爆款标题 -->
-    <div class="card mb-5">
-      <h3 class="card-title mb-4">
-        <span style="width:30px;height:30px;background:var(--coral-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">🔥</span>
-        爆款标题（阅读≥500）
-      </h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;">
-        <div class="fire-badge">📌 2026-05-17 某城投园区从空置60%到满租：我被骂了3年，但最后还是做成了</div>
-        <div class="fire-badge">📌 2026-05-27 7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div>
-        <div class="fire-badge">📌 2026-05-23 光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去打水漂</div>
+    <div class="card p-5 mb-6">
+      <h3 class="font-extrabold text-slate-800 text-sm mb-3">🔥 爆款标题（阅读≥1000）</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 font-medium">📌 2026-05-28 城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div><div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 font-medium">📌 2026-05-20 委托运营3年后，租户续约率从40%提到78%：我做对了什么？</div><div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 font-medium">📌 2026-05-15 委托运营合同怎么签：三个条款不写进去，后面全是坑</div><div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 font-medium">📌 2026-05-25 非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div><div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 font-medium">📌 2026-05-31 保障房运营的三个生死线：空置率、租金差、运营成本</div>
       </div>
     </div>
 
     <!-- 7月明细 -->
-    <div class="card mb-5">
-      <h3 class="card-title mb-3">
-        <span style="width:30px;height:30px;background:var(--teal-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📅</span>
-        7月文章明细（共17篇）
-      </h3>
+    <div class="card p-5 mb-6">
+      <h3 class="font-extrabold text-slate-800 text-sm mb-3">📅 7月文章明细（近期）</h3>
       <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr>
-            <th class="text-left">日期</th><th class="text-left">标题</th><th class="text-center">话题</th><th class="text-center">阅读</th>
+        <table class="w-full text-sm">
+          <thead><tr class="text-xs text-slate-400 uppercase tracking-wider border-b">
+            <th class="text-left py-2 pr-4">日期</th><th class="text-left py-2 pr-4">标题</th><th class="text-center py-2 px-2">话题</th><th class="text-center py-2 pl-2">阅读</th>
           </tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-22</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="拆了卖地，还是改了运营？城中村改造新逻辑">拆了卖地，还是改了运营？城中村改造新逻辑</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-teal-600">20</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-21</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚">浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚</td><td class="text-center"><span class="tag tag-new">泛资产管理</span></td><td class="text-center font-bold text-teal-600">8</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-18</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="900万拍综艺收益8600元：国企资产为什么总在“打水漂”">900万拍综艺收益8600元：国企资产为什么总在"打水漂"</td><td class="text-center"><span class="tag tag-new">其他</span></td><td class="text-center font-bold text-teal-600">20</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-17</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园以房养园：算完账发现这事还是要靠补贴">产业园以房养园：算完账发现这事还是要靠补贴</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">6</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-16</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的">AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">17</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-15</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园招商为什么总完不成：不是条件差，是没有招商体系">产业园招商为什么总完不成：不是条件差，是没有招商体系</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">38</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-14</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投债·展期不是躺平，是战术性收缩">城投债·展期不是躺平，是战术性收缩</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">10</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-13</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">42</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-11</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">17</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-10</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投到底能不能当LP？我见过最诚实的算账">城投到底能不能当LP？我见过最诚实的算账</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">30</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-09</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城中村改造2.0：这次谁出钱？">城中村改造2.0：这次谁出钱？</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-teal-600">19</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-08</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投选运营商的尽调清单：怎么识破PPT里的水分">城投选运营商的尽调清单：怎么识破PPT里的水分</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">36</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-07</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投做轻资产运营，我见过最冤的一次合规整改">城投做轻资产运营，我见过最冤的一次合规整改</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">23</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-06</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投轻资产运营：绩效验收标准定了三年，没一次真正执行完">城投轻资产运营：绩效验收标准定了三年，没一次真正执行完</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">15</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-03</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪">买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">11</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-02</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="商改住动了真格，这次比以往任何一次都具体">商改住动了真格，这次比以往任何一次都具体</td><td class="text-center"><span class="tag tag-new">新赛道</span></td><td class="text-center font-bold text-teal-600">23</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-01</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="[湘]城投收商品房作保障房，这次真要下场了">[湘]城投收商品房作保障房，这次真要下场了</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">29</td></tr>
-          </tbody>
+          <tbody class="scroll-area"><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-22</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="拆了卖地，还是改了运营？城中村改造新逻辑">拆了卖地，还是改了运营？城中村改造新逻辑</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">20</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-21</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚">浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">泛资产管理</span></td>
+          <td class="text-center font-bold text-indigo-600">8</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-18</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="900万拍综艺收益8600元：国企资产为什么总在“打水漂”">900万拍综艺收益8600元：国企资产为什么总在“打水漂”</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">20</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-17</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园以房养园：算完账发现这事还是要靠补贴">产业园以房养园：算完账发现这事还是要靠补贴</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">6</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-16</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的">AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">17</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园招商为什么总完不成：不是条件差，是没有招商体系">产业园招商为什么总完不成：不是条件差，是没有招商体系</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">38</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-14</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投债·展期不是躺平，是战术性收缩">城投债·展期不是躺平，是战术性收缩</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">10</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-13</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">42</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-11</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">17</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-10</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投到底能不能当LP？我见过最诚实的算账">城投到底能不能当LP？我见过最诚实的算账</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">30</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-09</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城中村改造2.0：这次谁出钱？">城中村改造2.0：这次谁出钱？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">19</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-08</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投选运营商的尽调清单：怎么识破PPT里的水分">城投选运营商的尽调清单：怎么识破PPT里的水分</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">36</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-07</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投做轻资产运营，我见过最冤的一次合规整改">城投做轻资产运营，我见过最冤的一次合规整改</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">23</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-06</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投轻资产运营：绩效验收标准定了三年，没一次真正执行完">城投轻资产运营：绩效验收标准定了三年，没一次真正执行完</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">15</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-03</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪">买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">11</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-02</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="商改住动了真格，这次比以往任何一次都具体">商改住动了真格，这次比以往任何一次都具体</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">新赛道</span></td>
+          <td class="text-center font-bold text-indigo-600">23</td>
+        </tr><tr class="row">
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="[湘]城投收商品房作保障房，这次真要下场了">[湘]城投收商品房作保障房，这次真要下场了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">29</td>
+        </tr></tbody>
         </table>
       </div>
     </div>
 
     <!-- 月度趋势 -->
-    <div class="card">
-      <h3 class="card-title mb-4">
-        <span style="width:30px;height:30px;background:var(--indigo-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📊</span>
-        月度发布&amp;阅读趋势（2025-09 起全量）
-      </h3>
+    <div class="card p-5">
+      <h3 class="font-extrabold text-slate-800 text-sm mb-4">📊 月度发布&阅读趋势</h3>
       <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr>
-            <th class="text-left">月份</th><th class="text-center">发布篇数</th><th class="text-center">总阅读</th><th class="text-center">篇均阅读</th><th class="text-center">最高阅读</th>
+        <table class="w-full text-sm">
+          <thead><tr class="text-xs text-slate-400 uppercase tracking-wider border-b">
+            <th class="text-left py-2 pr-4">月份</th><th class="text-center py-2 px-2">发布篇数</th><th class="text-center py-2 px-2">总阅读</th><th class="text-center py-2 pl-2">篇均阅读</th>
           </tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-09</td><td class="text-center text-teal-600 font-bold">7</td><td class="text-center text-slate-600">16</td><td class="text-center text-slate-400">2</td><td class="text-center text-amber-600 font-bold">5</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-10</td><td class="text-center text-teal-600 font-bold">8</td><td class="text-center text-slate-600">109</td><td class="text-center text-slate-400">13</td><td class="text-center text-amber-600 font-bold">68</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-11</td><td class="text-center text-teal-600 font-bold">5</td><td class="text-center text-slate-600">64</td><td class="text-center text-slate-400">12</td><td class="text-center text-amber-600 font-bold">55</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-12</td><td class="text-center text-teal-600 font-bold">8</td><td class="text-center text-slate-600">26</td><td class="text-center text-slate-400">3</td><td class="text-center text-amber-600 font-bold">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-01</td><td class="text-center text-teal-600 font-bold">3</td><td class="text-center text-slate-600">19</td><td class="text-center text-slate-400">6</td><td class="text-center text-amber-600 font-bold">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-02</td><td class="text-center text-teal-600 font-bold">4</td><td class="text-center text-slate-600">35</td><td class="text-center text-slate-400">8</td><td class="text-center text-amber-600 font-bold">15</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-04</td><td class="text-center text-teal-600 font-bold">9</td><td class="text-center text-slate-600">61</td><td class="text-center text-slate-400">6</td><td class="text-center text-amber-600 font-bold">15</td></tr>
-<tr class="hover:bg-gray-50" style="background:#FEF9EC;"><td class="font-bold text-amber-700 text-sm">2026-05 🔥</td><td class="text-center font-bold text-amber-600">29</td><td class="text-center font-bold text-amber-600">4,886</td><td class="text-center text-amber-600 font-bold">168</td><td class="text-center font-bold text-amber-700">1,088</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-06</td><td class="text-center text-teal-600 font-bold">22</td><td class="text-center text-slate-600">905</td><td class="text-center text-slate-400">41</td><td class="text-center text-amber-600 font-bold">133</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-07</td><td class="text-center text-teal-600 font-bold">17</td><td class="text-center text-slate-600">364</td><td class="text-center text-slate-400">21</td><td class="text-center text-amber-600 font-bold">42</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-09</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-600">124</td><td class="text-center text-slate-400">124</td><td class="text-center text-amber-600 font-bold">124</td></tr>
-          </tbody>
+          <tbody><tr class="row">
+          <td class="font-bold text-slate-700">01</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">19 </td>
+          <td class="text-center">6.3</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">02</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">35 </td>
+          <td class="text-center">8.8</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">04</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">61 </td>
+          <td class="text-center">6.8</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">05</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">11,299 🔥</td>
+          <td class="text-center">389.6</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">06</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">925 📈</td>
+          <td class="text-center">40.2</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">07</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">364 </td>
+          <td class="text-center">21.4</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">09</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">140 </td>
+          <td class="text-center">17.5</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">10</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">109 </td>
+          <td class="text-center">13.6</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">11</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">64 </td>
+          <td class="text-center">12.8</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">12</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">26 </td>
+          <td class="text-center">3.2</td>
+        </tr></tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════ -->
+  <!-- ================================================================ -->
   <!-- TAB 2: 月度战报 -->
-  <!-- ══════════════════════════════════════ -->
+  <!-- ================================================================ -->
   <div id="tab-monthly" class="tab-content">
-    <div class="card">
-      <h3 class="card-title mb-4">
-        <span style="width:30px;height:30px;background:var(--teal-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📅</span>
-        月度发布详情（2025-09 起）
-      </h3>
+    <div class="card p-5">
+      <h3 class="section-title mb-4">📅 月度发布详情</h3>
       <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr>
-            <th class="text-left">月份</th><th class="text-center">发布篇数</th><th class="text-center">总阅读</th><th class="text-center">篇均阅读</th><th class="text-center">最高阅读</th>
+        <table class="w-full text-sm">
+          <thead><tr class="text-xs text-slate-400 uppercase tracking-wider border-b">
+            <th class="text-left py-2 pr-4">月份</th><th class="text-center py-2 px-2">发布篇数</th><th class="text-center py-2 px-2">总阅读</th><th class="text-center py-2 pl-2">篇均阅读</th>
           </tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-09</td><td class="text-center text-teal-600 font-bold">7</td><td class="text-center text-slate-600">16</td><td class="text-center text-slate-400">2</td><td class="text-center text-amber-600 font-bold">5</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-10</td><td class="text-center text-teal-600 font-bold">8</td><td class="text-center text-slate-600">109</td><td class="text-center text-slate-400">13</td><td class="text-center text-amber-600 font-bold">68</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-11</td><td class="text-center text-teal-600 font-bold">5</td><td class="text-center text-slate-600">64</td><td class="text-center text-slate-400">12</td><td class="text-center text-amber-600 font-bold">55</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-12</td><td class="text-center text-teal-600 font-bold">8</td><td class="text-center text-slate-600">26</td><td class="text-center text-slate-400">3</td><td class="text-center text-amber-600 font-bold">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-01</td><td class="text-center text-teal-600 font-bold">3</td><td class="text-center text-slate-600">19</td><td class="text-center text-slate-400">6</td><td class="text-center text-amber-600 font-bold">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-02</td><td class="text-center text-teal-600 font-bold">4</td><td class="text-center text-slate-600">35</td><td class="text-center text-slate-400">8</td><td class="text-center text-amber-600 font-bold">15</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-04</td><td class="text-center text-teal-600 font-bold">9</td><td class="text-center text-slate-600">61</td><td class="text-center text-slate-400">6</td><td class="text-center text-amber-600 font-bold">15</td></tr>
-<tr class="hover:bg-gray-50" style="background:#FEF9EC;"><td class="font-bold text-amber-700 text-sm">2026-05 🔥</td><td class="text-center font-bold text-amber-600">29</td><td class="text-center font-bold text-amber-600">4,886</td><td class="text-center text-amber-600 font-bold">168</td><td class="text-center font-bold text-amber-700">1,088</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-06</td><td class="text-center text-teal-600 font-bold">22</td><td class="text-center text-slate-600">905</td><td class="text-center text-slate-400">41</td><td class="text-center text-amber-600 font-bold">133</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-07</td><td class="text-center text-teal-600 font-bold">17</td><td class="text-center text-slate-600">364</td><td class="text-center text-slate-400">21</td><td class="text-center text-amber-600 font-bold">42</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-09</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-600">124</td><td class="text-center text-slate-400">124</td><td class="text-center text-amber-600 font-bold">124</td></tr>
-          </tbody>
+          <tbody class="scroll-area"><tr class="row">
+          <td class="font-bold text-slate-700">01</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">19 </td>
+          <td class="text-center">6.3</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">02</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">35 </td>
+          <td class="text-center">8.8</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">04</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">61 </td>
+          <td class="text-center">6.8</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">05</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">11,299 🔥</td>
+          <td class="text-center">389.6</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">06</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">925 📈</td>
+          <td class="text-center">40.2</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">07</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">364 </td>
+          <td class="text-center">21.4</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">09</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">140 </td>
+          <td class="text-center">17.5</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">10</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">109 </td>
+          <td class="text-center">13.6</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">11</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">64 </td>
+          <td class="text-center">12.8</td>
+        </tr><tr class="row">
+          <td class="font-bold text-slate-700">12</td>
+          <td class="text-center">0</td>
+          <td class="text-center font-bold text-indigo-600">26 </td>
+          <td class="text-center">3.2</td>
+        </tr></tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════ -->
+  <!-- ================================================================ -->
   <!-- TAB 3: 历史全榜 -->
-  <!-- ══════════════════════════════════════ -->
+  <!-- ================================================================ -->
   <div id="tab-history" class="tab-content">
-
-    <!-- 全部历史 TOP10 -->
-    <div class="card mb-5">
-      <h3 class="card-title mb-1">
-        <span style="width:30px;height:30px;background:var(--amber-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">🏆</span>
-        全部历史 TOP10（2025-09 起 · 113篇总榜）
-      </h3>
-      <p class="text-xs text-slate-400 mb-4">按历史累计阅读排序，含2025年冷启动期数据</p>
-      <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr><th></th><th class="text-left">日期</th><th class="text-left">标题</th><th class="text-center">话题</th><th class="text-center">阅读</th><th>趋势</th></tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-1">1</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-17</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="某城投园区从空置60%到满租：我被骂了3年，但最后还是做成了">某城投园区从空置60%到满租：我被骂了3年，但最后还是做成了</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-amber-600">1,088</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:100%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-2">2</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-27</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-amber-600">1,040</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:95%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-3">3</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-23</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去打水漂">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去打水漂</td><td class="text-center"><span class="tag tag-new">泛资产管理</span></td><td class="text-center font-bold text-amber-600">1,028</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:94%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">4</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-18</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="园区轻资产运营：如何让入驻企业主动找你续约？">园区轻资产运营：如何让入驻企业主动找你续约？</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-amber-600">979</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:90%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">5</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-19</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园同质化：100个园区99个长得一样，凭什么选你？">产业园同质化：100个园区99个长得一样，凭什么选你？</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-amber-600">321</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:29%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">6</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-06</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙保障房改造：领导算完账当场沉默了">长沙保障房改造：领导算完账当场沉默了</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-amber-600">184</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:16%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">7</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-09</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-amber-600">133</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:12%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">8</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-07</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="13号文落地一个月：城投被剥马甲后，还有几条活路">13号文落地一个月：城投被剥马甲后，还有几条活路</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-amber-600">131</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:12%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">9</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-09-22</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力">城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-amber-600">124</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:11%;background:var(--amber)"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">10</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-05</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="停车场运营：我见过最狠的算账，有城投月收38万还亏60万">停车场运营：我见过最狠的算账，有城投月收38万还亏60万</td><td class="text-center"><span class="tag tag-new">泛资产管理</span></td><td class="text-center font-bold text-amber-600">70</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:6%;background:var(--amber)"></div></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 全年 TOP10 2026（不同于全部历史） -->
-    <div class="card mb-5">
-      <h3 class="card-title mb-1">
-        <span style="width:30px;height:30px;background:var(--teal-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📋</span>
-        2026年 TOP10（2026年专属榜，取不在全部历史TOP10的文章）
-      </h3>
-      <p class="text-xs text-slate-400 mb-4">与全部历史TOP10不重叠，展示2026年各月均衡实力</p>
-      <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr><th></th><th class="text-left">日期</th><th class="text-left">标题</th><th class="text-center">话题</th><th class="text-center">阅读</th><th>趋势</th></tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-1">1</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-30</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城中村改造算账：资本金只出12%，剩下88%靠什么撬动">城中村改造算账：资本金只出12%，剩下88%靠什么撬动</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-teal-600">59</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:100%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-2">2</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-10</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="保租房定价的死亡交叉点：低租金与高成本的矛盾">保租房定价的死亡交叉点：低租金与高成本的矛盾</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">58</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:98%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-3">3</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-19</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园以房养园：算完账发现这事还是要靠补贴">产业园以房养园：算完账发现这事还是要靠补贴</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">49</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:83%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">4</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-21</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投收商品房作保障房：三个算账盲区">城投收商品房作保障房：三个算账盲区</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">45</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:76%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">5</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-13</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">42</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:71%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">6</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-15</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园招商为什么总完不成：不是条件差，是没有招商体系">产业园招商为什么总完不成：不是条件差，是没有招商体系</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">38</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:64%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">7</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-14</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投轻资产运营，你可能连第一步就走错了">城投轻资产运营，你可能连第一步就走错了</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">38</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:64%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">8</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-02</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投选运营商的尽调清单：怎么识破PPT里的水分">城投选运营商的尽调清单：怎么识破PPT里的水分</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">38</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:64%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">9</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-30</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投做轻资产运营，我见过最冤的一次合规整改">城投做轻资产运营，我见过最冤的一次合规整改</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">37</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:62%"></div></div></td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">10</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-08</td><td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投到底能不能当LP？我见过最诚实的算账">城投到底能不能当LP？我见过最诚实的算账</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">36</td><td class="w-24"><div class="bar"><div class="bar-fill" style="width:61%"></div></div></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 全部历史文章列表（从2025-09起） -->
-    <div class="card">
-      <h3 class="card-title mb-1">
-        <span style="width:30px;height:30px;background:var(--indigo-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📋</span>
-        全部历史文章（共113篇 · 2025-09 起）
-      </h3>
-      <p class="text-xs text-slate-400 mb-4">按发布日期倒序排列，含2025年冷启动期全部30篇历史文章</p>
-      <div class="overflow-x-auto" style="max-height:600px;overflow-y:auto;">
-        <table class="data-table">
-          <thead><tr><th></th><th class="text-left">日期</th><th class="text-left">标题</th><th class="text-center">话题</th><th class="text-center">阅读</th></tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">1</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-09-22</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力">城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-teal-600">124</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">2</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-22</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="拆了卖地，还是改了运营？城中村改造新逻辑">拆了卖地，还是改了运营？城中村改造新逻辑</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-teal-600">20</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">3</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-21</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚">浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚</td><td class="text-center"><span class="tag tag-new">泛资产管理</span></td><td class="text-center font-bold text-teal-600">8</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">4</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-18</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="900万拍综艺收益8600元：国企资产为什么总在“打水漂”">900万拍综艺收益8600元：国企资产为什么总在"打水漂"</td><td class="text-center"><span class="tag tag-new">其他</span></td><td class="text-center font-bold text-teal-600">20</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">5</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-17</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="产业园以房养园：算完账发现这事还是要靠补贴">产业园以房养园：算完账发现这事还是要靠补贴</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">6</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">6</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-16</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的">AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">17</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">7</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-15</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="产业园招商为什么总完不成：不是条件差，是没有招商体系">产业园招商为什么总完不成：不是条件差，是没有招商体系</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">38</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">8</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-14</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投债·展期不是躺平，是战术性收缩">城投债·展期不是躺平，是战术性收缩</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">10</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">9</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-13</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">42</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">10</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-11</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">17</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">11</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-10</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投到底能不能当LP？我见过最诚实的算账">城投到底能不能当LP？我见过最诚实的算账</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">30</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">12</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-09</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城中村改造2.0：这次谁出钱？">城中村改造2.0：这次谁出钱？</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-teal-600">19</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">13</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-08</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投选运营商的尽调清单：怎么识破PPT里的水分">城投选运营商的尽调清单：怎么识破PPT里的水分</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">36</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">14</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-07</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投做轻资产运营，我见过最冤的一次合规整改">城投做轻资产运营，我见过最冤的一次合规整改</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">23</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">15</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-06</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投轻资产运营：绩效验收标准定了三年，没一次真正执行完">城投轻资产运营：绩效验收标准定了三年，没一次真正执行完</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">15</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">16</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-03</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪">买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">11</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">17</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-02</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="商改住动了真格，这次比以往任何一次都具体">商改住动了真格，这次比以往任何一次都具体</td><td class="text-center"><span class="tag tag-new">新赛道</span></td><td class="text-center font-bold text-teal-600">23</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">18</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-07-01</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="[湘]城投收商品房作保障房，这次真要下场了">[湘]城投收商品房作保障房，这次真要下场了</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">29</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">19</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-30</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投做轻资产运营，我见过最冤的一次合规整改">城投做轻资产运营，我见过最冤的一次合规整改</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">37</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">20</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-21</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投收商品房作保障房：三个算账盲区">城投收商品房作保障房：三个算账盲区</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">45</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">21</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-14</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投轻资产运营，你可能连第一步就走错了">城投轻资产运营，你可能连第一步就走错了</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">38</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">22</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-10</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">58</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">23</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-09</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="13号文落地一个月：城投被剥马甲后，还有几条活路">13号文落地一个月：城投被剥马甲后，还有几条活路</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">133</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">24</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-07</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="停车场运营：我见过最狠的算账，有城投月收38万还亏60万">停车场运营：我见过最狠的算账，有城投月收38万还亏60万</td><td class="text-center"><span class="tag tag-new">泛资产管理</span></td><td class="text-center font-bold text-teal-600">70</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">25</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-05</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投到底能不能当LP？我见过最诚实的算账">城投到底能不能当LP？我见过最诚实的算账</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">36</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">26</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-06-02</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投选运营商的尽调清单：怎么识破PPT里的水分">城投选运营商的尽调清单：怎么识破PPT里的水分</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">38</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">27</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-31</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="保障房运营的三个生死线：空置率、租金差、运营成本">保障房运营的三个生死线：空置率、租金差、运营成本</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">20</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">28</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-30</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城中村改造算账：资本金只出12%，剩下88%靠什么撬动">城中村改造算账：资本金只出12%，剩下88%靠什么撬动</td><td class="text-center"><span class="tag tag-coral">城市更新</span></td><td class="text-center font-bold text-teal-600">59</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">29</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-28</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="委托运营合同怎么签：三个条款不写进去，后面全是坑">委托运营合同怎么签：三个条款不写进去，后面全是坑</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">28</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">30</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-27</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">1,040</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">31</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-25</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">20</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">32</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-23</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去打水漂">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去打水漂</td><td class="text-center"><span class="tag tag-new">泛资产管理</span></td><td class="text-center font-bold text-teal-600">1,028</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">33</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-20</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="委托运营3年后，租户续约率从40%提到78%：我做对了什么？">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">20</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">34</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-19</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="产业园同质化：100个园区99个长得一样，凭什么选你？">产业园同质化：100个园区99个长得一样，凭什么选你？</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">321</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">35</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-18</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="园区轻资产运营：如何让入驻企业主动找你续约？">园区轻资产运营：如何让入驻企业主动找你续约？</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">979</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">36</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-17</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="某城投园区从空置60%到满租：我被骂了3年，但最后还是做成了">某城投园区从空置60%到满租：我被骂了3年，但最后还是做成了</td><td class="text-center"><span class="tag tag-violet">产业园</span></td><td class="text-center font-bold text-teal-600">1,088</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">37</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-05-06</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="长沙保障房改造：领导算完账当场沉默了">长沙保障房改造：领导算完账当场沉默了</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">184</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">38</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-04-30</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投轻资产运营，你可能连第一步就走错了">城投轻资产运营，你可能连第一步就走错了</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">15</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">39</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-04-15</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="城投轻资产运营，你可能连第一步就走错了">城投轻资产运营，你可能连第一步就走错了</td><td class="text-center"><span class="tag tag-teal">城投系</span></td><td class="text-center font-bold text-teal-600">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">40</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-02-28</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="【内部整理】保租房投资决策"秘籍"：2大死穴+3条活路">【内部整理】保租房投资决策"秘籍"：2大死穴+3条活路</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">15</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">41</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2026-01-15</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="2025已然过去，2026正式登场！">2025已然过去，2026正式登场！</td><td class="text-center"><span class="tag tag-new">其他</span></td><td class="text-center font-bold text-teal-600">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">42</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2025-12-28</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="关于印发《长沙市城镇房屋结构安全体检技术导则（试行）》的通知（附全文）">关于印发《长沙市城镇房屋结构安全体检技术导则（试行）》的通知（附全文）</td><td class="text-center"><span class="tag tag-new">政策解读</span></td><td class="text-center font-bold text-teal-600">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">43</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2025-11-20</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="812号令正式生效！租赁住房想‘活下来’，必须重视这件事">812号令正式生效！租赁住房想'活下来'，必须重视这件事</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">55</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">44</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2025-10-18</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="长沙市住房和城乡建设局等12部门关于进一步做好长沙市租赁住房工作">长沙市住房和城乡建设局等12部门关于进一步做好长沙市租赁住房工作</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">68</td></tr>
-<tr class="hover:bg-gray-50"><td class="text-center"><span class="badge badge-o">45</span></td><td class="text-xs text-slate-400 whitespace-nowrap">2025-09-10</td><td class="text-sm text-slate-800 font-medium max-w-md truncate" title="《长沙市中央财政支持住房租赁市场发展试点专项资金管理办法》">《长沙市中央财政支持住房租赁市场发展试点专项资金管理办法》</td><td class="text-center"><span class="tag tag-amber">保租房</span></td><td class="text-center font-bold text-teal-600">5</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════ -->
-  <!-- TAB 4: 流量来源 -->
-  <!-- ══════════════════════════════════════ -->
-  <div id="tab-sources" class="tab-content">
-
-    <!-- 月度文章数量（2026年1-12月） -->
-    <div class="card mb-5">
-      <h3 class="card-title mb-1">
-        <span style="width:30px;height:30px;background:var(--teal-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📅</span>
-        2026年各月文章发布数量
-      </h3>
-      <p class="text-xs text-slate-400 mb-4">有数据的月份标注阅读数，无数据的标注"待补充"，后续逐月更新</p>
-      <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr><th class="text-left">月份</th><th class="text-center">文章数</th><th class="text-center">总阅读</th><th class="text-center">状态</th></tr></thead>
-          <tbody>
-<tr><td class="font-bold text-slate-700 text-sm">2026-01</td><td class="text-center font-bold text-teal-600">3</td><td class="text-center text-slate-500">19</td><td class="text-center"><span class="tag tag-teal">有数据</span></td></tr>
-<tr><td class="font-bold text-slate-700 text-sm">2026-02</td><td class="text-center font-bold text-teal-600">4</td><td class="text-center text-slate-500">35</td><td class="text-center"><span class="tag tag-teal">有数据</span></td></tr>
-<tr><td class="font-bold text-slate-400 text-sm">2026-03</td><td class="text-center text-slate-300">—</td><td class="text-center text-slate-300">—</td><td class="text-center"><span class="tag tag-new">待补充</span></td></tr>
-<tr><td class="font-bold text-slate-700 text-sm">2026-04</td><td class="text-center font-bold text-teal-600">9</td><td class="text-center text-slate-500">61</td><td class="text-center"><span class="tag tag-teal">有数据</span></td></tr>
-<tr><td class="font-bold text-amber-700 text-sm">2026-05 🔥</td><td class="text-center font-bold text-amber-600">29</td><td class="text-center text-amber-600">4,886</td><td class="text-center"><span class="tag tag-amber">有数据</span></td></tr>
-<tr><td class="font-bold text-slate-700 text-sm">2026-06</td><td class="text-center font-bold text-teal-600">22</td><td class="text-center text-slate-500">905</td><td class="text-center"><span class="tag tag-teal">有数据</span></td></tr>
-<tr><td class="font-bold text-slate-700 text-sm">2026-07</td><td class="text-center font-bold text-teal-600">17</td><td class="text-center text-slate-500">364</td><td class="text-center"><span class="tag tag-teal">有数据</span></td></tr>
-<tr><td class="font-bold text-slate-400 text-sm">2026-08</td><td class="text-center text-slate-300">—</td><td class="text-center text-slate-300">—</td><td class="text-center"><span class="tag tag-new">待补充</span></td></tr>
-<tr><td class="font-bold text-slate-700 text-sm">2026-09</td><td class="text-center font-bold text-teal-600">1</td><td class="text-center text-slate-500">124</td><td class="text-center"><span class="tag tag-teal">有数据</span></td></tr>
-<tr><td class="font-bold text-slate-400 text-sm">2026-10</td><td class="text-center text-slate-300">—</td><td class="text-center text-slate-300">—</td><td class="text-center"><span class="tag tag-new">待补充</span></td></tr>
-<tr><td class="font-bold text-slate-400 text-sm">2026-11</td><td class="text-center text-slate-300">—</td><td class="text-center text-slate-300">—</td><td class="text-center"><span class="tag tag-new">待补充</span></td></tr>
-<tr><td class="font-bold text-slate-400 text-sm">2026-12</td><td class="text-center text-slate-300">—</td><td class="text-center text-slate-300">—</td><td class="text-center"><span class="tag tag-new">待补充</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- 历史全周期月度文章数 -->
-    <div class="card">
-      <h3 class="card-title mb-1">
-        <span style="width:30px;height:30px;background:var(--indigo-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📊</span>
-        历史全周期月度发布统计（2025-09 起）
-      </h3>
-      <p class="text-xs text-slate-400 mb-4">全部历史月份文章数量与阅读统计</p>
-      <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr><th class="text-left">月份</th><th class="text-center">发布篇数</th><th class="text-center">总阅读</th><th class="text-center">篇均阅读</th></tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-09</td><td class="text-center text-teal-600 font-bold">7</td><td class="text-center text-slate-600">16</td><td class="text-center text-slate-400">2</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-10</td><td class="text-center text-teal-600 font-bold">8</td><td class="text-center text-slate-600">109</td><td class="text-center text-slate-400">13</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-11</td><td class="text-center text-teal-600 font-bold">5</td><td class="text-center text-slate-600">64</td><td class="text-center text-slate-400">12</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-12</td><td class="text-center text-teal-600 font-bold">8</td><td class="text-center text-slate-600">26</td><td class="text-center text-slate-400">3</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-01</td><td class="text-center text-teal-600 font-bold">3</td><td class="text-center text-slate-600">19</td><td class="text-center text-slate-400">6</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-02</td><td class="text-center text-teal-600 font-bold">4</td><td class="text-center text-slate-600">35</td><td class="text-center text-slate-400">8</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-04</td><td class="text-center text-teal-600 font-bold">9</td><td class="text-center text-slate-600">61</td><td class="text-center text-slate-400">6</td></tr>
-<tr class="hover:bg-gray-50" style="background:#FEF9EC;"><td class="font-bold text-amber-700 text-sm">2026-05 🔥</td><td class="text-center font-bold text-amber-600">29</td><td class="text-center font-bold text-amber-600">4,886</td><td class="text-center text-amber-600 font-bold">168</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-06</td><td class="text-center text-teal-600 font-bold">22</td><td class="text-center text-slate-600">905</td><td class="text-center text-slate-400">41</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-07</td><td class="text-center text-teal-600 font-bold">17</td><td class="text-center text-slate-600">364</td><td class="text-center text-slate-400">21</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-09</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-600">124</td><td class="text-center text-slate-400">124</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════ -->
-  <!-- TAB 5: 话题地图 -->
-  <!-- ══════════════════════════════════════ -->
-  <div id="tab-topics" class="tab-content">
-    <div class="card mb-5">
-      <h3 class="card-title mb-4">
-        <span style="width:30px;height:30px;background:var(--violet-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">🗺️</span>
-        话题分布地图（按累计阅读量排序）
-      </h3>
-      <div>
-        <div class="topic-row" style="padding:12px 0;border-bottom:2px solid var(--border);font-weight:800;color:var(--text);font-size:13px;">
-          <span class="topic-name">话题</span>
-          <span class="topic-count">篇数</span>
-          <div class="topic-bar-bg" style="flex:1"></div>
-          <span class="topic-read" style="font-weight:900;">总阅读</span>
-          <span class="topic-avg">篇均</span>
-        </div>
-        <div class="topic-row">
-          <span class="topic-name" style="color:var(--teal);font-weight:800;">城投系</span>
-          <span class="topic-count">29篇</span>
-          <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:100%;background:var(--teal)"></div></div>
-          <span class="topic-read">2,400+</span>
-          <span class="topic-avg">均82</span>
-        </div>
-        <div class="topic-row">
-          <span class="topic-name" style="color:var(--violet);font-weight:800;">产业园</span>
-          <span class="topic-count">31篇</span>
-          <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:72%;background:var(--violet)"></div></div>
-          <span class="topic-read">1,800+</span>
-          <span class="topic-avg">均58</span>
-        </div>
-        <div class="topic-row">
-          <span class="topic-name" style="color:var(--amber);font-weight:800;">保租房</span>
-          <span class="topic-count">18篇</span>
-          <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:38%;background:var(--amber)"></div></div>
-          <span class="topic-read">960+</span>
-          <span class="topic-avg">均53</span>
-        </div>
-        <div class="topic-row">
-          <span class="topic-name" style="color:var(--coral);font-weight:800;">城市更新</span>
-          <span class="topic-count">15篇</span>
-          <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:22%;background:var(--coral)"></div></div>
-          <span class="topic-read">580+</span>
-          <span class="topic-avg">均38</span>
-        </div>
-        <div class="topic-row">
-          <span class="topic-name" style="color:var(--indigo);font-weight:800;">新赛道</span>
-          <span class="topic-count">9篇</span>
-          <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:12%;background:var(--indigo)"></div></div>
-          <span class="topic-read">320+</span>
-          <span class="topic-avg">均35</span>
-        </div>
-        <div class="topic-row">
-          <span class="topic-name" style="color:#64748B;font-weight:800;">其他/政策</span>
-          <span class="topic-count">11篇</span>
-          <div class="topic-bar-bg"><div class="topic-bar-fill" style="width:8%;background:#94A3B8"></div></div>
-          <span class="topic-read">200+</span>
-          <span class="topic-avg">均18</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 话题趋势 -->
-    <div class="card">
-      <h3 class="card-title mb-4">
-        <span style="width:30px;height:30px;background:var(--amber-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;">📈</span>
-        各月话题发布热力（篇数）
-      </h3>
-      <div class="overflow-x-auto">
-        <table class="data-table">
-          <thead><tr>
-            <th class="text-left">月份</th>
-            <th class="text-center" style="color:var(--teal)">城投系</th>
-            <th class="text-center" style="color:var(--violet)">产业园</th>
-            <th class="text-center" style="color:var(--amber)">保租房</th>
-            <th class="text-center" style="color:var(--coral)">城市更新</th>
-            <th class="text-center" style="color:var(--indigo)">新赛道</th>
-            <th class="text-center" style="color:#64748B">其他</th>
+    <div class="card p-5">
+      <h3 class="section-title mb-1">🏆 TOP5 热文</h3>
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full text-sm">
+          <thead><tr class="text-xs text-slate-400 uppercase tracking-wider border-b">
+            <th class="py-2 pr-2"></th><th class="text-left py-2 pr-4">日期</th><th class="text-left py-2 pr-4">标题</th><th class="text-center py-2 px-2">话题</th><th class="text-center py-2 pl-2">阅读</th><th class="hidden md:table-cell py-2 pl-2">趋势</th>
           </tr></thead>
-          <tbody>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-09</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">5</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">2</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-10</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">6</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">2</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-11</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">4</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">1</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2025-12</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">3</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">5</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-01</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">1</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-02</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">2</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">1</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-04</td><td class="text-center text-teal-600 font-bold">6</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">2</td></tr>
-<tr class="hover:bg-gray-50" style="background:#FEF9EC;"><td class="font-bold text-amber-700 text-sm">2026-05 🔥</td><td class="text-center font-bold text-amber-600">8</td><td class="text-center font-bold text-amber-600">10</td><td class="text-center font-bold text-amber-600">4</td><td class="text-center font-bold text-amber-600">3</td><td class="text-center font-bold text-amber-600">2</td><td class="text-center font-bold text-amber-600">2</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-06</td><td class="text-center text-teal-600 font-bold">7</td><td class="text-center text-teal-600 font-bold">6</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">4</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">5</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-07</td><td class="text-center text-teal-600 font-bold">6</td><td class="text-center text-teal-600 font-bold">2</td><td class="text-center text-teal-600 font-bold">2</td><td class="text-center text-teal-600 font-bold">4</td><td class="text-center text-teal-600 font-bold">3</td><td class="text-center text-slate-400">—</td></tr>
-<tr class="hover:bg-gray-50"><td class="font-bold text-slate-700 text-sm">2026-09</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td><td class="text-center text-teal-600 font-bold">1</td><td class="text-center text-slate-400">—</td><td class="text-center text-slate-400">—</td></tr>
-          </tbody>
+          <tbody><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🥇</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-28</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-amber-600">1,450</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-amber-400" style="width:100.0%"></div></div></td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-2">🥈</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-20</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="委托运营3年后，租户续约率从40%提到78%：我做对了什么？">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-amber-600">1,352</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-amber-400" style="width:93.2%"></div></div></td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-3">🥉</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="委托运营合同怎么签：三个条款不写进去，后面全是坑">委托运营合同怎么签：三个条款不写进去，后面全是坑</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-amber-600">1,310</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-amber-400" style="width:90.3%"></div></div></td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o">4</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-amber-600">1,151</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-amber-400" style="width:79.4%"></div></div></td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o">5</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-31</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="保障房运营的三个生死线：空置率、租金差、运营成本">保障房运营的三个生死线：空置率、租金差、运营成本</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-amber-600">1,150</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-amber-400" style="width:79.3%"></div></div></td>
+        </tr></tbody>
         </table>
       </div>
+      <h3 class="section-title mb-1">📋 历史全部文章（114篇）</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-xs text-slate-400 uppercase tracking-wider border-b">
+            <th class="py-2 pr-2"></th><th class="text-left py-2 pr-4">日期</th><th class="text-left py-2 pr-4">标题</th><th class="text-center py-2 px-2">话题</th><th class="text-center py-2 pl-2">阅读</th>
+          </tr></thead>
+          <tbody class="scroll-area"><tr class="row">
+          <td class="text-center"><span class="badge badge-3"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-09-22</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力">城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">124</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-22</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="拆了卖地，还是改了运营？城中村改造新逻辑">拆了卖地，还是改了运营？城中村改造新逻辑</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">20</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-21</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚">浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">泛资产管理</span></td>
+          <td class="text-center font-bold text-indigo-600">8</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-18</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="900万拍综艺收益8600元：国企资产为什么总在“打水漂”">900万拍综艺收益8600元：国企资产为什么总在“打水漂”</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">20</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-17</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园以房养园：算完账发现这事还是要靠补贴">产业园以房养园：算完账发现这事还是要靠补贴</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">6</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-16</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的">AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">17</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园招商为什么总完不成：不是条件差，是没有招商体系">产业园招商为什么总完不成：不是条件差，是没有招商体系</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">38</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-14</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投债·展期不是躺平，是战术性收缩">城投债·展期不是躺平，是战术性收缩</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">10</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-13</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">42</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-11</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">17</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-10</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投到底能不能当LP？我见过最诚实的算账">城投到底能不能当LP？我见过最诚实的算账</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">30</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-09</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城中村改造2.0：这次谁出钱？">城中村改造2.0：这次谁出钱？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">19</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-08</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投选运营商的尽调清单：怎么识破PPT里的水分">城投选运营商的尽调清单：怎么识破PPT里的水分</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">36</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-07</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投做轻资产运营，我见过最冤的一次合规整改">城投做轻资产运营，我见过最冤的一次合规整改</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">23</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-06</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投轻资产运营：绩效验收标准定了三年，没一次真正执行完">城投轻资产运营：绩效验收标准定了三年，没一次真正执行完</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">15</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-03</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪">买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">11</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-02</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="商改住动了真格，这次比以往任何一次都具体">商改住动了真格，这次比以往任何一次都具体</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">新赛道</span></td>
+          <td class="text-center font-bold text-indigo-600">23</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-07-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="[湘]城投收商品房作保障房，这次真要下场了">[湘]城投收商品房作保障房，这次真要下场了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">29</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-30</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="电竞酒店：城投公寓的00后新生意">电竞酒店：城投公寓的00后新生意</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">37</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-29</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">24</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-22</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="卖园区：5000万卖出去了，1.2亿的血亏是怎么漏掉的？">卖园区：5000万卖出去了，1.2亿的血亏是怎么漏掉的？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">25</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-21</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了">写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">45</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-20</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="35万亿十五五规划落地：城投手里有哪些还没被讨论的机会？">35万亿十五五规划落地：城投手里有哪些还没被讨论的机会？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">13</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-19</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投做能源托管，本质上是一场圈地运动——圈的是用电用户">城投做能源托管，本质上是一场圈地运动——圈的是用电用户</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">16</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-18</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="商办批量改公寓：一场豪赌，正在拉开差距">商办批量改公寓：一场豪赌，正在拉开差距</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">新赛道</span></td>
+          <td class="text-center font-bold text-indigo-600">31</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-16</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="经营性债务来袭：那120亿的债转股是怎么谈下来的">经营性债务来袭：那120亿的债转股是怎么谈下来的</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">16</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="“代建、代运营”的尽头，是自己下场做生意">“代建、代运营”的尽头，是自己下场做生意</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">泛资产管理</span></td>
+          <td class="text-center font-bold text-indigo-600">36</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-14</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="园区的“流量”金矿，城投只挖了1%">园区的“流量”金矿，城投只挖了1%</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">38</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-13</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="「六张网」7万亿砸下来，城投能接住哪一张？">「六张网」7万亿砸下来，城投能接住哪一张？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">24</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-12</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投资产盘活：五个坑，踩了三个就翻不了身">城投资产盘活：五个坑，踩了三个就翻不了身</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">32</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-11</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="13号文落地一个月，城投的三笔账怎么算？">13号文落地一个月，城投的三笔账怎么算？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">25</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-10</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园运营：三种模式，有的城投算完账就放弃了">产业园运营：三种模式，有的城投算完账就放弃了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">58</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-3"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-09</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">133</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-08</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="EOD 真实案例：某长三角地市 14 亿生态项目，3 年回本怎么算的">EOD 真实案例：某长三角地市 14 亿生态项目，3 年回本怎么算的</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">33</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-3"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-07</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="13号文落地一个月：城投被剥马甲后，还有几条活路">13号文落地一个月：城投被剥马甲后，还有几条活路</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">131</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-06</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title=""35%"上缴大棒：国企利润上交新规后，城投还剩多少肉？">"35%"上缴大棒：国企利润上交新规后，城投还剩多少肉？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">20</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-05</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="停车场运营：我见过最狠的算账，有城投月收38万还亏60万">停车场运营：我见过最狠的算账，有城投月收38万还亏60万</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">70</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-04</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="帮城投做REITs预审材料，我总结了5个被拒原因，第3个最不应该">帮城投做REITs预审材料，我总结了5个被拒原因，第3个最不应该</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">26</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-03</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="两业融合三年：城投的钱投进去了，效果怎么样？">两业融合三年：城投的钱投进去了，效果怎么样？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">23</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-02</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="工业上楼：城投跟不跟？算完这笔账，答案清楚了">工业上楼：城投跟不跟？算完这笔账，答案清楚了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">38</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-06-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="招商率卡在60%，问题不在招商——城投园区最常见的那个第一个错">招商率卡在60%，问题不在招商——城投园区最常见的那个第一个错</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">31</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-31</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="保障房运营的三个生死线：空置率、租金差、运营成本">保障房运营的三个生死线：空置率、租金差、运营成本</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">1,150</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-30</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="“算力”这趟车，城投上了到底是乘客还是燃料">“算力”这趟车，城投上了到底是乘客还是燃料</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">59</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-29</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="强制配储取消后，城投发现储能突然能赚钱了：有项目靠容量电价，年收入多了300万">强制配储取消后，城投发现储能突然能赚钱了：有项目靠容量电价，年收入多了300万</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">13</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-28</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">1,450</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-27</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">1,040</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">1,151</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-24</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="144亿收入，4.5%利润率：城投年报最薄利的一幕">144亿收入，4.5%利润率：城投年报最薄利的一幕</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">10</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-23</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">1,028</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-22</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="曲江撤销管委会：过多少文旅城投，死在这条路上">曲江撤销管委会：过多少文旅城投，死在这条路上</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">22</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-21</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="保租房定价：租金怎么定才不踩红线？一套算法模型">保租房定价：租金怎么定才不踩红线？一套算法模型</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">14</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-20</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="委托运营3年后，租户续约率从40%提到78%：我做对了什么？">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">1,352</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-2">📈</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-19</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="产业园同质化：100个园区99个长得一样，凭什么选你？">产业园同质化：100个园区99个长得一样，凭什么选你？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">321</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-19</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="某地级市城投"委托运营"3年后：500万教训换来的复盘">某地级市城投"委托运营"3年后：500万教训换来的复盘</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">49</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-2">📈</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-18</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="园区轻资产运营：如何让入驻企业"留下来、多消费"？">园区轻资产运营：如何让入驻企业"留下来、多消费"？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">979</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-17</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="某城投园区从"烂尾"到"满租"，三年复盘">某城投园区从"烂尾"到"满租"，三年复盘</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">1,088</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-16</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="某地级市城投：如何用"委托运营"撬动民营资本">某地级市城投：如何用"委托运营"撬动民营资本</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">24</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-1">🔥</span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="委托运营合同怎么签：三个条款不写进去，后面全是坑">委托运营合同怎么签：三个条款不写进去，后面全是坑</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">1,310</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="财政部新设债务司：城投的紧箍咒，不是松了，是换了个人念">财政部新设债务司：城投的紧箍咒，不是松了，是换了个人念</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">5</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-14</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="跟政府谈了100次：我发现有1条规矩，破了就全盘皆输">跟政府谈了100次：我发现有1条规矩，破了就全盘皆输</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">7</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-12</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="80万亿资产睡在账上：城投守着金矿，却挣扎在温饱问题里">80万亿资产睡在账上：城投守着金矿，却挣扎在温饱问题里</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">7</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-11</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="REITs/ABS/委托运营：三条路选错一条，白干十年">REITs/ABS/委托运营：三条路选错一条，白干十年</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">13</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-10</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="国企利润上交中央：城投又得多掏多少钱？算完惊了">国企利润上交中央：城投又得多掏多少钱？算完惊了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">5</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-09</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="土地财政死了：城投的饭票，还剩几张？">土地财政死了：城投的饭票，还剩几张？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-08</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="一个改造项目算不清账？业主亏掉了一套别墅的钱">一个改造项目算不清账？业主亏掉了一套别墅的钱</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">3</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-3"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-06</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙保障房改造：领导算完账当场沉默了">长沙保障房改造：领导算完账当场沉默了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">184</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-05</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="土储专项债重启：有人已经拿到钱了，你还在等什么？">土储专项债重启：有人已经拿到钱了，你还在等什么？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">6</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-04</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="7000家城投消失了：资产和债务到底去了哪里？">7000家城投消失了：资产和债务到底去了哪里？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-02</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="为什么你的园区招了三年还招不满">为什么你的园区招了三年还招不满</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">产业园</span></td>
+          <td class="text-center font-bold text-indigo-600">6</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-05-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长租公寓和保障房，不懂行的话，听起来很美，做起来很惨">长租公寓和保障房，不懂行的话，听起来很美，做起来很惨</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-30</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="三资盘活：湖北安徽模式，对其他城投有什么启发">三资盘活：湖北安徽模式，对其他城投有什么启发</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">9</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-29</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="政府资产盘活的真相：不是没钱，是没人敢担事">政府资产盘活的真相：不是没钱，是没人敢担事</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">5</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-28</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投轻资产运营，你可能连第一步就走错了">城投轻资产运营，你可能连第一步就走错了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">15</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-27</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="化债后半场的城投融资：哪些路通了，哪些路堵了">化债后半场的城投融资：哪些路通了，哪些路堵了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-26</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="城投年报里的"增收不增利"，到底什么意思">城投年报里的"增收不增利"，到底什么意思</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">6</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="政府资产运维的钱，都花在哪里了">政府资产运维的钱，都花在哪里了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">4</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-24</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="REITs扩围：城市更新和商业楼宇，这次真的能上市了">REITs扩围：城市更新和商业楼宇，这次真的能上市了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">9</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-23</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="化债进入"主动化债"时代：各地的债务高风险地区，现在都怎么样了">化债进入"主动化债"时代：各地的债务高风险地区，现在都怎么样了</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">5</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-04-13</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="2026年政府资产盘活：为什么"轻资产模式"才是城投转型的救命稻草？">2026年政府资产盘活：为什么"轻资产模式"才是城投转型的救命稻草？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城投系</span></td>
+          <td class="text-center font-bold text-indigo-600">6</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-02-28</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="【内部整理】保租房投资决策“秘籍”：2大模式优劣分析+可套用测算模型，直接抄作业！">【内部整理】保租房投资决策“秘籍”：2大模式优劣分析+可套用测算模型，直接抄作业！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">15</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-02-20</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="轻骑逐火，盘活生金｜「轻资运营局」2026新年寄语 & 年度内容规划">轻骑逐火，盘活生金｜「轻资运营局」2026新年寄语 & 年度内容规划</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">7</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-02-16</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="🧨 岁序更新，金马迎春">🧨 岁序更新，金马迎春</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">5</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-02-05</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="上海的“老破小”，最终会被谁“买断”？答案将影响你未来10年的财富！">上海的“老破小”，最终会被谁“买断”？答案将影响你未来10年的财富！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">8</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-01-16</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！">别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">6</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-01-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！">别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2026-01-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="2025已然过去，2026正式登场！">2025已然过去，2026正式登场！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">12</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-22</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙房东/运营商注意！你手上的房子，即将迎来“持证”时代！一张“体检报告”决定资产生死！">长沙房东/运营商注意！你手上的房子，即将迎来“持证”时代！一张“体检报告”决定资产生死！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">3</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-21</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="冬至快乐！">冬至快乐！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-20</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="关于印发《长沙市城镇房屋结构安全体检技术指南（试行）》的通知_长住建发[2025]57号">关于印发《长沙市城镇房屋结构安全体检技术指南（试行）》的通知_长住建发[2025]57号</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">政策解读</span></td>
+          <td class="text-center font-bold text-indigo-600">12</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-15</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="湖南省人民政府办公厅关于壮大养老产业促进银发经济发展的实施意见(湘政办发〔2025〕48号)">湖南省人民政府办公厅关于壮大养老产业促进银发经济发展的实施意见(湘政办发〔2025〕48号)</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">新赛道</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-12</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="湖南省人民政府办公厅关于持续推进城市更新行动的实施意见 （湘政办发〔2025〕49号）">湖南省人民政府办公厅关于持续推进城市更新行动的实施意见 （湘政办发〔2025〕49号）</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">城市更新</span></td>
+          <td class="text-center font-bold text-indigo-600">4</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-10</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙保租房房东、租客必看！12月新规重塑小区公共收益，你的钱袋要“变天”了？">长沙保租房房东、租客必看！12月新规重塑小区公共收益，你的钱袋要“变天”了？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-04</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="“存量商品房”可以作为保租房吗？这是楼市新出路还是权宜之计？">“存量商品房”可以作为保租房吗？这是楼市新出路还是权宜之计？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-12-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="2026年巨变！保障性租赁住房主力房源，原来是它！">2026年巨变！保障性租赁住房主力房源，原来是它！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-11-23</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="重磅！长沙大批“国资”入场，“十五五”黄金窗口期来了！">重磅！长沙大批“国资”入场，“十五五”黄金窗口期来了！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">政策解读</span></td>
+          <td class="text-center font-bold text-indigo-600">4</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-11-14</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="黄金地段“老破小”的生死局：是彻底倒下，还是即将“焕发二春”？">黄金地段“老破小”的生死局：是彻底倒下，还是即将“焕发二春”？</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-11-05</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="十五五规划下，保障性租赁住房的“破圈”与“升级”">十五五规划下，保障性租赁住房的“破圈”与“升级”</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-11-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="812号令正式生效！租赁住房想‘活下来’，这3道‘报建生死关’必须闯——尤其是消防验收">812号令正式生效！租赁住房想‘活下来’，这3道‘报建生死关’必须闯——尤其是消防验收</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">55</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-11-01</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="“人工智能+”时代，轻资产如何“智”取保障性租赁住房新蓝海？——一位运营者的深度思考">“人工智能+”时代，轻资产如何“智”取保障性租赁住房新蓝海？——一位运营者的深度思考</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-27</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙国有老资产变身“青年社区”：一场政策与市场的双赢实验">长沙国有老资产变身“青年社区”：一场政策与市场的双赢实验</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">政策解读</span></td>
+          <td class="text-center font-bold text-indigo-600">28</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-26</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="酒店业寒冬与长租公寓崛起：租赁行业的结构性变革">酒店业寒冬与长租公寓崛起：租赁行业的结构性变革</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单">长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">4</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="湘江新区保障性租赁住房项目2024年12月公示名单">湘江新区保障性租赁住房项目2024年12月公示名单</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="保障性租赁租房步入“双轨+双循环”时代">保障性租赁租房步入“双轨+双循环”时代</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-16</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="湖南省人民政府办公厅关于加快湖南省公共数据资源开发利用的实施意见">湖南省人民政府办公厅关于加快湖南省公共数据资源开发利用的实施意见</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">政策解读</span></td>
+          <td class="text-center font-bold text-indigo-600">3</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-08</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙市住房和城乡建设局等12部门 关于进一步优化房地产发展措施的通知">长沙市住房和城乡建设局等12部门 关于进一步优化房地产发展措施的通知</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">政策解读</span></td>
+          <td class="text-center font-bold text-indigo-600">68</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-10-08</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙市住房和城乡建设局 关于加快推进住宅小区智慧物业建设的通知">长沙市住房和城乡建设局 关于加快推进住宅小区智慧物业建设的通知</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">泛资产管理</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-09-30</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="喜迎中秋，欢度国庆！">喜迎中秋，欢度国庆！</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-09-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙市住房和城乡建设局关于印发《长沙市配售型保障性住房管理办法（试行）》的通知">长沙市住房和城乡建设局关于印发《长沙市配售型保障性住房管理办法（试行）》的通知</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-09-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="《长沙市中央财政支持住房租赁市场发展试点资金分配方案》的通知  长财综[2020]2号">《长沙市中央财政支持住房租赁市场发展试点资金分配方案》的通知  长财综[2020]2号</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">政策解读</span></td>
+          <td class="text-center font-bold text-indigo-600">5</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-09-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙市“十四五”住房保障规划（2021-2025）">长沙市“十四五”住房保障规划（2021-2025）</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-09-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙市保障性租赁住房项目申请认定申报实施细则  (长住建发〔2025〕10号文件)">长沙市保障性租赁住房项目申请认定申报实施细则  (长住建发〔2025〕10号文件)</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">保租房</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-09-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知">中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">政策解读</span></td>
+          <td class="text-center font-bold text-indigo-600">2</td>
+        </tr><tr class="row">
+          <td class="text-center"><span class="badge badge-o"></span></td>
+          <td class="text-xs text-slate-400 whitespace-nowrap">2025-09-25</td>
+          <td class="text-sm text-slate-800 font-medium max-w-xs truncate" title="长沙市住房租赁合同范本（2025版）">长沙市住房租赁合同范本（2025版）</td>
+          <td class="text-center"><span class="tag-new text-xs whitespace-nowrap">其他</span></td>
+          <td class="text-center font-bold text-indigo-600">1</td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- TAB 4: 流量来源 -->
+  <!-- ================================================================ -->
+  <div id="tab-sources" class="tab-content">
+    <div class="card p-5">
+      <h3 class="section-title mb-4">📡 流量来源分布</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead><tr class="text-xs text-slate-400 uppercase tracking-wider border-b">
+            <th class="text-left py-2 pr-4">渠道</th><th class="text-center py-2 px-2">阅读数</th><th class="text-center py-2 px-2">占比</th><th class="text-center py-2 px-2">文章数</th><th class="hidden md:table-cell py-2 pl-2">分布</th>
+          </tr></thead>
+          <tbody class="scroll-area"><tr class="row">
+          <td class="font-medium text-slate-700">推荐</td>
+          <td class="text-center font-bold text-indigo-600">8,256</td>
+          <td class="text-center text-slate-500">73.2%</td>
+          <td class="text-center text-slate-400 text-xs">22篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:73.2%"></div></div></td>
+        </tr><tr class="row">
+          <td class="font-medium text-slate-700">公众号消息</td>
+          <td class="text-center font-bold text-indigo-600">1,283</td>
+          <td class="text-center text-slate-500">11.4%</td>
+          <td class="text-center text-slate-400 text-xs">68篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:11.4%"></div></div></td>
+        </tr><tr class="row">
+          <td class="font-medium text-slate-700">朋友圈</td>
+          <td class="text-center font-bold text-indigo-600">612</td>
+          <td class="text-center text-slate-500">5.4%</td>
+          <td class="text-center text-slate-400 text-xs">19篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:5.4%"></div></div></td>
+        </tr><tr class="row">
+          <td class="font-medium text-slate-700">聊天会话</td>
+          <td class="text-center font-bold text-indigo-600">403</td>
+          <td class="text-center text-slate-500">3.6%</td>
+          <td class="text-center text-slate-400 text-xs">27篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:3.6%"></div></div></td>
+        </tr><tr class="row">
+          <td class="font-medium text-slate-700">公众号主页</td>
+          <td class="text-center font-bold text-indigo-600">285</td>
+          <td class="text-center text-slate-500">2.5%</td>
+          <td class="text-center text-slate-400 text-xs">60篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:2.5%"></div></div></td>
+        </tr><tr class="row">
+          <td class="font-medium text-slate-700">其他</td>
+          <td class="text-center font-bold text-indigo-600">201</td>
+          <td class="text-center text-slate-500">1.8%</td>
+          <td class="text-center text-slate-400 text-xs">48篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:1.8%"></div></div></td>
+        </tr><tr class="row">
+          <td class="font-medium text-slate-700">搜一搜</td>
+          <td class="text-center font-bold text-indigo-600">150</td>
+          <td class="text-center text-slate-500">1.3%</td>
+          <td class="text-center text-slate-400 text-xs">68篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:1.3%"></div></div></td>
+        </tr><tr class="row">
+          <td class="font-medium text-slate-700">推荐阅读</td>
+          <td class="text-center font-bold text-indigo-600">91</td>
+          <td class="text-center text-slate-500">0.8%</td>
+          <td class="text-center text-slate-400 text-xs">1篇</td>
+          <td class="w-24 hidden md:table-cell"><div class="bar"><div class="bar-fill bg-violet-400" style="width:0.8%"></div></div></td>
+        </tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================================ -->
+  <!-- TAB 5: 话题地图 -->
+  <!-- ================================================================ -->
+  <div id="tab-topics" class="tab-content">
+    <div class="card p-5">
+      <h3 class="section-title mb-4">🗺️ 话题分布（阅读量导向）</h3>
+      <div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">城投系</span>
+          <span class="w-16 text-xs text-slate-400">46篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:100.0%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">5,391阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均117</span>
+        </div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">其他</span>
+          <span class="w-16 text-xs text-slate-400">22篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:52.0%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">2,802阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均127</span>
+        </div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">产业园</span>
+          <span class="w-16 text-xs text-slate-400">8篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:49.3%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">2,658阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均332</span>
+        </div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">城市更新</span>
+          <span class="w-16 text-xs text-slate-400">7篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:30.2%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">1,629阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均232</span>
+        </div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">保租房</span>
+          <span class="w-16 text-xs text-slate-400">18篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:6.3%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">339阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均18</span>
+        </div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">政策解读</span>
+          <span class="w-16 text-xs text-slate-400">7篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:2.3%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">122阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均17</span>
+        </div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">新赛道</span>
+          <span class="w-16 text-xs text-slate-400">3篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:1.0%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">55阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均18</span>
+        </div><div class="topic-row flex items-center gap-4 px-4 py-3">
+          <span class="w-24 text-sm font-bold text-slate-700">泛资产管理</span>
+          <span class="w-16 text-xs text-slate-400">3篇</span>
+          <div class="flex-1 bar"><div class="bar-fill bg-indigo-400" style="width:0.9%"></div></div>
+          <span class="w-24 text-right text-xs font-bold text-indigo-600">46阅读</span>
+          <span class="w-16 text-right text-xs text-slate-400">篇均15</span>
+        </div></div>
     </div>
   </div>
 
 </main>
-
-<!-- ═══ FOOTER ═══ -->
-<div class="footer">
-  轻资运营局 · 运营战报 &nbsp;|&nbsp; 数据区间：2025-09 至 2026-09 &nbsp;|&nbsp; 最后更新：2026-09-24 &nbsp;|&nbsp; 共 113 篇文章
-</div>
 
 <script>
   function showTab(name, btn) {
@@ -777,6 +1244,5 @@
     btn.classList.add('active');
   }
 </script>
-
 </body>
 </html>
