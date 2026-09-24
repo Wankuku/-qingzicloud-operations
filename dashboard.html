@@ -124,7 +124,22 @@
       margin-top: 3px;
     }
 
-    /* ── NAV TABS ── */
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 55%;
+      background-image: url("https://raw.githubusercontent.com/Wankuku/-qingzicloud-operations/main/assets/hero-city-right-fade.png");
+      background-size: cover;
+      background-position: right center;
+      background-repeat: no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+/* ── NAV TABS ── */
     .tab-bar {
       background: var(--card);
       border-bottom: 1px solid var(--border);
