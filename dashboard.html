@@ -41,8 +41,8 @@
       position: absolute;
       inset: 0;
       background:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 400'%3E%3Cg opacity='0.06'%3E%3Crect x='0' y='280' width='60' height='120' rx='4' fill='%230D7C66'/%3E%3Crect x='70' y='240' width='50' height='160' rx='4' fill='%230D7C66'/%3E%3Crect x='130' y='200' width='70' height='200' rx='4' fill='%230D7C66'/%3E%3Crect x='210' y='260' width='55' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='275' y='220' width='65' height='180' rx='4' fill='%230D7C66'/%3E%3Crect x='350' y='180' width='80' height='220' rx='4' fill='%230D7C66'/%3E%3Crect x='440' y='250' width='45' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='495' y='190' width='75' height='210' rx='4' fill='%230D7C66'/%3E%3Crect x='580' y='230' width='60' height='170' rx='4' fill='%230D7C66'/%3E%3Crect x='650' y='270' width='50' height='130' rx='4' fill='%230D7C66'/%3E%3Crect x='710' y='200' width='85' height='200' rx='4' fill='%230D7C66'/%3E%3Crect x='805' y='250' width='55' height='150' rx='4' fill='%230D7C66'/%3E%3Crect x='870' y='180' width='70' height='220' rx='4' fill='%230D7C66'/%3E%3Crect x='950' y='240' width='60' height='160' rx='4' fill='%230D7C66'/%3E%3Crect x='1020' y='210' width='80' height='190' rx='4' fill='%230D7C66'/%3E%3Crect x='1110' y='260' width='50' height='140' rx='4' fill='%230D7C66'/%3E%3Crect x='1170' y='190' width='65' height='210' rx='4' fill='%230D7C66'/%3E%3Crect x='1245' y='230' width='75' height='170' rx='4' fill='%230D7C66'/%3E%3Crect x='1330' y='270' width='55' height='130' rx='4' fill='%230D7C66'/%3E%3Crect x='1395' y='200' width='45' height='200' rx='4' fill='%230D7C66'/%3E%3C/svg%3E") center bottom / cover no-repeat,
-        linear-gradient(160deg, #E8F4F0 0%, #D4EDE6 40%, #C8E6DC 70%, #BFE3D5 100%);
+        linear-gradient(to right, #E8F4F0 0%, #D4EDE6 55%, #C8E6DC 75%, #BFE3D5 100%),
+        url("https://raw.githubusercontent.com/Wankuku/-qingzicloud-operations/main/assets/hero-city-right-fade.png") top right / 60% auto no-repeat;
       opacity: 1;
     }
     .hero::after {
@@ -125,20 +125,7 @@
     }
 
     
-    .hero::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 55%;
-      background-image: url("https://raw.githubusercontent.com/Wankuku/-qingzicloud-operations/main/assets/hero-city-right-fade.png");
-      background-size: cover;
-      background-position: right center;
-      background-repeat: no-repeat;
-      z-index: 1;
-      pointer-events: none;
-    }
+    
 /* ── NAV TABS ── */
     .tab-bar {
       background: var(--card);
