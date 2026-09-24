@@ -7,170 +7,156 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
     :root {
-      --bg: #ffffff;
-      --surface: #ffffff;
-      --border: #f0f0f0;
-      --border-strong: #e5e5e5;
-      --text-primary: #1a1a1a;
-      --text-secondary: #555555;
-      --text-tertiary: #999999;
-      --text-quaternary: #cccccc;
-      --accent: #2563eb;
-      --accent-warm: #dc2626;
-      --accent-green: #16a34a;
-      --accent-purple: #7c3aed;
-      --accent-orange: #ea580c;
-      --accent-teal: #0d9488;
-      --chart-1: #2563eb;
-      --chart-2: #dc2626;
-      --chart-3: #16a34a;
-      --chart-4: #7c3aed;
-      --chart-5: #f59e0b;
+      --bg: oklch(0.995 0 0);
+      --surface: oklch(1 0 0);
+      --surface-2: oklch(0.98 0 0);
+      --border: oklch(0.91 0 0);
+      --text: oklch(0.145 0 0);
+      --text-2: oklch(0.45 0 0);
+      --text-3: oklch(0.65 0 0);
+      --primary: oklch(0.55 0.18 255);
+      --primary-light: oklch(0.92 0.05 255);
+      --red: oklch(0.6 0.2 25);
+      --green: oklch(0.6 0.15 145);
+      --purple: oklch(0.55 0.15 300);
+      --orange: oklch(0.65 0.15 60);
+      --teal: oklch(0.6 0.12 195);
+      --shadow: 0 1px 3px oklch(0 0 0 / 0.06), 0 1px 2px oklch(0 0 0 / 0.04);
+      --shadow-md: 0 4px 12px oklch(0 0 0 / 0.08), 0 2px 4px oklch(0 0 0 / 0.04);
+      --radius: 10px;
+      --radius-sm: 6px;
     }
-
-    * { font-family: 'Inter','PingFang SC','Microsoft YaHei',sans-serif; box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 14px; }
-    body { background: #f8fafc; color: var(--text-primary); }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); }
 
-    /* ── 顶栏背景 ── */
+    /* ── 顶栏 ── */
     .topbar {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #1e40af 70%, #1d4ed8 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .topbar::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(59,130,246,0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(124,58,237,0.2) 0%, transparent 40%),
-        radial-gradient(circle at 60% 80%, rgba(37,99,235,0.2) 0%, transparent 40%);
-      pointer-events: none;
-    }
-    .topbar::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      background: var(--text);
+      border-bottom: 1px solid oklch(0.3 0 0);
     }
 
     /* ── 卡片 ── */
     .card {
       background: var(--surface);
-      border-radius: 12px;
       border: 1px solid var(--border);
-      transition: box-shadow 0.2s, transform 0.2s;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, transform 0.15s;
     }
-    .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-1px); }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
 
-    /* ── Tab切换 ── */
+    /* ── KPI卡片（彩色顶边） ── */
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-top: 2.5px solid var(--c, var(--primary));
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s;
+    }
+    .kpi-card:hover { box-shadow: var(--shadow-md); }
+
+    /* ── Tab ── */
     .tab-btn {
-      padding: 7px 14px;
-      border-radius: 8px;
+      padding: 6px 13px;
+      border-radius: var(--radius-sm);
       font-weight: 600;
       font-size: 0.78rem;
-      color: rgba(255,255,255,0.6);
+      color: oklch(0.7 0 0);
       background: transparent;
       cursor: pointer;
       border: none;
       transition: all 0.15s;
       white-space: nowrap;
     }
-    .tab-btn:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.1); }
-    .tab-btn.active { background: rgba(255,255,255,0.15); color: #fff; backdrop-filter: blur(4px); }
-
-    /* ── 小标题 ── */
-    .s-title {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #1a1a1a;
-      display: block;
-    }
-
-    /* ── KPI ── */
-    .kv { display: flex; flex-direction: column; gap: 3px; }
-    .kv-v { font-size: 1.45rem; font-weight: 900; color: var(--text-primary); letter-spacing: -0.04em; line-height: 1; }
-    .kv-k { font-size: 0.68rem; color: var(--text-tertiary); font-weight: 600; }
-    .kv-s { font-size: 0.62rem; color: var(--text-quaternary); }
-
-    /* ── 榜单行 ── */
-    .row {
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      transition: background 0.15s;
-    }
-    .row:hover { background: #f7f7f7; }
-
-    /* ── 渠道条 ── */
-    .chan-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--border); }
-    .chan-row:last-child { border-bottom: none; }
-    .cd { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-    /* ── 进度条 ── */
-    .pg { height: 3px; border-radius: 2px; background: var(--border); overflow: hidden; }
-    .pf { height: 100%; border-radius: 2px; }
-
-    /* ── 月份竖线 ── */
-    .ml { border-left: 2px solid var(--border-strong); padding-left: 10px; }
-    .ml-hi { border-left: 2px solid var(--accent); padding-left: 10px; }
-
-    /* ── 洞察卡片 ── */
-    .ins {
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px 16px;
-      border-left: 3px solid var(--accent);
-    }
-    .ins-l { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
-
-    /* ── 标签 ── */
-    .t { display: inline-block; padding: 1px 7px; border-radius: 20px; font-size: 0.62rem; font-weight: 600; }
+    .tab-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .tab-btn.active { background: rgba(255,255,255,0.12); color: #fff; }
 
     /* ── Tab内容 ── */
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
+    /* ── 标题 ── */
+    .s-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: block;
+    }
+
+    /* ── KPI数值 ── */
+    .kv { display: flex; flex-direction: column; gap: 2px; }
+    .kv-v { font-size: 1.5rem; font-weight: 900; color: var(--text); letter-spacing: -0.04em; line-height: 1; }
+    .kv-k { font-size: 0.68rem; color: var(--text-3); font-weight: 600; }
+    .kv-s { font-size: 0.62rem; color: oklch(0.8 0 0); }
+
+    /* ── 行 ── */
+    .row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s;
+    }
+    .row:hover { background: var(--surface-2); }
+
+    /* ── 进度条 ── */
+    .pg { height: 3px; border-radius: 2px; background: var(--border); overflow: hidden; }
+    .pf { height: 100%; border-radius: 2px; }
+
+    /* ── 月份 ── */
+    .ml { border-left: 2px solid var(--border); padding-left: 10px; }
+
+    /* ── 标签 ── */
+    .t { display: inline-block; padding: 1px 7px; border-radius: 20px; font-size: 0.62rem; font-weight: 600; }
+
+    /* ── 洞察 ── */
+    .ins {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      border-left: 3px solid var(--primary);
+      border: 1px solid var(--border);
+    }
+    .ins-l { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary); margin-bottom: 5px; }
+
+    /* ── 渠道点 ── */
+    .cd { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .chan-row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .chan-row:last-child { border-bottom: none; }
+
     /* ── 图表容器 ── */
     .cb { position: relative; height: 200px; }
     .cb-lg { position: relative; height: 240px; }
 
-    /* ── KPI小卡片颜色 ── */
-    .kpi-blue { border-top: 2.5px solid #2563eb; }
-    .kpi-red { border-top: 2.5px solid #dc2626; }
-    .kpi-green { border-top: 2.5px solid #16a34a; }
-    .kpi-purple { border-top: 2.5px solid #7c3aed; }
-    .kpi-orange { border-top: 2.5px solid #ea580c; }
-    .kpi-teal { border-top: 2.5px solid #0d9488; }
-    .kpi-dark { border-top: 2.5px solid #1a1a1a; }
-    .kpi-gray { border-top: 2.5px solid #d1d5db; }
-
     /* ── 渐变数字 ── */
-    .num-hero { background: linear-gradient(135deg, #1a1a1a 0%, #374151 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .num-hero { background: linear-gradient(135deg, var(--text), oklch(0.4 0 0)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
     /* ── 滚动条 ── */
     ::-webkit-scrollbar { width: 3px; height: 3px; }
-    ::-webkit-scrollbar-thumb { background: #e0e0e0; }
+    ::-webkit-scrollbar-thumb { background: var(--border); }
 
     /* ── 底部 ── */
     .ft { border-top: 1px solid var(--border); padding: 16px 0; margin-top: 24px; }
 
-    /* ── Tab 区分色 ── */
-    .tab-overview .tab-btn:nth-child(1) { color: rgba(255,255,255,0.7); }
-    .tab-monthly .tab-btn:nth-child(2) { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); }
-    .tab-2025 .tab-btn:nth-child(3) { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); }
-    .tab-history .tab-btn:nth-child(4) { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); }
-    .tab-source .tab-btn:nth-child(5) { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); }
-    .tab-topic .tab-btn:nth-child(6) { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.12); }
+    /* ── 渐变顶边KPI ── */
+    .kpi-glow { border-top: none; position: relative; overflow: hidden; }
+    .kpi-glow::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--c1, #2563eb), var(--c2, #60a5fa));
+    }
 
     pre { white-space: pre-wrap; word-wrap: break-word; }
   </style>
@@ -178,107 +164,108 @@
 <body>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- 顶栏（渐变深蓝+光效背景）                                    -->
+<!-- 顶栏（Linear/Vercel 风格：纯黑 + Logo白字）                 -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="topbar" style="padding:20px 0">
-  <div class="max-w-6xl mx-auto px-6">
-    <div style="display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1">
+<div class="topbar">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 0">
       <div style="display:flex;align-items:center;gap:16px">
-        <div>
-          <div style="font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.2em;text-transform:uppercase;font-weight:700;margin-bottom:3px">WECHAT OFFICIAL ACCOUNT</div>
-          <div style="font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.03em">
-            轻资<span style="background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">运营局</span>
-            <span style="font-size:11px;font-weight:400;color:rgba(255,255,255,0.5);margin-left:10px">运营战报</span>
+        <!-- Logo -->
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;border-radius:7px;background:oklch(0.55 0.18 255);display:flex;align-items:center;justify-content:center">
+            <i data-lucide="trending-up" style="width:15px;height:15px;color:#fff;stroke-width:2.5"></i>
+          </div>
+          <div>
+            <div style="font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.04em">轻资<span style="color:oklch(0.75 0.12 255)">运营局</span></div>
           </div>
         </div>
-        <div style="width:1px;height:32px;background:rgba(255,255,255,0.15)"></div>
-        <div style="display:flex;gap:6px">
-          <div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:5px 12px;text-align:center">
-            <div style="font-size:9px;color:rgba(255,255,255,0.45);margin-bottom:2px">数据截至</div>
-            <div style="font-size:12px;font-weight:700;color:#fff">2026-09-23</div>
-          </div>
-          <div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:5px 12px;text-align:center">
-            <div style="font-size:9px;color:rgba(255,255,255,0.45);margin-bottom:2px">累计篇数</div>
-            <div style="font-size:12px;font-weight:700;color:#fff">124篇</div>
-          </div>
-        </div>
+        <div style="width:1px;height:24px;background:rgba(255,255,255,0.1)"></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:0.03em">运营战报</div>
       </div>
-      <div style="font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.05em">
-        📈 数据驱动 · 精细运营
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:5px 12px;text-align:center">
+          <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:1px">数据截至</div>
+          <div style="font-size:11px;font-weight:600;color:#fff">2026-09-23</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:5px 12px;text-align:center">
+          <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:1px">累计发布</div>
+          <div style="font-size:11px;font-weight:600;color:#fff">124篇</div>
+        </div>
+        <div style="background:oklch(0.55 0.18 255);border-radius:7px;padding:5px 12px;text-align:center">
+          <div style="font-size:9px;color:rgba(255,255,255,0.6);margin-bottom:1px">总阅读</div>
+          <div style="font-size:11px;font-weight:800;color:#fff">13,149</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- 三大核心指标（强视觉焦点）——蓝白卡片                         -->
+<!-- 三大核心指标（白卡+彩色顶边）                                -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="max-w-6xl mx-auto px-6" style="padding-top:22px">
+<div style="max-width:1200px;margin:0 auto;padding:24px 24px 0">
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
-    <div class="card" style="padding:24px;text-align:center;position:relative;overflow:hidden">
+    <div class="card" style="padding:28px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2563eb,#60a5fa)"></div>
-      <div style="font-size:2.6rem;font-weight:900;background:linear-gradient(135deg,#1a1a1a,#374151);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.05em;line-height:1;margin-top:4px">13,149</div>
-      <div style="font-size:10px;color:#999;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-top:8px">总阅读量</div>
-      <div style="font-size:10px;color:#ccc;margin-top:2px">次</div>
+      <div style="font-size:2.8rem;font-weight:900;letter-spacing:-0.05em;line-height:1;margin-top:6px" class="num-hero">13,149</div>
+      <div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-top:8px">总阅读量</div>
     </div>
-    <div class="card" style="padding:24px;text-align:center">
+    <div class="card" style="padding:28px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div>
-      <div style="font-size:2.6rem;font-weight:900;color:#1a1a1a;letter-spacing:-0.05em;line-height:1">124</div>
-      <div style="font-size:10px;color:#999;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-top:8px">累计发布</div>
-      <div style="font-size:10px;color:#ccc;margin-top:2px">篇</div>
+      <div style="font-size:2.8rem;font-weight:900;color:var(--text);letter-spacing:-0.05em;line-height:1;margin-top:6px">124</div>
+      <div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-top:8px">累计发布</div>
     </div>
-    <div class="card" style="padding:24px;text-align:center">
+    <div class="card" style="padding:28px;text-align:center;position:relative;overflow:hidden">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#16a34a,#4ade80)"></div>
-      <div style="font-size:2.6rem;font-weight:900;color:#1a1a1a;letter-spacing:-0.05em;line-height:1">106</div>
-      <div style="font-size:10px;color:#999;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-top:8px">篇均阅读</div>
-      <div style="font-size:10px;color:#ccc;margin-top:2px">次 / 篇</div>
+      <div style="font-size:2.8rem;font-weight:900;color:var(--text);letter-spacing:-0.05em;line-height:1;margin-top:6px">106</div>
+      <div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-top:8px">篇均阅读</div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- 6个KPI指标——彩色顶边区分                                     -->
+<!-- 6个KPI指标卡片                                               -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="max-w-6xl mx-auto px-6" style="padding-top:14px">
+<div style="max-width:1200px;margin:0 auto;padding:14px 24px 0">
   <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-    <div class="card kpi-blue" style="padding:12px 18px;min-width:130px">
+    <div class="kpi-card" style="--c:#2563eb;min-width:130px">
       <div class="kv">
-        <div style="font-size:1.35rem;font-weight:900;color:#2563eb;line-height:1">8<span style="font-size:10px;font-weight:500;color:#ccc;margin-left:2px">篇</span></div>
+        <div class="kv-v" style="color:#2563eb">8<span style="font-size:10px;font-weight:500;color:var(--text-3);margin-left:2px">篇</span></div>
         <div class="kv-k">爆款文章</div>
         <div class="kv-s">阅读 ≥ 500</div>
       </div>
     </div>
-    <div class="card kpi-purple" style="padding:12px 18px;min-width:130px">
+    <div class="kpi-card" style="--c:#7c3aed;min-width:130px">
       <div class="kv">
-        <div style="font-size:1.35rem;font-weight:900;color:#7c3aed;line-height:1">6.5%</div>
+        <div class="kv-v" style="color:#7c3aed">6.5%</div>
         <div class="kv-k">爆款率</div>
         <div class="kv-s">8 / 124</div>
       </div>
     </div>
-    <div class="card kpi-orange" style="padding:12px 18px;min-width:130px">
+    <div class="kpi-card" style="--c:#ea580c;min-width:130px">
       <div class="kv">
-        <div style="font-size:1.35rem;font-weight:900;color:#ea580c;line-height:1">1,450</div>
+        <div class="kv-v" style="color:#ea580c">1,450</div>
         <div class="kv-k">最高单篇</div>
         <div class="kv-s">城市更新算账</div>
       </div>
     </div>
-    <div class="card kpi-red" style="padding:12px 18px;min-width:130px">
+    <div class="kpi-card" style="--c:#dc2626;min-width:130px">
       <div class="kv">
-        <div style="font-size:1.35rem;font-weight:900;color:#dc2626;line-height:1">7<span style="font-size:10px;font-weight:500;color:#ccc;margin-left:2px">条</span></div>
+        <div class="kv-v" style="color:#dc2626">7<span style="font-size:10px;font-weight:500;color:var(--text-3);margin-left:2px">条</span></div>
         <div class="kv-k">话题赛道</div>
-        <div class="kv-s">覆盖城投 / 园区</div>
+        <div class="kv-s">覆盖城投/园区</div>
       </div>
     </div>
-    <div class="card kpi-teal" style="padding:12px 18px;min-width:130px">
+    <div class="kpi-card" style="--c:#0d9488;min-width:130px">
       <div class="kv">
-        <div style="font-size:1.35rem;font-weight:900;color:#0d9488;line-height:1">257</div>
+        <div class="kv-v" style="color:#0d9488">257</div>
         <div class="kv-k">本月阅读</div>
         <div class="kv-s">9月截至23日</div>
       </div>
     </div>
-    <div class="card kpi-gray" style="padding:12px 18px;min-width:130px">
+    <div class="kpi-card" style="--c:oklch(0.55 0 0);min-width:130px">
       <div class="kv">
-        <div style="font-size:1.35rem;font-weight:900;color:#9ca3af;line-height:1">13<span style="font-size:10px;font-weight:500;color:#ccc;margin-left:2px">篇/月</span></div>
+        <div class="kv-v" style="color:oklch(0.45 0 0)">13<span style="font-size:10px;font-weight:500;color:var(--text-3);margin-left:2px">篇/月</span></div>
         <div class="kv-k">月均发布</div>
         <div class="kv-s">2026年至今</div>
       </div>
@@ -287,17 +274,29 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<!-- Tab 切换（深色顶栏内的Tab）                                    -->
+<!-- Tab 切换栏                                                    -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div style="background:linear-gradient(180deg,#0f172a,#1e293b);padding:0">
-  <div class="max-w-6xl mx-auto px-6" style="padding-top:0">
-    <div style="display:flex;gap:4px;overflow-x:auto;padding-bottom:0;border-bottom:1px solid rgba(255,255,255,0.08)">
-      <button class="tab-btn active" onclick="switchTab(this,'tab-overview','tab-overview')">📈 战报总览</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-monthly','tab-monthly')">📅 月度战报</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-2025','tab-2025')">📜 2025年回顾</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-history','tab-history')">🏆 历史全榜</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-source','tab-source')">📡 流量来源</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab-topic','tab-topic')">🗺️ 话题地图</button>
+<div style="background:var(--text);padding:0">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px">
+    <div style="display:flex;gap:2px;overflow-x:auto;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06)">
+      <button class="tab-btn active" onclick="switchTab(this,'tab-overview')">
+        <i data-lucide="layout-dashboard" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px;stroke-width:2"></i>战报总览
+      </button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-monthly')">
+        <i data-lucide="calendar" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px;stroke-width:2"></i>月度战报
+      </button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-2025')">
+        <i data-lucide="archive" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px;stroke-width:2"></i>2025年回顾
+      </button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-history')">
+        <i data-lucide="trophy" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px;stroke-width:2"></i>历史全榜
+      </button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-source')">
+        <i data-lucide="pie-chart" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px;stroke-width:2"></i>流量来源
+      </button>
+      <button class="tab-btn" onclick="switchTab(this,'tab-topic')">
+        <i data-lucide="map" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px;stroke-width:2"></i>话题地图
+      </button>
     </div>
   </div>
 </div>
@@ -305,35 +304,36 @@
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- TAB 1: 战报总览                                               -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div id="tab-overview" class="tab-content active max-w-6xl mx-auto px-6 py-5" style="display:block">
+<div id="tab-overview" class="tab-content active" style="display:block">
+<div style="max-width:1200px;margin:0 auto;padding:24px">
 
   <!-- 三栏 -->
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px">
     <div class="card" style="padding:14px 16px">
       <div class="s-title">📅 本月战报</div>
       <div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">发布篇数</span><span style="font-size:11px;font-weight:700;color:#2563eb">4篇</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">阅读总量</span><span style="font-size:11px;font-weight:700;color:#555">631次</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">篇均阅读</span><span style="font-size:11px;font-weight:700;color:#555">158次</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-size:11px;color:#999">最高单篇</span><span style="font-size:11px;font-weight:800;color:#1a1a1a">257次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">发布篇数</span><span style="font-size:11px;font-weight:700;color:#2563eb">4篇</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">阅读总量</span><span style="font-size:11px;font-weight:700;color:var(--text-2)">631次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">篇均阅读</span><span style="font-size:11px;font-weight:700;color:var(--text-2)">158次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-size:11px;color:var(--text-3)">最高单篇</span><span style="font-size:11px;font-weight:800;color:var(--text)">257次</span></div>
       </div>
     </div>
     <div class="card" style="padding:14px 16px">
       <div class="s-title">📊 2026年累计</div>
       <div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">发布篇数</span><span style="font-size:11px;font-weight:700;color:#7c3aed">85篇</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">阅读总量</span><span style="font-size:11px;font-weight:700;color:#555">13,049次</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">篇均阅读</span><span style="font-size:11px;font-weight:700;color:#555">153.5次</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-size:11px;color:#999">最高单篇</span><span style="font-size:11px;font-weight:800;color:#ea580c">1,450次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">发布篇数</span><span style="font-size:11px;font-weight:700;color:#7c3aed">85篇</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">阅读总量</span><span style="font-size:11px;font-weight:700;color:var(--text-2)">13,049次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">篇均阅读</span><span style="font-size:11px;font-weight:700;color:var(--text-2)">153.5次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-size:11px;color:var(--text-3)">最高单篇</span><span style="font-size:11px;font-weight:800;color:#ea580c">1,450次</span></div>
       </div>
     </div>
     <div class="card" style="padding:14px 16px">
       <div class="s-title">🏆 历史累计</div>
       <div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">发布篇数</span><span style="font-size:11px;font-weight:700;color:#16a34a">124篇</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">阅读总量</span><span style="font-size:11px;font-weight:700;color:#555">13,149次</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f7f7f7"><span style="font-size:11px;color:#999">篇均阅读</span><span style="font-size:11px;font-weight:700;color:#555">106次</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-size:11px;color:#999">爆款率</span><span style="font-size:11px;font-weight:800;color:#1a1a1a">6.5%</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">发布篇数</span><span style="font-size:11px;font-weight:700;color:#16a34a">124篇</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">阅读总量</span><span style="font-size:11px;font-weight:700;color:var(--text-2)">13,149次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)"><span style="font-size:11px;color:var(--text-3)">篇均阅读</span><span style="font-size:11px;font-weight:700;color:var(--text-2)">106次</span></div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0"><span style="font-size:11px;color:var(--text-3)">爆款率</span><span style="font-size:11px;font-weight:800;color:var(--text)">6.5%</span></div>
       </div>
     </div>
   </div>
@@ -341,16 +341,16 @@
   <!-- 爆款墙 -->
   <div class="card" style="padding:18px 18px 12px;margin-bottom:12px">
     <div class="s-title" style="margin-bottom:14px">🔥 爆款墙 · Top 10</div>
-    <div style="display:flex;flex-direction:column;gap:2px">
+    <div style="display:flex;flex-direction:column;gap:3px">
 
       <!-- 01 -->
-      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:linear-gradient(135deg,#fef2f2,#fff5f5);border:1px solid #fecaca">
+      <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:8px;background:oklch(0.98 0.02 25 / 0.4);border:1px solid oklch(0.85 0.05 25)">
         <span style="font-size:1.1rem;width:30px;text-align:center;flex-shrink:0">🥇</span>
         <div style="flex:1;min-width:0">
-          <div style="font-size:12px;font-weight:700;color:#1a1a1a;line-height:1.4">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);line-height:1.4">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div>
           <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
-            <span class="t" style="background:#fee2e2;color:#dc2626">城市更新</span>
-            <span style="font-size:10px;color:#ccc">2026-05-28</span>
+            <span class="t" style="background:oklch(0.92 0.03 25);color:#dc2626">城市更新</span>
+            <span style="font-size:10px;color:var(--text-3)">2026-05-28</span>
           </div>
         </div>
         <span style="font-size:1.1rem;font-weight:900;color:#dc2626;white-space:nowrap;letter-spacing:-0.03em">1,450</span>
@@ -358,41 +358,41 @@
 
       <!-- 02-03 -->
       <div style="display:flex;gap:8px">
-        <div style="flex:1;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:#fafafa;border:1px solid #e5e7eb">
+        <div style="flex:1;display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border)">
           <span style="font-size:1rem;width:24px;text-align:center;flex-shrink:0">🥈</span>
           <div style="flex:1;min-width:0">
-            <div style="font-size:11px;font-weight:600;color:#333;line-height:1.4">委托运营3年后，租户续约率从40%提到78%...</div>
-            <div style="display:flex;align-items:center;gap:4px;margin-top:2px"><span class="t" style="background:#f3e8ff;color:#7c3aed;font-size:9px">委托运营</span></div>
+            <div style="font-size:11px;font-weight:600;color:var(--text-2);line-height:1.4">委托运营3年后，租户续约率从40%提到78%...</div>
+            <div style="display:flex;align-items:center;gap:4px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.04 300);color:#7c3aed;font-size:9px">委托运营</span></div>
           </div>
           <span style="font-size:11px;font-weight:900;color:#7c3aed;white-space:nowrap;letter-spacing:-0.02em">1,352</span>
         </div>
-        <div style="flex:1;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:#fafafa;border:1px solid #e5e7eb">
+        <div style="flex:1;display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border)">
           <span style="font-size:1rem;width:24px;text-align:center;flex-shrink:0">🥉</span>
           <div style="flex:1;min-width:0">
-            <div style="font-size:11px;font-weight:600;color:#333;line-height:1.4">委托运营合同怎么签：三个条款不写进去...</div>
-            <div style="display:flex;align-items:center;gap:4px;margin-top:2px"><span class="t" style="background:#f3e8ff;color:#7c3aed;font-size:9px">委托运营</span></div>
+            <div style="font-size:11px;font-weight:600;color:var(--text-2);line-height:1.4">委托运营合同怎么签：三个条款不写进去...</div>
+            <div style="display:flex;align-items:center;gap:4px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.04 300);color:#7c3aed;font-size:9px">委托运营</span></div>
           </div>
           <span style="font-size:11px;font-weight:900;color:#7c3aed;white-space:nowrap;letter-spacing:-0.02em">1,310</span>
         </div>
       </div>
 
       <!-- 04-10 -->
-      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">04</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:#444;line-height:1.4">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:#dbeafe;color:#2563eb">城投转型</span><span style="font-size:10px;color:#ccc">2026-05-25</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,151</span></div>
-      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">05</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:#444;line-height:1.4">保障房运营的三个生死线：空置率、租金差、运营成本</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:#dcfce7;color:#16a34a">其他</span><span style="font-size:10px;color:#ccc">2026-05-31</span></div></div><span style="font-size:11px;font-weight:700;color:#16a34a;white-space:nowrap;letter-spacing:-0.01em">1,150</span></div>
-      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">06</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:#444;line-height:1.4">某城投园区从"烂尾"到"满租"，三年复盘</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:#dbeafe;color:#2563eb">城投转型</span><span style="font-size:10px;color:#ccc">2026-05-17</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,088</span></div>
-      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">07</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:#444;line-height:1.4">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:#dbeafe;color:#2563eb">城投转型</span><span style="font-size:10px;color:#ccc">2026-05-27</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,040</span></div>
-      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">08</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:#444;line-height:1.4">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:#dbeafe;color:#2563eb">城投转型</span><span style="font-size:10px;color:#ccc">2026-05-23</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,028</span></div>
-      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">09</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:#444;line-height:1.4">园区轻资产运营：如何让入驻企业"留下来、多消费"？</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:#ccfbf1;color:#0d9488">产业园运营</span><span style="font-size:10px;color:#ccc">2026-05-18</span></div></div><span style="font-size:11px;font-weight:700;color:#0d9488;white-space:nowrap;letter-spacing:-0.01em">979</span></div>
-      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">10</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:#444;line-height:1.4">产业园同质化：100个园区99个长得一样，凭什么选你？</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:#ccfbf1;color:#0d9488">产业园运营</span><span style="font-size:10px;color:#ccc">2026-05-19</span></div></div><span style="font-size:11px;font-weight:700;color:#0d9488;white-space:nowrap;letter-spacing:-0.01em">321</span></div>
+      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">04</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:var(--text-2);line-height:1.4">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.04 255);color:#2563eb">城投转型</span><span style="font-size:10px;color:var(--text-3)">2026-05-25</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,151</span></div>
+      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">05</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:var(--text-2);line-height:1.4">保障房运营的三个生死线：空置率、租金差、运营成本</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.03 145);color:#16a34a">其他</span><span style="font-size:10px;color:var(--text-3)">2026-05-31</span></div></div><span style="font-size:11px;font-weight:700;color:#16a34a;white-space:nowrap;letter-spacing:-0.01em">1,150</span></div>
+      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">06</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:var(--text-2);line-height:1.4">某城投园区从"烂尾"到"满租"，三年复盘</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.04 255);color:#2563eb">城投转型</span><span style="font-size:10px;color:var(--text-3)">2026-05-17</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,088</span></div>
+      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">07</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:var(--text-2);line-height:1.4">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.04 255);color:#2563eb">城投转型</span><span style="font-size:10px;color:var(--text-3)">2026-05-27</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,040</span></div>
+      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">08</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:var(--text-2);line-height:1.4">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.04 255);color:#2563eb">城投转型</span><span style="font-size:10px;color:var(--text-3)">2026-05-23</span></div></div><span style="font-size:11px;font-weight:700;color:#2563eb;white-space:nowrap;letter-spacing:-0.01em">1,028</span></div>
+      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">09</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:var(--text-2);line-height:1.4">园区轻资产运营：如何让入驻企业"留下来、多消费"？</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.03 195);color:#0d9488">产业园运营</span><span style="font-size:10px;color:var(--text-3)">2026-05-18</span></div></div><span style="font-size:11px;font-weight:700;color:#0d9488;white-space:nowrap;letter-spacing:-0.01em">979</span></div>
+      <div class="row"><span style="width:30px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">10</span><div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:500;color:var(--text-2);line-height:1.4">产业园同质化：100个园区99个长得一样，凭什么选你？</div><div style="display:flex;align-items:center;gap:6px;margin-top:2px"><span class="t" style="background:oklch(0.93 0.03 195);color:#0d9488">产业园运营</span><span style="font-size:10px;color:var(--text-3)">2026-05-19</span></div></div><span style="font-size:11px;font-weight:700;color:#0d9488;white-space:nowrap;letter-spacing:-0.01em">321</span></div>
     </div>
   </div>
 
   <!-- 洞察 -->
   <div class="ins" style="margin-bottom:12px">
     <div class="ins-l">💡 老王洞察</div>
-    <div style="font-size:11px;color:#555;line-height:1.8">
-      5月是历史流量高峰（篇均<strong style="color:#1a1a1a">389.6次</strong>），核心驱动是城投转型话题。
-      爆款率目前维持<strong style="color:#1a1a1a">6.5%</strong>，每15篇出1篇爆款。
+    <div style="font-size:11px;color:var(--text-2);line-height:1.8">
+      5月是历史流量高峰（篇均<strong style="color:var(--text)">389.6次</strong>），核心驱动是城投转型话题。
+      爆款率目前维持<strong style="color:var(--text)">6.5%</strong>，每15篇出1篇爆款。
       8-9月以产业园和REITs新赛道为主，流量回落属正常淡季波动，9月单篇已回升至257次。
     </div>
   </div>
@@ -404,44 +404,44 @@
       <div style="display:flex;flex-direction:column;gap:7px">
         <div class="chan-row">
           <span class="cd" style="background:#2563eb"></span>
-          <span style="font-size:11px;color:#666;flex:1;font-weight:500">城投转型</span>
-          <span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">5,400</span>
+          <span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">城投转型</span>
+          <span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">5,400</span>
           <div class="pg" style="width:60px"><div class="pf" style="width:100%;background:#2563eb"></div></div>
         </div>
         <div class="chan-row">
           <span class="cd" style="background:#7c3aed"></span>
-          <span style="font-size:11px;color:#666;flex:1;font-weight:500">委托运营</span>
-          <span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">2,701</span>
+          <span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">委托运营</span>
+          <span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">2,701</span>
           <div class="pg" style="width:60px"><div class="pf" style="width:50%;background:#7c3aed"></div></div>
         </div>
         <div class="chan-row">
           <span class="cd" style="background:#16a34a"></span>
-          <span style="font-size:11px;color:#666;flex:1;font-weight:500">其他</span>
-          <span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">1,794</span>
+          <span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">其他</span>
+          <span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">1,794</span>
           <div class="pg" style="width:60px"><div class="pf" style="width:33%;background:#16a34a"></div></div>
         </div>
         <div class="chan-row">
           <span class="cd" style="background:#ea580c"></span>
-          <span style="font-size:11px;color:#666;flex:1;font-weight:500">城市更新</span>
-          <span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">1,637</span>
+          <span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">城市更新</span>
+          <span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">1,637</span>
           <div class="pg" style="width:60px"><div class="pf" style="width:30%;background:#ea580c"></div></div>
         </div>
         <div class="chan-row">
           <span class="cd" style="background:#0d9488"></span>
-          <span style="font-size:11px;color:#666;flex:1;font-weight:500">产业园运营</span>
-          <span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">1,401</span>
+          <span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">产业园运营</span>
+          <span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">1,401</span>
           <div class="pg" style="width:60px"><div class="pf" style="width:26%;background:#0d9488"></div></div>
         </div>
         <div class="chan-row">
           <span class="cd" style="background:#f59e0b"></span>
-          <span style="font-size:11px;color:#666;flex:1;font-weight:500">保租房</span>
-          <span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">156</span>
+          <span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">保租房</span>
+          <span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">156</span>
           <div class="pg" style="width:60px"><div class="pf" style="width:3%;background:#f59e0b"></div></div>
         </div>
         <div class="chan-row">
           <span class="cd" style="background:#9ca3af"></span>
-          <span style="font-size:11px;color:#666;flex:1;font-weight:500">REITs与新资产</span>
-          <span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">60</span>
+          <span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">REITs与新资产</span>
+          <span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">60</span>
           <div class="pg" style="width:60px"><div class="pf" style="width:1%;background:#9ca3af"></div></div>
         </div>
       </div>
@@ -452,12 +452,15 @@
       <div class="cb"><canvas id="overviewLineChart"></canvas></div>
     </div>
   </div>
+
+</div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- TAB 2: 月度战报                                                -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div id="tab-monthly" class="tab-content max-w-6xl mx-auto px-6 py-5">
+<div id="tab-monthly" class="tab-content">
+<div style="max-width:1200px;margin:0 auto;padding:24px">
 
   <div class="card" style="padding:18px;margin-bottom:12px">
     <div class="s-title">📊 2026年各月发布与阅读量</div>
@@ -466,40 +469,41 @@
 
   <!-- 月度卡片 -->
   <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px">
-    <div class="card kpi-gray" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ccc;margin-bottom:8px">1月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">发布</span><span style="font-size:10px;font-weight:600;color:#555">3篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">阅读</span><span style="font-size:10px;font-weight:600;color:#555">19次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">篇均</span><span style="font-size:10px;color:#ccc">6.3次</span></div></div></div>
-    <div class="card kpi-gray" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ccc;margin-bottom:8px">2月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">发布</span><span style="font-size:10px;font-weight:600;color:#555">4篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">阅读</span><span style="font-size:10px;font-weight:600;color:#555">35次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">篇均</span><span style="font-size:10px;color:#ccc">8.8次</span></div></div></div>
-    <div class="card kpi-gray" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ccc;margin-bottom:8px">3月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">发布</span><span style="font-size:10px;color:#ddd">—</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">阅读</span><span style="font-size:10px;color:#ddd">—</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">篇均</span><span style="font-size:10px;color:#ddd">—</span></div></div></div>
-    <div class="card kpi-gray" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ccc;margin-bottom:8px">4月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">发布</span><span style="font-size:10px;font-weight:600;color:#555">9篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">阅读</span><span style="font-size:10px;font-weight:600;color:#555">61次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">篇均</span><span style="font-size:10px;color:#ccc">6.8次</span></div></div></div>
-    <div class="card kpi-red" style="padding:12px;background:linear-gradient(135deg,#fff5f5,#fef2f2)"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#dc2626;margin-bottom:8px">🔥 5月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fca5a5">发布</span><span style="font-size:10px;font-weight:800;color:#1a1a1a">29篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fca5a5">阅读</span><span style="font-size:10px;font-weight:800;color:#1a1a1a">11,299次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fca5a5">篇均</span><span style="font-size:10px;font-weight:800;color:#dc2626">389.6次</span></div></div><div style="font-size:9px;color:#dc2626;margin-top:6px;font-weight:700">🏆 流量高峰月</div></div>
-    <div class="card kpi-blue" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#2563eb;margin-bottom:8px">6月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#93c5fd">发布</span><span style="font-size:10px;font-weight:600;color:#555">23篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#93c5fd">阅读</span><span style="font-size:10px;font-weight:600;color:#555">925次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#93c5fd">篇均</span><span style="font-size:10px;font-weight:600;color:#2563eb">40.2次</span></div></div></div>
-    <div class="card kpi-teal" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#0d9488;margin-bottom:8px">7月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#5eead4">发布</span><span style="font-size:10px;font-weight:600;color:#555">17篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#5eead4">阅读</span><span style="font-size:10px;font-weight:600;color:#555">364次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#5eead4">篇均</span><span style="font-size:10px;font-weight:600;color:#0d9488">21.4次</span></div></div></div>
-    <div class="card kpi-purple" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#7c3aed;margin-bottom:8px">8月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#c4b5fd">发布</span><span style="font-size:10px;font-weight:600;color:#555">3篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#c4b5fd">阅读</span><span style="font-size:10px;font-weight:600;color:#555">374次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#c4b5fd">篇均</span><span style="font-size:10px;font-weight:600;color:#7c3aed">124.7次</span></div></div></div>
-    <div class="card kpi-orange" style="padding:12px;background:linear-gradient(135deg,#fffbeb,#fff7ed)"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ea580c;margin-bottom:8px">9月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fcd34d">发布</span><span style="font-size:10px;font-weight:600;color:#555">1篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fcd34d">阅读</span><span style="font-size:10px;font-weight:800;color:#1a1a1a">257次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fcd34d">篇均</span><span style="font-size:10px;font-weight:800;color:#ea580c">257次</span></div></div></div>
-    <div class="card kpi-gray" style="padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:8px">2025</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">发布</span><span style="font-size:10px;font-weight:600;color:#555">30篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">阅读</span><span style="font-size:10px;font-weight:600;color:#555">217次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#bbb">篇均</span><span style="font-size:10px;font-weight:600;color:#555">7.2次</span></div></div></div>
+    <div class="kpi-card" style="--c:oklch(0.7 0 0);padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:8px">1月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">3篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">阅读</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">19次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">篇均</span><span style="font-size:10px;color:var(--text-3)">6.3次</span></div></div></div>
+    <div class="kpi-card" style="--c:oklch(0.7 0 0);padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:8px">2月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">4篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">阅读</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">35次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">篇均</span><span style="font-size:10px;color:var(--text-3)">8.8次</span></div></div></div>
+    <div class="kpi-card" style="--c:oklch(0.85 0 0);padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:8px">3月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">发布</span><span style="font-size:10px;color:var(--text-3)">—</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">阅读</span><span style="font-size:10px;color:var(--text-3)">—</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">篇均</span><span style="font-size:10px;color:var(--text-3)">—</span></div></div></div>
+    <div class="kpi-card" style="--c:oklch(0.7 0 0);padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:8px">4月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">9篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">阅读</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">61次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">篇均</span><span style="font-size:10px;color:var(--text-3)">6.8次</span></div></div></div>
+    <div class="kpi-card" style="--c:#dc2626;padding:12px;background:oklch(0.98 0.02 25 / 0.3)"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#dc2626;margin-bottom:8px">🔥 5月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#f87171">发布</span><span style="font-size:10px;font-weight:800;color:var(--text)">29篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#f87171">阅读</span><span style="font-size:10px;font-weight:800;color:var(--text)">11,299次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#f87171">篇均</span><span style="font-size:10px;font-weight:800;color:#dc2626">389.6次</span></div></div><div style="font-size:9px;color:#dc2626;margin-top:6px;font-weight:700">🏆 流量高峰月</div></div>
+    <div class="kpi-card" style="--c:#2563eb;padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#2563eb;margin-bottom:8px">6月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#93c5fd">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">23篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#93c5fd">阅读</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">925次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#93c5fd">篇均</span><span style="font-size:10px;font-weight:600;color:#2563eb">40.2次</span></div></div></div>
+    <div class="kpi-card" style="--c:#0d9488;padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#0d9488;margin-bottom:8px">7月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#5eead4">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">17篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#5eead4">阅读</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">364次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#5eead4">篇均</span><span style="font-size:10px;font-weight:600;color:#0d9488">21.4次</span></div></div></div>
+    <div class="kpi-card" style="--c:#7c3aed;padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#7c3aed;margin-bottom:8px">8月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#c4b5fd">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">3篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#c4b5fd">阅读</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">374次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#c4b5fd">篇均</span><span style="font-size:10px;font-weight:600;color:#7c3aed">124.7次</span></div></div></div>
+    <div class="kpi-card" style="--c:#ea580c;padding:12px;background:oklch(0.97 0.03 60 / 0.15)"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ea580c;margin-bottom:8px">9月</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fdba74">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">1篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fdba74">阅读</span><span style="font-size:10px;font-weight:800;color:var(--text)">257次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:#fdba74">篇均</span><span style="font-size:10px;font-weight:800;color:#ea580c">257次</span></div></div></div>
+    <div class="kpi-card" style="--c:oklch(0.55 0 0);padding:12px"><div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-3);margin-bottom:8px">2025</div><div style="display:flex;flex-direction:column;gap:5px"><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">发布</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">30篇</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">阅读</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">217次</span></div><div style="display:flex;justify-content:space-between"><span style="font-size:10px;color:var(--text-3)">篇均</span><span style="font-size:10px;font-weight:600;color:var(--text-2)">7.2次</span></div></div></div>
   </div>
 
   <div class="ins">
     <div class="ins-l">💡 老王洞察</div>
-    <div style="font-size:11px;color:#555;line-height:1.8">
-      <strong style="color:#1a1a1a">5月</strong>是绝对的流量高峰，篇均389.6次，是其他月份的5-60倍。
+    <div style="font-size:11px;color:var(--text-2);line-height:1.8">
+      <strong style="color:var(--text)">5月</strong>是绝对的流量高峰，篇均389.6次，是其他月份的5-60倍。
       8月虽只发3篇，但篇均124.7次，说明新赛道内容（算力园区/Costco代购仓）已有稳定受众。
-      <strong style="color:#1a1a1a">9月</strong>目前只发1篇但拿了257次，文章质量在回升。
+      <strong style="color:var(--text)">9月</strong>目前只发1篇但拿了257次，文章质量在回升。
       2025年冷启动阶段篇均仅7.2次，与2026年爆发式增长形成鲜明对比。
     </div>
   </div>
+</div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- TAB 3: 2025年回顾                                              -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div id="tab-2025" class="tab-content max-w-6xl mx-auto px-6 py-5">
+<div id="tab-2025" class="tab-content">
+<div style="max-width:1200px;margin:0 auto;padding:24px">
 
-  <!-- 概览4格 -->
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px">
-    <div class="card kpi-blue" style="padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#2563eb;line-height:1">30</div><div style="font-size:10px;color:#93c5fd;margin-top:5px;font-weight:600">发布篇数</div></div>
-    <div class="card kpi-purple" style="padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#7c3aed;line-height:1">217</div><div style="font-size:10px;color:#c4b5fd;margin-top:5px;font-weight:600">总阅读量</div></div>
-    <div class="card kpi-teal" style="padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#0d9488;line-height:1">7.2</div><div style="font-size:10px;color:#5eead4;margin-top:5px;font-weight:600">篇均阅读</div></div>
-    <div class="card kpi-orange" style="padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#ea580c;line-height:1">68</div><div style="font-size:10px;color:#fcd34d;margin-top:5px;font-weight:600">最高单篇</div><div style="font-size:9px;color:#bbb;margin-top:3px">长沙住建局文件</div></div>
+    <div class="kpi-card" style="--c:#2563eb;padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#2563eb;line-height:1">30</div><div style="font-size:10px;color:var(--text-3);font-weight:600;margin-top:5px">发布篇数</div></div>
+    <div class="kpi-card" style="--c:#7c3aed;padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#7c3aed;line-height:1">217</div><div style="font-size:10px;color:var(--text-3);font-weight:600;margin-top:5px">总阅读量</div></div>
+    <div class="kpi-card" style="--c:#0d9488;padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#0d9488;line-height:1">7.2</div><div style="font-size:10px;color:var(--text-3);font-weight:600;margin-top:5px">篇均阅读</div></div>
+    <div class="kpi-card" style="--c:#ea580c;padding:16px;text-align:center"><div style="font-size:1.7rem;font-weight:900;color:#ea580c;line-height:1">68</div><div style="font-size:10px;color:var(--text-3);font-weight:600;margin-top:5px">最高单篇</div><div style="font-size:9px;color:var(--text-3);margin-top:3px">长沙住建局文件</div></div>
   </div>
 
   <div class="card" style="padding:18px;margin-bottom:12px">
@@ -507,100 +511,102 @@
 
     <!-- 9月 -->
     <div style="margin-bottom:16px">
-      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:#1a1a1a;letter-spacing:0.03em">📅 2025年9月</span><span style="font-size:10px;color:#ccc;margin-left:8px">8篇 / 17次 / 篇均2.1次</span></div>
+      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.03em">📅 2025年9月</span><span style="font-size:10px;color:var(--text-3);margin-left:8px">8篇 / 17次 / 篇均2.1次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市保障性租赁住房项目申请认定申报实施细则</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">5</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">关于组织申报住房租赁试点企业和租赁住房奖补项目的通知</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市住房租赁合同范本（2025版）</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市"十四五"住房保障规划（2021-2025）</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">《长沙市中央财政支持住房租赁市场发展试点资金分配方案》通知</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">5</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于壮大养老产业促进银发经济发展的实施意见</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">09-30</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">喜迎中秋，欢度国庆！</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市保障性租赁住房项目申请认定申报实施细则</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">5</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">关于组织申报住房租赁试点企业和租赁住房奖补项目的通知</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市住房租赁合同范本（2025版）</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市"十四五"住房保障规划（2021-2025）</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">《长沙市中央财政支持住房租赁市场发展试点资金分配方案》通知</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">5</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于壮大养老产业促进银发经济发展的实施意见</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">09-30</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">喜迎中秋，欢度国庆！</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
       </div>
     </div>
 
     <!-- 10月 -->
     <div style="margin-bottom:16px">
-      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:#1a1a1a;letter-spacing:0.03em">📅 2025年10月</span><span style="font-size:10px;color:#ccc;margin-left:8px">9篇 / 110次 / 篇均12.2次</span></div>
+      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.03em">📅 2025年10月</span><span style="font-size:10px;color:var(--text-3);margin-left:8px">9篇 / 110次 / 篇均12.2次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row" style="background:#fef2f2;border-radius:6px;padding:7px 10px;border:1px solid #fecaca">
-          <span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-08</span>
-          <div style="flex:1;font-size:11px;color:#666;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市住房和城乡建设局等12部门关于进一步优化房地产发展措施的通知</div>
+        <div class="row" style="background:oklch(0.97 0.02 25 / 0.4);border-radius:6px;padding:7px 10px;border:1px solid oklch(0.85 0.05 25)">
+          <span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-08</span>
+          <div style="flex:1;font-size:11px;color:var(--text-2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市住房和城乡建设局等12部门关于进一步优化房地产发展措施的通知</div>
           <span style="font-size:11px;font-weight:900;color:#dc2626;margin-left:8px;flex-shrink:0">68</span>
         </div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-27</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙国有老资产变身"青年社区"：一场政策与市场的双赢实验</div><span style="font-size:11px;font-weight:700;color:#666;margin-left:8px;flex-shrink:0">28</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湘江新区保障性租赁住房项目2024年12月公示名单</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湘江新区保障性租赁住房项目2025年8月公示名单</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">保障性租赁租房步入"双轨+双循环"时代</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-16</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于加快湖南省公共数据资源开发利用的实施意见</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-08</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市住房和城乡建设局关于加快推进住宅小区智慧物业建设的通知</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-26</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">酒店业寒冬与长租公寓崛起：租赁行业的结构性变革</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">4</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-27</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙国有老资产变身"青年社区"：一场政策与市场的双赢实验</div><span style="font-size:11px;font-weight:700;color:var(--text-2);margin-left:8px;flex-shrink:0">28</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湘江新区保障性租赁住房项目2024年12月公示名单</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湘江新区保障性租赁住房项目2025年8月公示名单</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">保障性租赁租房步入"双轨+双循环"时代</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-16</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于加快湖南省公共数据资源开发利用的实施意见</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-08</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市住房和城乡建设局关于加快推进住宅小区智慧物业建设的通知</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-26</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">酒店业寒冬与长租公寓崛起：租赁行业的结构性变革</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">10-25</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">4</span></div>
       </div>
     </div>
 
     <!-- 11月 -->
     <div style="margin-bottom:16px">
-      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:#1a1a1a;letter-spacing:0.03em">📅 2025年11月</span><span style="font-size:10px;color:#ccc;margin-left:8px">5篇 / 64次 / 篇均12.8次</span></div>
+      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.03em">📅 2025年11月</span><span style="font-size:10px;color:var(--text-3);margin-left:8px">5篇 / 64次 / 篇均12.8次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row" style="background:#fef2f2;border-radius:6px;padding:7px 10px;border:1px solid #fecaca">
-          <span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">11-01</span>
-          <div style="flex:1;font-size:11px;color:#666;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">812号令正式生效！租赁住房想'活下来'，这3道'报建生死关'必须闯——尤其是消防验收</div>
+        <div class="row" style="background:oklch(0.97 0.02 25 / 0.4);border-radius:6px;padding:7px 10px;border:1px solid oklch(0.85 0.05 25)">
+          <span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">11-01</span>
+          <div style="flex:1;font-size:11px;color:var(--text-2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">812号令正式生效！租赁住房想'活下来'，这3道'报建生死关'必须闯——尤其是消防验收</div>
           <span style="font-size:11px;font-weight:900;color:#dc2626;margin-left:8px;flex-shrink:0">55</span>
         </div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">11-14</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">黄金地段"老破小"的生死局：是彻底倒下，还是即将"焕发二春"？</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">11-01</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"人工智能+"时代，轻资产如何"智"取保障性租赁住房新蓝海？</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">11-05</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">十五五规划下，保障性租赁住房的"破圈"与"升级"</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">11-23</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">重磅！长沙大批"国资"入场，"十五五"黄金窗口期来了！</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">4</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">11-14</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">黄金地段"老破小"的生死局：是彻底倒下，还是即将"焕发二春"？</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">11-01</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"人工智能+"时代，轻资产如何"智"取保障性租赁住房新蓝海？</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">11-05</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">十五五规划下，保障性租赁住房的"破圈"与"升级"</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">11-23</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">重磅！长沙大批"国资"入场，"十五五"黄金窗口期来了！</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">4</span></div>
       </div>
     </div>
 
     <!-- 12月 -->
     <div>
-      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:#1a1a1a;letter-spacing:0.03em">📅 2025年12月</span><span style="font-size:10px;color:#ccc;margin-left:8px">8篇 / 26次 / 篇均3.2次</span></div>
+      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:var(--text);letter-spacing:0.03em">📅 2025年12月</span><span style="font-size:10px;color:var(--text-3);margin-left:8px">8篇 / 26次 / 篇均3.2次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-20</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">关于印发《长沙市城镇房屋结构安全体检技术指南（试行)》的通知</div><span style="font-size:11px;font-weight:700;color:#888;margin-left:8px;flex-shrink:0">12</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-12</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于持续推进城市更新行动的实施意见(湘政办发〔2025〕49号)</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">4</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-15</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于壮大养老产业促进银发经济发展的实施意见(湘政办发〔2025〕48号)</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-10</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙保租房房东、租客必看！12月新规重塑小区公共收益，你的钱袋要"变天"了？</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-04</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"存量商品房"可以作为保租房吗？这是楼市新出路还是权宜之计？</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">1</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-01</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">2026年巨变！保障性租赁住房主力房源，原来是它！</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-22</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙房东/运营商注意！你手上的房子，即将迎来"持证"时代！</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">3</span></div>
-        <div class="row"><span style="font-size:10px;color:#ccc;width:38px;flex-shrink:0">12-21</span><div style="flex:1;font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">冬至快乐！</div><span style="font-size:11px;font-weight:600;color:#bbb;margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-20</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">关于印发《长沙市城镇房屋结构安全体检技术指南（试行)》的通知</div><span style="font-size:11px;font-weight:700;color:var(--text-2);margin-left:8px;flex-shrink:0">12</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-12</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于持续推进城市更新行动的实施意见(湘政办发〔2025〕49号)</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">4</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-15</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">湖南省人民政府办公厅关于壮大养老产业促进银发经济发展的实施意见(湘政办发〔2025〕48号)</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-10</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙保租房房东、租客必看！12月新规重塑小区公共收益，你的钱袋要"变天"了？</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-04</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"存量商品房"可以作为保租房吗？这是楼市新出路还是权宜之计？</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">1</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-01</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">2026年巨变！保障性租赁住房主力房源，原来是它！</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-22</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">长沙房东/运营商注意！你手上的房子，即将迎来"持证"时代！</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">3</span></div>
+        <div class="row"><span style="font-size:10px;color:var(--text-3);width:38px;flex-shrink:0">12-21</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">冬至快乐！</div><span style="font-size:11px;font-weight:600;color:var(--text-3);margin-left:8px;flex-shrink:0">2</span></div>
       </div>
     </div>
   </div>
 
   <div class="ins">
     <div class="ins-l">💡 老王洞察</div>
-    <div style="font-size:11px;color:#555;line-height:1.8">
-      2025年是公众号冷启动期，以<strong style="color:#1a1a1a">政策文件转载</strong>为主（省/市住建局文件），累计30篇仅217次阅读，篇均7.2次。
+    <div style="font-size:11px;color:var(--text-2);line-height:1.8">
+      2025年是公众号冷启动期，以<strong style="color:var(--text)">政策文件转载</strong>为主（省/市住建局文件），累计30篇仅217次阅读，篇均7.2次。
       最高为"长沙住建局12部门联合发文"（68次）和"812号令消防验收"（55次）——说明政策解读类内容有稳定需求，但本身粉丝基数极低。
-      <strong style="color:#1a1a1a">2026年是真正的起步年</strong>：切换到城投转型/委托运营/产业园运营等实操话题后，篇均阅读从7.2次跃升至153.5次（5月峰值389.6次），增长约21倍。
+      <strong style="color:var(--text)">2026年是真正的起步年</strong>：切换到城投转型/委托运营/产业园运营等实操话题后，篇均阅读从7.2次跃升至153.5次（5月峰值389.6次），增长约21倍。
     </div>
   </div>
+</div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- TAB 4: 历史全榜                                                -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div id="tab-history" class="tab-content max-w-6xl mx-auto px-6 py-5">
+<div id="tab-history" class="tab-content">
+<div style="max-width:1200px;margin:0 auto;padding:24px">
 
   <div class="card" style="padding:18px">
     <div class="s-title" style="margin-bottom:16px">🏆 历史爆款榜 · 全部文章阅读量排名</div>
 
     <!-- 9月 -->
     <div style="margin-bottom:14px">
-      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#1a1a1a">📅 2026年9月</span><span style="font-size:10px;color:#ccc;margin-left:6px">1篇 / 257次</span></div>
+      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:var(--text)">📅 2026年9月</span><span style="font-size:10px;color:var(--text-3);margin-left:6px">1篇 / 257次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row" style="background:linear-gradient(135deg,#fff7ed,#fff5f5);border-radius:8px;padding:10px 12px;border:1px solid #fed7aa">
+        <div class="row" style="background:oklch(0.97 0.03 60 / 0.15);border-radius:8px;padding:10px 12px;border:1px solid oklch(0.85 0.08 60)">
           <span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥇</span>
           <div style="flex:1;min-width:0">
-            <div style="font-size:12px;font-weight:700;color:#1a1a1a">城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力</div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力</div>
             <div style="display:flex;align-items:center;gap:6px;margin-top:3px">
-              <span class="t" style="background:#ffedd5;color:#ea580c">城市更新</span>
-              <span style="font-size:10px;color:#ccc">2026-09-23</span>
+              <span class="t" style="background:oklch(0.95 0.03 60);color:#ea580c">城市更新</span>
+              <span style="font-size:10px;color:var(--text-3)">2026-09-23</span>
             </div>
           </div>
           <span style="font-size:13px;font-weight:900;color:#ea580c;white-space:nowrap;letter-spacing:-0.02em">257</span>
@@ -610,119 +616,121 @@
 
     <!-- 8月 -->
     <div style="margin-bottom:14px">
-      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#7c3aed">📅 2026年8月</span><span style="font-size:10px;color:#ccc;margin-left:6px">3篇 / 374次</span></div>
+      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#7c3aed">📅 2026年8月</span><span style="font-size:10px;color:var(--text-3);margin-left:6px">3篇 / 374次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥇</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">老厂房改算力，真有那么赚钱？</div><span class="t" style="background:#f3e8ff;color:#7c3aed;margin-right:6px">REITs</span><span style="font-size:11px;font-weight:700;color:#7c3aed;white-space:nowrap">39</span></div>
-        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥈</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Costco/山姆代购仓：园区的另类招商</div><span class="t" style="background:#ccfbf1;color:#0d9488;margin-right:6px">产业园</span><span style="font-size:11px;font-weight:700;color:#0d9488;white-space:nowrap">23</span></div>
-        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥉</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">厦门"5年5折租房"出台一个月——我越看越觉得：这事不是补贴，是城市的"人才金融工具"</div><span class="t" style="background:#fef3c7;color:#d97706;margin-right:6px">其他</span><span style="font-size:11px;font-weight:700;color:#d97706;white-space:nowrap">21</span></div>
+        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥇</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">老厂房改算力，真有那么赚钱？</div><span class="t" style="background:oklch(0.93 0.04 300);color:#7c3aed;margin-right:6px">REITs</span><span style="font-size:11px;font-weight:700;color:#7c3aed;white-space:nowrap">39</span></div>
+        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥈</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Costco/山姆代购仓：园区的另类招商</div><span class="t" style="background:oklch(0.93 0.03 195);color:#0d9488;margin-right:6px">产业园</span><span style="font-size:11px;font-weight:700;color:#0d9488;white-space:nowrap">23</span></div>
+        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥉</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">厦门"5年5折租房"出台一个月——我越看越觉得：这事不是补贴，是城市的"人才金融工具"</div><span class="t" style="background:oklch(0.94 0.04 60);color:#d97706;margin-right:6px">其他</span><span style="font-size:11px;font-weight:700;color:#d97706;white-space:nowrap">21</span></div>
       </div>
     </div>
 
     <!-- 7月 -->
     <div style="margin-bottom:14px">
-      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#0d9488">📅 2026年7月</span><span style="font-size:10px;color:#ccc;margin-left:6px">17篇 / 364次</span></div>
+      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#0d9488">📅 2026年7月</span><span style="font-size:10px;color:var(--text-3);margin-left:6px">17篇 / 364次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">01</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">42</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">02</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">产业园招商为什么总完不成：不是条件差，是没有招商体系</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">38</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">03</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">电竞酒店：城投公寓的00后新生意</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">37</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">04</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">城投选运营商的尽调清单：怎么识破PPT里的水分</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">36</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">05</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"代建、代运营"的尽头，是自己下场做生意</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">36</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">01</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">42</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">02</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">产业园招商为什么总完不成：不是条件差，是没有招商体系</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">38</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">03</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">电竞酒店：城投公寓的00后新生意</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">37</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">04</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">城投选运营商的尽调清单：怎么识破PPT里的水分</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">36</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">05</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"代建、代运营"的尽头，是自己下场做生意</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">36</span></div>
       </div>
     </div>
 
     <!-- 6月 -->
     <div style="margin-bottom:14px">
-      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#2563eb">📅 2026年6月</span><span style="font-size:10px;color:#ccc;margin-left:6px">23篇 / 925次</span></div>
+      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#2563eb">📅 2026年6月</span><span style="font-size:10px;color:var(--text-3);margin-left:6px">23篇 / 925次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:2px">
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">01</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"算力"这趟车，城投上了到底是乘客还是燃料</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">59</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">02</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">产业园运营：三种模式，有的城投算完账就放弃了</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">58</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">03</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">133</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">04</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">13号文落地一个月：城投被剥马甲后，还有几条活路</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">131</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">05</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">45</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">01</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">"算力"这趟车，城投上了到底是乘客还是燃料</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">59</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">02</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">产业园运营：三种模式，有的城投算完账就放弃了</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">58</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">03</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">133</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">04</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">13号文落地一个月：城投被剥马甲后，还有几条活路</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">131</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">05</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">45</span></div>
       </div>
     </div>
 
     <!-- 5月高峰 -->
-    <div style="margin-bottom:14px;padding:14px;border-radius:10px;border:1.5px solid #e5e7eb;background:linear-gradient(135deg,#fef2f2,#fff5f5)">
-      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:#dc2626">🔥 2026年5月 · 历史高峰</span><span style="font-size:10px;color:#fca5a5;margin-left:6px">29篇 / 11,299次 / 篇均389.6次</span></div>
+    <div style="margin-bottom:14px;padding:14px;border-radius:10px;border:1.5px solid var(--border);background:oklch(0.98 0.02 25 / 0.3)">
+      <div class="ml" style="margin-bottom:8px"><span style="font-size:10px;font-weight:800;color:#dc2626">🔥 2026年5月 · 历史高峰</span><span style="font-size:10px;color:#f87171;margin-left:6px">29篇 / 11,299次 / 篇均389.6次</span></div>
       <div style="padding-left:10px;display:flex;flex-direction:column;gap:3px">
-        <div class="row" style="background:#fff;border-radius:8px;padding:9px 12px;border:1px solid #fecaca">
+        <div class="row" style="background:var(--surface);border-radius:8px;padding:9px 12px;border:1px solid oklch(0.85 0.05 25)">
           <span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥇</span>
           <div style="flex:1;min-width:0">
-            <div style="font-size:12px;font-weight:800;color:#1a1a1a">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div>
-            <span class="t" style="background:#fee2e2;color:#dc2626;margin-top:3px">城市更新</span>
+            <div style="font-size:12px;font-weight:800;color:var(--text)">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div>
+            <span class="t" style="background:oklch(0.92 0.03 25);color:#dc2626;margin-top:3px">城市更新</span>
           </div>
           <span style="font-size:1rem;font-weight:900;color:#dc2626;white-space:nowrap;letter-spacing:-0.03em">1,450</span>
         </div>
-        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥈</span><div style="flex:1;font-size:11px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</div><span class="t" style="background:#f3e8ff;color:#7c3aed;margin-right:6px">委托运营</span><span style="font-size:11px;font-weight:900;color:#7c3aed;white-space:nowrap">1,352</span></div>
-        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥉</span><div style="flex:1;font-size:11px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">委托运营合同怎么签：三个条款不写进去，后面全是坑</div><span class="t" style="background:#f3e8ff;color:#7c3aed;margin-right:6px">委托运营</span><span style="font-size:11px;font-weight:900;color:#7c3aed;white-space:nowrap">1,310</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">04</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">1,151</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">05</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">保障房运营的三个生死线：空置率、租金差、运营成本</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">1,150</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">06</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">某城投园区从"烂尾"到"满租"，三年复盘</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">1,088</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">07</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">1,040</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">08</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">1,028</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">09</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">园区轻资产运营：如何让入驻企业"留下来、多消费"？</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">979</span></div>
-        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:#555;flex-shrink:0">10</span><div style="flex:1;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">产业园同质化：100个园区99个长得一样，凭什么选你？</div><span style="font-size:11px;font-weight:700;color:#888;white-space:nowrap">321</span></div>
-        <div class="row" style="padding-left:36px"><span style="font-size:10px;color:#ccc;flex-shrink:0">其余</span><div style="flex:1;font-size:11px;color:#bbb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">19篇文章（保租房/城投年报/曲江文旅/电池odg等）</div><span style="font-size:11px;color:#ccc;flex-shrink:0">2~184次</span></div>
+        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥈</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</div><span class="t" style="background:oklch(0.93 0.04 300);color:#7c3aed;margin-right:6px">委托运营</span><span style="font-size:11px;font-weight:900;color:#7c3aed;white-space:nowrap">1,352</span></div>
+        <div class="row"><span style="font-size:1rem;width:28px;text-align:center;flex-shrink:0">🥉</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">委托运营合同怎么签：三个条款不写进去，后面全是坑</div><span class="t" style="background:oklch(0.93 0.04 300);color:#7c3aed;margin-right:6px">委托运营</span><span style="font-size:11px;font-weight:900;color:#7c3aed;white-space:nowrap">1,310</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">04</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">1,151</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">05</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">保障房运营的三个生死线：空置率、租金差、运营成本</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">1,150</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">06</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">某城投园区从"烂尾"到"满租"，三年复盘</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">1,088</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">07</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">1,040</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">08</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">1,028</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">09</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">园区轻资产运营：如何让入驻企业"留下来、多消费"？</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">979</span></div>
+        <div class="row"><span style="width:28px;text-align:center;font-size:11px;font-weight:800;color:var(--text-3);flex-shrink:0">10</span><div style="flex:1;font-size:11px;color:var(--text-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">产业园同质化：100个园区99个长得一样，凭什么选你？</div><span style="font-size:11px;font-weight:700;color:var(--text-2);white-space:nowrap">321</span></div>
+        <div class="row" style="padding-left:36px"><span style="font-size:10px;color:var(--text-3);flex-shrink:0">其余</span><div style="flex:1;font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">19篇文章（保租房/城投年报/曲江文旅/电池odg等）</div><span style="font-size:11px;color:var(--text-3);flex-shrink:0">2~184次</span></div>
       </div>
     </div>
 
     <!-- 早期 -->
     <div>
-      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:#ccc">📅 早期文章（2025.09 - 2026.04）</span><span style="font-size:10px;color:#ccc;margin-left:6px">39篇 / 185次</span></div>
-      <div style="font-size:10px;color:#ccc;padding-left:10px;line-height:1.8;font-style:italic">
+      <div class="ml" style="margin-bottom:6px"><span style="font-size:10px;font-weight:800;color:var(--text-3)">📅 早期文章（2025.09 - 2026.04）</span><span style="font-size:10px;color:var(--text-3);margin-left:6px">39篇 / 185次</span></div>
+      <div style="font-size:10px;color:var(--text-3);padding-left:10px;line-height:1.8;font-style:italic">
         含2025年冷启动期30篇（政策文件转载，篇均7.2次）和2026年1-4月9篇。<br>
         最高为"长沙保障房改造：领导算完账当场沉默了"（184次）和"京东廊坊仓续约崩了"（133次）。
       </div>
     </div>
   </div>
 </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- TAB 5: 流量来源                                                -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div id="tab-source" class="tab-content max-w-6xl mx-auto px-6 py-5">
+<div id="tab-source" class="tab-content">
+<div style="max-width:1200px;margin:0 auto;padding:24px">
 
   <!-- 渠道总览 -->
   <div class="card" style="padding:18px;margin-bottom:12px">
     <div class="s-title" style="margin-bottom:14px">📡 流量来源总览</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px">
-      <div style="text-align:center;padding:14px;border-radius:10px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe">
+      <div style="text-align:center;padding:14px;border-radius:10px;background:oklch(0.93 0.05 255);border:1px solid oklch(0.8 0.08 255)">
         <div style="font-size:1.5rem;font-weight:900;color:#1e40af;line-height:1">8,256</div>
         <div style="font-size:10px;color:#60a5fa;font-weight:600;margin-top:4px">推荐</div>
         <div style="font-size:9px;color:#93c5fd;margin-top:2px">62.8%</div>
       </div>
-      <div style="text-align:center;padding:14px;border-radius:10px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:1px solid #ddd6fe">
+      <div style="text-align:center;padding:14px;border-radius:10px;background:oklch(0.93 0.04 300);border:1px solid oklch(0.8 0.08 300)">
         <div style="font-size:1.5rem;font-weight:900;color:#6d28d9;line-height:1">1,276</div>
         <div style="font-size:10px;color:#a78bfa;font-weight:600;margin-top:4px">公众号消息</div>
         <div style="font-size:9px;color:#c4b5fd;margin-top:2px">9.7%</div>
       </div>
-      <div style="text-align:center;padding:14px;border-radius:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0">
+      <div style="text-align:center;padding:14px;border-radius:10px;background:oklch(0.93 0.04 145);border:1px solid oklch(0.8 0.08 145)">
         <div style="font-size:1.5rem;font-weight:900;color:#15803d;line-height:1">604</div>
         <div style="font-size:10px;color:#4ade80;font-weight:600;margin-top:4px">朋友圈</div>
         <div style="font-size:9px;color:#86efac;margin-top:2px">4.6%</div>
       </div>
-      <div style="text-align:center;padding:14px;border-radius:10px;background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fed7aa">
+      <div style="text-align:center;padding:14px;border-radius:10px;background:oklch(0.95 0.04 60);border:1px solid oklch(0.82 0.08 60)">
         <div style="font-size:1.5rem;font-weight:900;color:#c2410c;line-height:1">384</div>
         <div style="font-size:10px;color:#fb923c;font-weight:600;margin-top:4px">聊天会话</div>
         <div style="font-size:9px;color:#fdba74;margin-top:2px">2.9%</div>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      <div style="text-align:center;padding:10px;border-radius:8px;background:#fafafa;border:1px solid #f0f0f0">
-        <div style="font-size:1.1rem;font-weight:900;color:#555;line-height:1">276</div>
-        <div style="font-size:10px;color:#999;font-weight:600;margin-top:3px">公众号主页</div>
-        <div style="font-size:9px;color:#ccc;margin-top:1px">2.1%</div>
+      <div style="text-align:center;padding:10px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border)">
+        <div style="font-size:1.1rem;font-weight:900;color:var(--text-2);line-height:1">276</div>
+        <div style="font-size:10px;color:var(--text-3);font-weight:600;margin-top:3px">公众号主页</div>
+        <div style="font-size:9px;color:var(--text-3);margin-top:1px">2.1%</div>
       </div>
-      <div style="text-align:center;padding:10px;border-radius:8px;background:#fafafa;border:1px solid #f0f0f0">
-        <div style="font-size:1.1rem;font-weight:900;color:#555;line-height:1">108</div>
-        <div style="font-size:10px;color:#999;font-weight:600;margin-top:3px">搜一搜</div>
-        <div style="font-size:9px;color:#ccc;margin-top:1px">0.8%</div>
+      <div style="text-align:center;padding:10px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border)">
+        <div style="font-size:1.1rem;font-weight:900;color:var(--text-2);line-height:1">108</div>
+        <div style="font-size:10px;color:var(--text-3);font-weight:600;margin-top:3px">搜一搜</div>
+        <div style="font-size:9px;color:var(--text-3);margin-top:1px">0.8%</div>
       </div>
-      <div style="text-align:center;padding:10px;border-radius:8px;background:#fafafa;border:1px solid #f0f0f0">
-        <div style="font-size:1.1rem;font-weight:900;color:#555;line-height:1">194</div>
-        <div style="font-size:10px;color:#999;font-weight:600;margin-top:3px">其他</div>
-        <div style="font-size:9px;color:#ccc;margin-top:1px">1.5%</div>
+      <div style="text-align:center;padding:10px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border)">
+        <div style="font-size:1.1rem;font-weight:900;color:var(--text-2);line-height:1">194</div>
+        <div style="font-size:10px;color:var(--text-3);font-weight:600;margin-top:3px">其他</div>
+        <div style="font-size:9px;color:var(--text-3);margin-top:1px">1.5%</div>
       </div>
     </div>
   </div>
@@ -734,21 +742,21 @@
       <div style="height:180px;position:relative">
         <canvas id="sourceDonutChart"></canvas>
         <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none">
-          <div style="font-size:1.3rem;font-weight:900;color:#1a1a1a;line-height:1">13,149</div>
-          <div style="font-size:9px;color:#ccc;margin-top:3px">总阅读</div>
+          <div style="font-size:1.3rem;font-weight:900;color:var(--text);line-height:1">13,149</div>
+          <div style="font-size:9px;color:var(--text-3);margin-top:3px">总阅读</div>
         </div>
       </div>
     </div>
     <div class="card" style="padding:16px">
       <div class="s-title">📊 渠道明细</div>
       <div style="display:flex;flex-direction:column;gap:6px">
-        <div class="chan-row"><span class="cd" style="background:#2563eb"></span><span style="font-size:11px;color:#666;flex:1;font-weight:500">推荐</span><span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">8,256</span><div class="pg" style="width:50px"><div class="pf" style="width:100%;background:#2563eb"></div></div></div>
-        <div class="chan-row"><span class="cd" style="background:#7c3aed"></span><span style="font-size:11px;color:#666;flex:1;font-weight:500">公众号消息</span><span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">1,276</span><div class="pg" style="width:50px"><div class="pf" style="width:15%;background:#7c3aed"></div></div></div>
-        <div class="chan-row"><span class="cd" style="background:#16a34a"></span><span style="font-size:11px;color:#666;flex:1;font-weight:500">朋友圈</span><span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">604</span><div class="pg" style="width:50px"><div class="pf" style="width:7%;background:#16a34a"></div></div></div>
-        <div class="chan-row"><span class="cd" style="background:#ea580c"></span><span style="font-size:11px;color:#666;flex:1;font-weight:500">聊天会话</span><span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">384</span><div class="pg" style="width:50px"><div class="pf" style="width:4.6%;background:#ea580c"></div></div></div>
-        <div class="chan-row"><span class="cd" style="background:#0d9488"></span><span style="font-size:11px;color:#666;flex:1;font-weight:500">公众号主页</span><span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">276</span><div class="pg" style="width:50px"><div class="pf" style="width:3.3%;background:#0d9488"></div></div></div>
-        <div class="chan-row"><span class="cd" style="background:#f59e0b"></span><span style="font-size:11px;color:#666;flex:1;font-weight:500">搜一搜</span><span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">108</span><div class="pg" style="width:50px"><div class="pf" style="width:1.3%;background:#f59e0b"></div></div></div>
-        <div class="chan-row"><span class="cd" style="background:#9ca3af"></span><span style="font-size:11px;color:#666;flex:1;font-weight:500">其他</span><span style="font-size:11px;font-weight:800;color:#333;width:48px;text-align:right;letter-spacing:-0.01em">194</span><div class="pg" style="width:50px"><div class="pf" style="width:2.3%;background:#9ca3af"></div></div></div>
+        <div class="chan-row"><span class="cd" style="background:#2563eb"></span><span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">推荐</span><span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">8,256</span><div class="pg" style="width:50px"><div class="pf" style="width:100%;background:#2563eb"></div></div></div>
+        <div class="chan-row"><span class="cd" style="background:#7c3aed"></span><span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">公众号消息</span><span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">1,276</span><div class="pg" style="width:50px"><div class="pf" style="width:15%;background:#7c3aed"></div></div></div>
+        <div class="chan-row"><span class="cd" style="background:#16a34a"></span><span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">朋友圈</span><span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">604</span><div class="pg" style="width:50px"><div class="pf" style="width:7%;background:#16a34a"></div></div></div>
+        <div class="chan-row"><span class="cd" style="background:#ea580c"></span><span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">聊天会话</span><span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">384</span><div class="pg" style="width:50px"><div class="pf" style="width:4.6%;background:#ea580c"></div></div></div>
+        <div class="chan-row"><span class="cd" style="background:#0d9488"></span><span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">公众号主页</span><span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">276</span><div class="pg" style="width:50px"><div class="pf" style="width:3.3%;background:#0d9488"></div></div></div>
+        <div class="chan-row"><span class="cd" style="background:#f59e0b"></span><span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">搜一搜</span><span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">108</span><div class="pg" style="width:50px"><div class="pf" style="width:1.3%;background:#f59e0b"></div></div></div>
+        <div class="chan-row"><span class="cd" style="background:#9ca3af"></span><span style="font-size:11px;color:var(--text-2);flex:1;font-weight:500">其他</span><span style="font-size:11px;font-weight:800;color:var(--text);width:48px;text-align:right;letter-spacing:-0.01em">194</span><div class="pg" style="width:50px"><div class="pf" style="width:2.3%;background:#9ca3af"></div></div></div>
       </div>
     </div>
   </div>
@@ -757,22 +765,22 @@
   <div class="card" style="padding:16px;margin-bottom:12px">
     <div class="s-title">🔍 5月渠道拆解（流量高峰月）</div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
-      <div style="text-align:center;padding:12px;border-radius:8px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe">
+      <div style="text-align:center;padding:12px;border-radius:8px;background:oklch(0.93 0.05 255);border:1px solid oklch(0.8 0.08 255)">
         <div style="font-size:1.2rem;font-weight:900;color:#1e40af;line-height:1">8,239</div>
         <div style="font-size:10px;color:#60a5fa;font-weight:600;margin-top:4px">推荐渠道</div>
         <div style="font-size:9px;color:#93c5fd;margin-top:2px">占全月 99.8%</div>
       </div>
-      <div style="text-align:center;padding:12px;border-radius:8px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:1px solid #ddd6fe">
+      <div style="text-align:center;padding:12px;border-radius:8px;background:oklch(0.93 0.04 300);border:1px solid oklch(0.8 0.08 300)">
         <div style="font-size:1.2rem;font-weight:900;color:#6d28d9;line-height:1">263</div>
         <div style="font-size:10px;color:#a78bfa;font-weight:600;margin-top:4px">公众号消息</div>
         <div style="font-size:9px;color:#c4b5fd;margin-top:2px">全月占比 1.9%</div>
       </div>
-      <div style="text-align:center;padding:12px;border-radius:8px;background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fed7aa">
+      <div style="text-align:center;padding:12px;border-radius:8px;background:oklch(0.95 0.04 60);border:1px solid oklch(0.82 0.08 60)">
         <div style="font-size:1.2rem;font-weight:900;color:#c2410c;line-height:1">341</div>
         <div style="font-size:10px;color:#fb923c;font-weight:600;margin-top:4px">聊天会话</div>
         <div style="font-size:9px;color:#fdba74;margin-top:2px">朋友圈转发</div>
       </div>
-      <div style="text-align:center;padding:12px;border-radius:8px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0">
+      <div style="text-align:center;padding:12px;border-radius:8px;background:oklch(0.93 0.04 145);border:1px solid oklch(0.8 0.08 145)">
         <div style="font-size:1.2rem;font-weight:900;color:#15803d;line-height:1">500</div>
         <div style="font-size:10px;color:#4ade80;font-weight:600;margin-top:4px">朋友圈</div>
         <div style="font-size:9px;color:#86efac;margin-top:2px">爆款传播</div>
@@ -782,70 +790,72 @@
 
   <div class="ins">
     <div class="ins-l">💡 老王洞察</div>
-    <div style="font-size:11px;color:#555;line-height:1.8">
-      5月的流量结构极度依赖<strong style="color:#1a1a1a">推荐（99%+</strong>），说明爆款文章本身有强推荐属性。
+    <div style="font-size:11px;color:var(--text-2);line-height:1.8">
+      5月的流量结构极度依赖<strong style="color:var(--text)">推荐（99%+</strong>），说明爆款文章本身有强推荐属性。
       但这也意味着：非推荐来源占比极低，账号自身粉丝触达能力弱。
-      建议在爆款文章底部加强<strong style="color:#1a1a1a">关注引导</strong>，提升粉丝主动回访比例。
+      建议在爆款文章底部加强<strong style="color:var(--text)">关注引导</strong>，提升粉丝主动回访比例。
     </div>
   </div>
+</div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- TAB 6: 话题地图                                                -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div id="tab-topic" class="tab-content max-w-6xl mx-auto px-6 py-5">
+<div id="tab-topic" class="tab-content">
+<div style="max-width:1200px;margin:0 auto;padding:24px">
 
   <!-- 7个赛道卡片 -->
   <div class="card" style="padding:18px;margin-bottom:12px">
     <div class="s-title" style="margin-bottom:14px">🗺️ 话题赛道 · 流量热力图</div>
     <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px">
-      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:linear-gradient(135deg,#1e3a5f,#1e40af);color:#fff">
+      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:oklch(0.25 0.12 255);color:#fff">
         <div style="font-size:14px;margin-bottom:4px">🏛️</div>
-        <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:0.02em">城投转型</div>
+        <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.7);letter-spacing:0.02em">城投转型</div>
         <div style="font-size:1.2rem;font-weight:900;color:#fff;margin-top:6px;line-height:1;letter-spacing:-0.03em">5,400</div>
-        <div style="font-size:9px;color:rgba(255,255,255,0.5);margin-top:3px">41.1%</div>
-        <div class="pg mt-2"><div class="pf" style="width:100%;background:#fff;opacity:0.3"></div></div>
+        <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px">41.1%</div>
+        <div class="pg mt-2"><div class="pf" style="width:100%;background:#fff;opacity:0.25"></div></div>
       </div>
-      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);border:1px solid #ddd6fe">
+      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:oklch(0.93 0.04 300);border:1px solid oklch(0.8 0.08 300)">
         <div style="font-size:14px;margin-bottom:4px">🤝</div>
         <div style="font-size:9px;font-weight:700;color:#6d28d9">委托运营</div>
         <div style="font-size:1.2rem;font-weight:900;color:#7c3aed;margin-top:6px;line-height:1;letter-spacing:-0.03em">2,701</div>
         <div style="font-size:9px;color:#c4b5fd;margin-top:3px">20.5%</div>
         <div class="pg mt-2"><div class="pf" style="width:50%;background:#7c3aed"></div></div>
       </div>
-      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0">
+      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:oklch(0.93 0.04 145);border:1px solid oklch(0.8 0.08 145)">
         <div style="font-size:14px;margin-bottom:4px">📦</div>
         <div style="font-size:9px;font-weight:700;color:#15803d">其他</div>
         <div style="font-size:1.2rem;font-weight:900;color:#16a34a;margin-top:6px;line-height:1;letter-spacing:-0.03em">1,794</div>
         <div style="font-size:9px;color:#86efac;margin-top:3px">13.6%</div>
         <div class="pg mt-2"><div class="pf" style="width:33%;background:#16a34a"></div></div>
       </div>
-      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid #fed7aa">
+      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:oklch(0.95 0.04 60);border:1px solid oklch(0.82 0.08 60)">
         <div style="font-size:14px;margin-bottom:4px">🏙️</div>
         <div style="font-size:9px;font-weight:700;color:#c2410c">城市更新</div>
         <div style="font-size:1.2rem;font-weight:900;color:#ea580c;margin-top:6px;line-height:1;letter-spacing:-0.03em">1,637</div>
         <div style="font-size:9px;color:#fdba74;margin-top:3px">12.4%</div>
         <div class="pg mt-2"><div class="pf" style="width:30%;background:#ea580c"></div></div>
       </div>
-      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border:1px solid #99f6e4">
+      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:oklch(0.93 0.03 195);border:1px solid oklch(0.8 0.06 195)">
         <div style="font-size:14px;margin-bottom:4px">🏢</div>
         <div style="font-size:9px;font-weight:700;color:#0f766e">产业园</div>
         <div style="font-size:1.2rem;font-weight:900;color:#0d9488;margin-top:6px;line-height:1;letter-spacing:-0.03em">1,401</div>
         <div style="font-size:9px;color:#5eead4;margin-top:3px">10.7%</div>
         <div class="pg mt-2"><div class="pf" style="width:26%;background:#0d9488"></div></div>
       </div>
-      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:linear-gradient(135deg,#fefce8,#fef9c3);border:1px solid #fde047">
+      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:oklch(0.95 0.04 80);border:1px solid oklch(0.8 0.06 80)">
         <div style="font-size:14px;margin-bottom:4px">🏠</div>
         <div style="font-size:9px;font-weight:700;color:#a16207">保租房</div>
         <div style="font-size:1.2rem;font-weight:900;color:#ca8a04;margin-top:6px;line-height:1;letter-spacing:-0.03em">156</div>
         <div style="font-size:9px;color:#facc15;margin-top:3px">1.2%</div>
         <div class="pg mt-2"><div class="pf" style="width:3%;background:#ca8a04"></div></div>
       </div>
-      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:#fafafa;border:1px solid #e5e7eb">
+      <div style="text-align:center;padding:14px 6px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border)">
         <div style="font-size:14px;margin-bottom:4px">💹</div>
-        <div style="font-size:9px;font-weight:700;color:#9ca3af">REITs</div>
-        <div style="font-size:1.2rem;font-weight:900;color:#6b7280;margin-top:6px;line-height:1;letter-spacing:-0.03em">60</div>
-        <div style="font-size:9px;color:#d1d5db;margin-top:3px">0.5%</div>
+        <div style="font-size:9px;font-weight:700;color:var(--text-3)">REITs</div>
+        <div style="font-size:1.2rem;font-weight:900;color:var(--text-2);margin-top:6px;line-height:1;letter-spacing:-0.03em">60</div>
+        <div style="font-size:9px;color:var(--text-3);margin-top:3px">0.5%</div>
         <div class="pg mt-2"><div class="pf" style="width:1%;background:#9ca3af"></div></div>
       </div>
     </div>
@@ -865,60 +875,63 @@
         <div style="display:flex;gap:10px">
           <span style="font-size:14px;flex-shrink:0">🏛️</span>
           <div>
-            <div style="font-size:11px;font-weight:700;color:#1a1a1a">城投转型（41.1%）</div>
-            <div style="font-size:10px;color:#777;margin-top:2px">绝对主力赛道，爆款率最高。城投化债/退平台/转型话题持续有流量。</div>
+            <div style="font-size:11px;font-weight:700;color:var(--text)">城投转型（41.1%）</div>
+            <div style="font-size:10px;color:var(--text-2);margin-top:2px">绝对主力赛道，爆款率最高。城投化债/退平台/转型话题持续有流量。</div>
           </div>
         </div>
         <div style="display:flex;gap:10px">
           <span style="font-size:14px;flex-shrink:0">🤝</span>
           <div>
-            <div style="font-size:11px;font-weight:700;color:#1a1a1a">委托运营（20.5%）</div>
-            <div style="font-size:10px;color:#777;margin-top:2px">5月三篇委托运营文章全部爆款（1300+），"合同怎么签"类实操内容需求旺盛。</div>
+            <div style="font-size:11px;font-weight:700;color:var(--text)">委托运营（20.5%）</div>
+            <div style="font-size:10px;color:var(--text-2);margin-top:2px">5月三篇委托运营文章全部爆款（1300+），"合同怎么签"类实操内容需求旺盛。</div>
           </div>
         </div>
         <div style="display:flex;gap:10px">
           <span style="font-size:14px;flex-shrink:0">🏢</span>
           <div>
-            <div style="font-size:11px;font-weight:700;color:#1a1a1a">产业园运营（10.7%）</div>
-            <div style="font-size:10px;color:#777;margin-top:2px">8月 Costco/算力园区新赛道已有正向流量，新赛道值得持续深耕。</div>
+            <div style="font-size:11px;font-weight:700;color:var(--text)">产业园运营（10.7%）</div>
+            <div style="font-size:10px;color:var(--text-2);margin-top:2px">8月 Costco/算力园区新赛道已有正向流量，新赛道值得持续深耕。</div>
           </div>
         </div>
       </div>
     </div>
     <div class="card" style="padding:14px">
-      <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#ccc;margin-bottom:10px">⚠️ 薄弱赛道</div>
+      <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-3);margin-bottom:10px">⚠️ 薄弱赛道</div>
       <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:10px">
         <div style="display:flex;gap:10px">
           <span style="font-size:14px;flex-shrink:0">🏠</span>
           <div>
-            <div style="font-size:11px;font-weight:700;color:#1a1a1a">保租房（1.2%）</div>
-            <div style="font-size:10px;color:#777;margin-top:2px">仅156次，5年5折/定价模型等话题尚未打开流量，需加强。</div>
+            <div style="font-size:11px;font-weight:700;color:var(--text)">保租房（1.2%）</div>
+            <div style="font-size:10px;color:var(--text-2);margin-top:2px">仅156次，5年5折/定价模型等话题尚未打开流量，需加强。</div>
           </div>
         </div>
         <div style="display:flex;gap:10px">
           <span style="font-size:14px;flex-shrink:0">💹</span>
           <div>
-            <div style="font-size:11px;font-weight:700;color:#1a1a1a">REITs与新资产（0.5%）</div>
-            <div style="font-size:10px;color:#777;margin-top:2px">仅60次，新赛道培育期，需要更多爆款文章打开知名度。</div>
+            <div style="font-size:11px;font-weight:700;color:var(--text)">REITs与新资产（0.5%）</div>
+            <div style="font-size:10px;color:var(--text-2);margin-top:2px">仅60次，新赛道培育期，需要更多爆款文章打开知名度。</div>
           </div>
         </div>
       </div>
-      <div style="padding:10px;border-radius:8px;background:linear-gradient(135deg,#fff7ed,#fff5f5);border:1px solid #fed7aa">
+      <div style="padding:10px;border-radius:8px;background:oklch(0.95 0.04 60);border:1px solid oklch(0.82 0.08 60)">
         <div style="font-size:10px;font-weight:800;color:#c2410c;margin-bottom:3px">🎯 下一步建议</div>
         <div style="font-size:10px;color:#92400e">10月重点：<strong>保租房 REITs 扩募</strong>话题，政策窗口期，流量可期。</div>
       </div>
     </div>
   </div>
 </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!-- FOOTER                                                         -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
-<div class="max-w-6xl mx-auto px-6">
+<div style="max-width:1200px;margin:0 auto;padding:0 24px">
   <div class="ft">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:10px;color:#ccc">📕 轻资运营局 · 公众号运营战报 · 2026年9月23日更新</div>
-      <div style="font-size:10px;color:#ddd">图表支持：Chart.js</div>
+      <div style="font-size:10px;color:var(--text-3)">📕 轻资运营局 · 公众号运营战报 · 2026年9月23日更新</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text-3)">
+        <i data-lucide="zap" style="width:12px;height:12px;stroke-width:2"></i>图表支持：Chart.js · 图标：Lucide
+      </div>
     </div>
   </div>
 </div>
@@ -986,7 +999,7 @@
     }
   });
 
-  // 月度发布/阅读柱状图
+  // 月度柱状图
   new Chart(document.getElementById('monthlyBarChart'), {
     type: 'bar',
     data: {
@@ -1087,6 +1100,9 @@
       }
     }
   });
+
+  // Lucide 图标初始化
+  lucide.createIcons();
 </script>
 </body>
 </html>
