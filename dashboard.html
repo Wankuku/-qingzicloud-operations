@@ -1372,7 +1372,8 @@ new Chart(document.getElementById('chartCompare'), {
 
     topics.forEach(function(topic, ti){
       sb.push('<tr><td style="color:#4A5568;font-weight:500;padding-right:6px;white-space:nowrap;">' + topic + '</td>');
-      matrix.forEach(function(val){
+      matrix.forEach(function(row){
+        var val = row[ti];
         var t = val > 0 ? Math.min(val / max, 1) : 0;
         var bg = shadeColor(colors[ti], t);
         var textColor = t >= 0.4 ? '#fff' : '#4A5568';
