@@ -1116,14 +1116,22 @@
       </div>
     </div>
 
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-header">
+        <div class="card-title">月度赛道分布（篇数）</div>
+        <span style="font-size:11px;color:var(--stone);">2026年各月发布篇数 · 按赛道分类</span>
+      </div>
+      <div style="height:280px;"><canvas id="chartTopicMonthly"></canvas></div>
+    </div>
+
     <div class="grid-2">
       <div class="card">
-        <div class="card-header"><div class="card-title">赛道阅读效率（篇均）</div></div>
-        <div style="height:240px;"><canvas id="chartTopicAvg"></canvas></div>
+        <div class="card-header"><div class="card-title">年度 vs 9月赛道对比（篇均阅读）</div></div>
+        <div style="height:260px;"><canvas id="chartTopicCompare"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title">赛道篇数占比</div></div>
-        <div style="height:240px;"><canvas id="chartTopicPie"></canvas></div>
+        <div class="card-header"><div class="card-title">2026年度赛道篇数占比</div></div>
+        <div style="height:260px;"><canvas id="chartTopicPie"></canvas></div>
       </div>
     </div>
 
@@ -1326,31 +1334,126 @@ new Chart(document.getElementById('chartCompare'), {
   }
 });
 
-// ── 赛道篇均效率 ──
-new Chart(document.getElementById('chartTopicAvg'), {
+// ── 月度赛道堆叠柱图 ──
+new Chart(document.getElementById('chartTopicMonthly'), {
+  type: 'bar',
+  data: {
+    labels: ['1月','2月','4月','5月','6月','7月','9月','10月'],
+    datasets: [
+      {
+        label: '城投转型',
+        data: [0, 0, 2, 7, 10, 7, 4, 1],
+        backgroundColor: '#EF4444',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: '城市更新',
+        data: [0, 0, 0, 1, 0, 1, 1, 0],
+        backgroundColor: '#F59E0B',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: '产业园运营',
+        data: [0, 0, 0, 3, 1, 1, 0, 0],
+        backgroundColor: '#3B82F6',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: '保租房',
+        data: [0, 1, 0, 1, 0, 2, 0, 0],
+        backgroundColor: '#10B981',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: '委托运营',
+        data: [0, 0, 0, 1, 1, 0, 0, 0],
+        backgroundColor: '#EC4899',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: 'REITs新资产',
+        data: [0, 0, 0, 0, 0, 0, 0, 0],
+        backgroundColor: '#8B5CF6',
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: { font: { family: 'Inter', size: 10 }, boxWidth: 10, padding: 8, color: '#4A5568' }
+      },
+      tooltip: {
+        backgroundColor: '#1B2B3A',
+        titleFont: { family: 'Inter', size: 12 },
+        bodyFont: { family: 'Inter', size: 11 },
+        padding: 10,
+        callbacks: {
+          label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '篇'
+        }
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        grid: { display: false },
+        ticks: { font: { family: 'Inter', size: 11 }, color: '#8B8680' }
+      },
+      y: {
+        stacked: true,
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: { font: { family: 'Inter', size: 10 }, color: '#8B8680' },
+      }
+    }
+  }
+});
+
+// ── 年度 vs 9月 赛道篇均对比 ──
+new Chart(document.getElementById('chartTopicCompare'), {
   type: 'bar',
   data: {
     labels: ['城市更新', '城投转型', '产业园运营', '委托运营', '保租房', 'REITs新资产'],
-    datasets: [{
-      label: '篇均阅读',
-      data: [67, 16, 2, 2, 1, 0],
-      backgroundColor: ['#F59E0B','#EF4444','#3B82F6','#EC4899','#10B981','#8B5CF6'],
-      borderRadius: 6,
-      borderSkipped: false,
-    }]
+    datasets: [
+      {
+        label: '2026年度篇均',
+        data: [67, 16, 2, 2, 1, 0],
+        backgroundColor: 'rgba(201,168,76,0.75)',
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+      {
+        label: '2026年9月篇均',
+        data: [191, 96, 0, 0, 0, 0],
+        backgroundColor: 'rgba(16,185,129,0.75)',
+        borderRadius: 6,
+        borderSkipped: false,
+      },
+    ]
   },
   options: {
     indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: false },
+      legend: {
+        position: 'top',
+        labels: { font: { family: 'Inter', size: 10 }, boxWidth: 12, padding: 8 }
+      },
       tooltip: {
         backgroundColor: '#1B2B3A',
         titleFont: { family: 'Inter', size: 12 },
         bodyFont: { family: 'Inter', size: 11 },
         padding: 10,
-        callbacks: { label: ctx => '篇均 ' + ctx.parsed.x + ' 阅读' }
+        callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.x + ' 阅读' }
       }
     },
     scales: {
@@ -1364,10 +1467,10 @@ new Chart(document.getElementById('chartTopicAvg'), {
 new Chart(document.getElementById('chartTopicPie'), {
   type: 'doughnut',
   data: {
-    labels: ['城投转型', '城市更新', '产业园运营', '保租房', '其他', '委托运营', 'REITs新资产'],
+    labels: ['城投转型', '城市更新', '产业园运营', '保租房', '委托运营', 'REITs新资产'],
     datasets: [{
-      data: [62.1, 27.4, 5.0, 3.1, 1.6, 0.8, 0],
-      backgroundColor: ['#EF4444','#F59E0B','#3B82F6','#10B981','#94A3B8','#EC4899','#8B5CF6'],
+      data: [62.1, 27.4, 5.0, 3.1, 0.8, 0],
+      backgroundColor: ['#EF4444','#F59E0B','#3B82F6','#10B981','#EC4899','#8B5CF6'],
       borderWidth: 0,
       hoverOffset: 6,
     }]
