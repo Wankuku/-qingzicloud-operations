@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轻资运营局 · 运营战报（2026年度版）</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+    body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); min-height: 100vh; }
+    .tab-btn { padding: 12px 24px; border: 2px solid transparent; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; background: white; color: #475569; }
+    .tab-btn:hover { border-color: #6366F1; color: #6366F1; background: #EEF2FF; }
+    .tab-btn.active { background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); color: white; border-color: #4F46E5; box-shadow: 0 4px 16px rgba(79,70,229,0.35); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body class="p-4 lg:p-8">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- HEADER -->
+    <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+      <div class="flex items-center justify-between flex-wrap gap-4">
+        <div>
+          <h1 class="text-3xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            📊 轻资运营局 · 运营战报
+          </h1>
+          <p class="text-slate-500 mt-1 text-sm">2026年度报告 · 截止 2026-07-23 11:00</p>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-slate-400">统计基准</div>
+          <div class="text-lg font-black text-emerald-600">2026年1月起 · 自然年度</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="bg-white rounded-2xl shadow-md p-3 mb-6">
+      <div class="flex flex-wrap gap-2">
+        <button class="tab-btn active" onclick="showTab('overview',this)">📈 战报总览</button>
+        <button class="tab-btn" onclick="showTab('monthly',this)">📅 本月战报</button>
+        <button class="tab-btn" onclick="showTab('history',this)">🏆 历史全榜</button>
+        <button class="tab-btn" onclick="showTab('traffic',this)">📡 流量来源</button>
+        <button class="tab-btn" onclick="showTab('topic',this)">🗺️ 话题地图</button>
+      </div>
+    </div>
+
+
+<!-- TAB 1: 战报总览 -->
+<div id="tab-overview" class="tab-content active">
+
+  <!-- KPI四维小框 -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 rounded-2xl p-5">
+      <div class="text-xs text-indigo-600 font-bold mb-2">📅 本週 (07.17-07.23)</div>
+      <div class="text-3xl font-black text-indigo-700">5<span class="text-base text-indigo-500 ml-1">篇</span></div>
+      <div class="mt-2 text-sm text-slate-600">总阅读 <span class="font-bold text-indigo-700">59</span> · 篇均 <span class="font-bold">11.8</span></div>
+    </div>
+    <div class="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-2xl p-5">
+      <div class="text-xs text-blue-600 font-bold mb-2">📆 本月 (7月)</div>
+      <div class="text-3xl font-black text-blue-700">16<span class="text-base text-blue-500 ml-1">篇</span></div>
+      <div class="mt-2 text-sm text-slate-600">总阅读 <span class="font-bold text-blue-700">445</span> · 篇均 <span class="font-bold">27.8</span></div>
+    </div>
+    <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 rounded-2xl p-5">
+      <div class="text-xs text-emerald-600 font-bold mb-2">📊 本年度 (2026)</div>
+      <div class="text-3xl font-black text-emerald-700">96<span class="text-base text-emerald-500 ml-1">篇</span></div>
+      <div class="mt-2 text-sm text-slate-600">总阅读 <span class="font-bold text-emerald-700">17,507</span> · 篇均 <span class="font-bold">182.4</span></div>
+    </div>
+    <div class="bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 rounded-2xl p-5">
+      <div class="text-xs text-slate-600 font-bold mb-2">🗂️ 全部历史</div>
+      <div class="text-3xl font-black text-slate-700">118<span class="text-base text-slate-500 ml-1">篇</span></div>
+      <div class="mt-2 text-sm text-slate-600">总阅读 <span class="font-bold text-slate-700">17,669</span> · 篇均 <span class="font-bold">149.7</span></div>
+    </div>
+  </div>
+
+  <!-- 月度阅读趋势图 -->
+  <div class="bg-white rounded-2xl shadow-md p-6 mb-6">
+    <h3 class="text-lg font-black text-slate-800 mb-4">📈 2026年月度阅读趋势</h3>
+    <canvas id="chartMonthlyTrend" height="80"></canvas>
+  </div>
+
+  <!-- 关键诊断 -->
+  <div class="bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500 rounded-r-2xl p-5 mb-6">
+    <h3 class="text-lg font-black text-red-700 mb-2">🚨 关键诊断</h3>
+    <ul class="space-y-1.5 text-sm text-slate-700">
+      <li>• <span class="font-bold">5月峰值</span>：月阅读 <span class="font-black text-red-600">11,299</span>（篇均390），推荐流量爆发</li>
+      <li>• <span class="font-bold">6月断崖</span>：月阅读骤降至 <span class="font-black text-orange-600">925</span>（篇均40），<span class="text-red-600 font-bold">平台限流触发</span></li>
+      <li>• <span class="font-bold">7月延续</span>：截至22日月阅读364（篇均21），仍处低位恢复期</li>
+      <li>• <span class="font-bold">历史数据参考</span>：2025年44篇仅215阅读，2026年是真正运营元年</li>
+    </ul>
+  </div>
+
+  <!-- TOP5本月爆款 -->
+  <div class="bg-white rounded-2xl shadow-md p-6">
+    <h3 class="text-lg font-black text-slate-800 mb-4">🔥 7月TOP5（按阅读量）</h3>
+    <div class="space-y-2">
+      <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+        <span class="bg-indigo-600 text-white text-xs font-black rounded-full w-7 h-7 flex items-center justify-center">1</span>
+        <div class="flex-1">
+          <div class="font-bold text-slate-800 text-sm">买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪</div>
+          <div class="text-xs text-slate-500 mt-0.5">2026-07-03 · <span style="color:#10b981" class="font-bold">● 保租房</span></div>
+        </div>
+        <span class="text-lg font-black text-indigo-600">197</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+        <span class="bg-indigo-600 text-white text-xs font-black rounded-full w-7 h-7 flex items-center justify-center">2</span>
+        <div class="flex-1">
+          <div class="font-bold text-slate-800 text-sm">接手一个空置率67%的产业园，他前30天做的5个错决策</div>
+          <div class="text-xs text-slate-500 mt-0.5">2026-07-31 · <span style="color:#3b82f6" class="font-bold">● 产业园运营</span></div>
+        </div>
+        <span class="text-lg font-black text-indigo-600">36</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+        <span class="bg-indigo-600 text-white text-xs font-black rounded-full w-7 h-7 flex items-center justify-center">3</span>
+        <div class="flex-1">
+          <div class="font-bold text-slate-800 text-sm">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</div>
+          <div class="text-xs text-slate-500 mt-0.5">2026-07-13 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+        </div>
+        <span class="text-lg font-black text-indigo-600">34</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+        <span class="bg-indigo-600 text-white text-xs font-black rounded-full w-7 h-7 flex items-center justify-center">4</span>
+        <div class="flex-1">
+          <div class="font-bold text-slate-800 text-sm">那个闲置校舍，城投想盘，教育局不放手，财政局不出钱</div>
+          <div class="text-xs text-slate-500 mt-0.5">2026-07-29 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+        </div>
+        <span class="text-lg font-black text-indigo-600">33</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+        <span class="bg-indigo-600 text-white text-xs font-black rounded-full w-7 h-7 flex items-center justify-center">5</span>
+        <div class="flex-1">
+          <div class="font-bold text-slate-800 text-sm">47亿砸进一个片区更新项目，出租率只有41%，这账怎么算？</div>
+          <div class="text-xs text-slate-500 mt-0.5">2026-07-23 · <span style="color:#f59e0b" class="font-bold">● 城市更新</span></div>
+        </div>
+        <span class="text-lg font-black text-indigo-600">31</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- TAB 2: 本月战报 -->
+<div id="tab-monthly" class="tab-content">
+
+  <div class="bg-white rounded-2xl shadow-md p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-xl font-black text-slate-800">📅 2026年7月（截至7月22日）</h3>
+      <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">16篇 · 总阅读445</span>
+    </div>
+
+    <!-- 本月核心指标 -->
+    <div class="grid grid-cols-4 gap-3 mb-5">
+      <div class="bg-blue-50 rounded-xl p-3 text-center">
+        <div class="text-xs text-blue-600 font-bold">篇数</div>
+        <div class="text-2xl font-black text-blue-700">16</div>
+      </div>
+      <div class="bg-emerald-50 rounded-xl p-3 text-center">
+        <div class="text-xs text-emerald-600 font-bold">总阅读</div>
+        <div class="text-2xl font-black text-emerald-700">445</div>
+      </div>
+      <div class="bg-amber-50 rounded-xl p-3 text-center">
+        <div class="text-xs text-amber-600 font-bold">篇均</div>
+        <div class="text-2xl font-black text-amber-700">27.8</div>
+      </div>
+      <div class="bg-purple-50 rounded-xl p-3 text-center">
+        <div class="text-xs text-purple-600 font-bold">最高单篇</div>
+        <div class="text-2xl font-black text-purple-700">197</div>
+      </div>
+    </div>
+
+    <!-- 7月文章列表 -->
+    <h4 class="font-bold text-slate-700 mb-2">📋 7月发布明细（从新到旧）</h4>
+    <div class="space-y-2">
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-31</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">接手一个空置率67%的产业园，他前30天做的5个错决策</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:18%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">36</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-29</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">那个闲置校舍，城投想盘，教育局不放手，财政局不出钱</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:16%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">33</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-27</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">2026城投年中报数据复盘：繁荣的B面</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:3%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">6</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-23</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">47亿砸进一个片区更新项目，出租率只有41%，这账怎么算？</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#f59e0b">● 城市更新</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:15%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">31</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-22</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">拆了卖地，还是改了运营？城中村改造新逻辑</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#f59e0b">● 城市更新</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:1%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">3</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-21</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#8b5cf6">● REITs与新资产</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:1%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">3</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-18</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">900万拍综艺收益8600元：国企资产为什么总在“打水漂”</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:10%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">20</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-17</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">产业园以房养园：算完账发现这事还是要靠补贴</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:1%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">2</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-16</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:9%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">18</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-15</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">产业园招商为什么总完不成：不是条件差，是没有招商体系</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:11%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">23</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-14</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">城投债·展期不是躺平，是战术性收缩</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:1%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">3</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-13</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:17%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">34</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-11</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#10b981">● 保租房</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:4%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">9</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-10</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">城投到底能不能当LP？我见过最诚实的算账</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:11%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">22</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-08</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">城投选运营商的尽调清单：怎么识破PPT里的水分</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:10%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">21</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-07</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">城投做轻资产运营，我见过最冤的一次合规整改</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:9%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">19</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-03</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#10b981">● 保租房</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:100%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">197</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-02</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">商改住动了真格，这次比以往任何一次都具体</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#94a3b8">● 其他</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:8%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">17</div>
+      </div>
+      <div class="flex items-center gap-3 p-2.5 hover:bg-slate-50 rounded-lg">
+        <div class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-01</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm text-slate-800 truncate">[湘]城投收商品房作保障房，这次真要下场了</div>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="text-xs font-bold" style="color:#ef4444">● 城投转型</span>
+            <div class="flex-1 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-blue-400 to-indigo-500" style="width:11%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="text-base font-black text-slate-700 w-12 text-right flex-shrink-0">23</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本月诊断 -->
+  <div class="bg-amber-50 border-l-4 border-amber-500 rounded-r-2xl p-5">
+    <h3 class="font-black text-amber-800 mb-2">💡 本月诊断</h3>
+    <p class="text-sm text-slate-700">7月截至22日已发17篇，总阅读364、篇均21.4，相比5月峰值篇均390差距悬殊。
+    主要流量来源是<span class="font-bold text-amber-700">公众号消息</span>（约200+），朋友圈/推荐流量已极少。
+    限流影响仍在持续，需继续观察后续文章数据是否回升。</p>
+  </div>
+</div>
+
+
+
+<!-- TAB 3: 历史全榜 -->
+<div id="tab-history" class="tab-content">
+
+  <!-- 截止目前本年度统计 -->
+  <div class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl shadow-md p-5 mb-6">
+    <h3 class="text-lg font-black mb-2">📊 截止目前本年度统计（2026.01.01 ~ 2026.07.22）</h3>
+    <div class="grid grid-cols-4 gap-4">
+      <div><div class="text-xs opacity-90">累计发布</div><div class="text-2xl font-black">96篇</div></div>
+      <div><div class="text-xs opacity-90">累计阅读</div><div class="text-2xl font-black">17,507</div></div>
+      <div><div class="text-xs opacity-90">篇均阅读</div><div class="text-2xl font-black">182.4</div></div>
+      <div><div class="text-xs opacity-90">最高单篇</div><div class="text-2xl font-black">1457</div></div>
+    </div>
+  </div>
+
+  <!-- 两个TOP10 -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <!-- TOP10 全统计口径 -->
+    <div class="bg-white rounded-2xl shadow-md p-5">
+      <h3 class="font-black text-slate-800 mb-3 flex items-center gap-2">
+        <span class="bg-slate-700 text-white text-xs px-2 py-0.5 rounded">全口径</span>
+        🔥 全统计口径TOP10（全部历史）
+      </h3>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center">🥇</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div>
+            <div class="text-xs text-slate-500">2026-05-28 · <span style="color:#f59e0b" class="font-bold">● 城市更新</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1457</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center">🥈</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">「保租房」光靠租金活不下去，但增值服务也不是万能药</div>
+            <div class="text-xs text-slate-500">2026-10-03 · <span style="color:#10b981" class="font-bold">● 保租房</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1385</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center">🥉</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</div>
+            <div class="text-xs text-slate-500">2026-05-20 · <span style="color:#ec4899" class="font-bold">● 委托运营</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1359</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center"><span class="bg-slate-200 text-slate-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">4</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">委托运营合同怎么签：三个条款不写进去，后面全是坑</div>
+            <div class="text-xs text-slate-500">2026-05-15 · <span style="color:#ec4899" class="font-bold">● 委托运营</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1325</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center"><span class="bg-slate-200 text-slate-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">5</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">保障房运营的三个生死线：空置率、租金差、运营成本</div>
+            <div class="text-xs text-slate-500">2026-05-31 · <span style="color:#94a3b8" class="font-bold">● 其他</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1154</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center"><span class="bg-slate-200 text-slate-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">6</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div>
+            <div class="text-xs text-slate-500">2026-05-25 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1153</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center"><span class="bg-slate-200 text-slate-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">7</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">央妈下发的“银发〔2026〕171号”：「长租房」租赁企业终于不再是隐形人</div>
+            <div class="text-xs text-slate-500">2026-10-13 · <span style="color:#10b981" class="font-bold">● 保租房</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1127</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center"><span class="bg-slate-200 text-slate-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">8</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">某城投园区从"烂尾"到"满租"，三年复盘</div>
+            <div class="text-xs text-slate-500">2026-05-17 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1090</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center"><span class="bg-slate-200 text-slate-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">9</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div>
+            <div class="text-xs text-slate-500">2026-05-27 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1042</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-slate-50 rounded">
+          <span class="w-6 text-center"><span class="bg-slate-200 text-slate-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">10</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div>
+            <div class="text-xs text-slate-500">2026-05-23 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-indigo-600">1031</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP10 全年口径 -->
+    <div class="bg-white rounded-2xl shadow-md p-5">
+      <h3 class="font-black text-slate-800 mb-3 flex items-center gap-2">
+        <span class="bg-emerald-600 text-white text-xs px-2 py-0.5 rounded">2026</span>
+        🏆 全年口径TOP10（仅2026年）
+      </h3>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center">🥇</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</div>
+            <div class="text-xs text-slate-500">2026-05-28 · <span style="color:#f59e0b" class="font-bold">● 城市更新</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1457</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center">🥈</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">「保租房」光靠租金活不下去，但增值服务也不是万能药</div>
+            <div class="text-xs text-slate-500">2026-10-03 · <span style="color:#10b981" class="font-bold">● 保租房</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1385</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center">🥉</span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</div>
+            <div class="text-xs text-slate-500">2026-05-20 · <span style="color:#ec4899" class="font-bold">● 委托运营</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1359</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">4</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">委托运营合同怎么签：三个条款不写进去，后面全是坑</div>
+            <div class="text-xs text-slate-500">2026-05-15 · <span style="color:#ec4899" class="font-bold">● 委托运营</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1325</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">5</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">保障房运营的三个生死线：空置率、租金差、运营成本</div>
+            <div class="text-xs text-slate-500">2026-05-31 · <span style="color:#94a3b8" class="font-bold">● 其他</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1154</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">6</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</div>
+            <div class="text-xs text-slate-500">2026-05-25 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1153</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">7</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">央妈下发的“银发〔2026〕171号”：「长租房」租赁企业终于不再是隐形人</div>
+            <div class="text-xs text-slate-500">2026-10-13 · <span style="color:#10b981" class="font-bold">● 保租房</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1127</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">8</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">某城投园区从"烂尾"到"满租"，三年复盘</div>
+            <div class="text-xs text-slate-500">2026-05-17 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1090</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">9</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</div>
+            <div class="text-xs text-slate-500">2026-05-27 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1042</span>
+        </div>
+        <div class="flex items-center gap-2 p-2 hover:bg-emerald-50 rounded">
+          <span class="w-6 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs rounded-full w-5 h-5 inline-flex items-center justify-center font-bold">10</span></span>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm text-slate-800 truncate">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</div>
+            <div class="text-xs text-slate-500">2026-05-23 · <span style="color:#ef4444" class="font-bold">● 城投转型</span></div>
+          </div>
+          <span class="text-sm font-black text-emerald-600">1031</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 月度细分 -->
+  <div class="bg-white rounded-2xl shadow-md p-5 mb-6">
+    <h3 class="font-black text-slate-800 mb-3">📅 月度细分（2026年）</h3>
+    <div class="grid grid-cols-3 lg:grid-cols-7 gap-2">
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-01</div>
+        <div class="text-lg font-black text-slate-700">1</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">7</div>
+        <div class="text-xs text-slate-400">篇均7.0</div>
+        
+      </div>
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-02</div>
+        <div class="text-lg font-black text-slate-700">4</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">33</div>
+        <div class="text-xs text-slate-400">篇均8.2</div>
+        
+      </div>
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-04</div>
+        <div class="text-lg font-black text-slate-700">9</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">60</div>
+        <div class="text-xs text-slate-400">篇均6.7</div>
+        
+      </div>
+      <div class="bg-gradient-to-b from-red-100 to-red-200 border-2 border-red-400 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-05</div>
+        <div class="text-lg font-black text-slate-700">24</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">11,335</div>
+        <div class="text-xs text-slate-400">篇均472.3</div>
+        <div class='text-xs text-red-600 font-bold mt-1'>峰值</div>
+      </div>
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-06</div>
+        <div class="text-lg font-black text-slate-700">23</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">804</div>
+        <div class="text-xs text-slate-400">篇均35.0</div>
+        
+      </div>
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-07</div>
+        <div class="text-lg font-black text-slate-700">19</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">520</div>
+        <div class="text-xs text-slate-400">篇均27.4</div>
+        
+      </div>
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-08</div>
+        <div class="text-lg font-black text-slate-700">3</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">63</div>
+        <div class="text-xs text-slate-400">篇均21.0</div>
+        
+      </div>
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-09</div>
+        <div class="text-lg font-black text-slate-700">6</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">637</div>
+        <div class="text-xs text-slate-400">篇均106.2</div>
+        
+      </div>
+      <div class="bg-slate-50 rounded-xl p-2 text-center">
+        <div class="text-xs text-slate-500 font-bold">2026-10</div>
+        <div class="text-lg font-black text-slate-700">7</div>
+        <div class="text-xs text-slate-500">篇</div>
+        <div class="mt-1 text-sm font-black text-indigo-600">4,048</div>
+        <div class="text-xs text-slate-400">篇均578.3</div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- 全部文章（从新到旧） -->
+  <div class="bg-white rounded-2xl shadow-md p-5">
+    <h3 class="font-black text-slate-800 mb-3">📜 全部历史文章（从新到旧，共118篇）</h3>
+    <div class="space-y-1 max-h-[600px] overflow-y-auto pr-2">
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-10-13</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">央妈下发的“银发〔2026〕171号”：「长租房」租赁企业终于不再是隐形人</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1127</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-10-11</span>
+        <span class="text-xs font-bold" style="color:#ec4899">委托运营</span>
+        <span class="flex-1 text-slate-800 truncate">「大代建」的账本，能算得过来吗？我拿长沙五一路上的一栋老破小算了三天</span>
+        <span class="font-bold text-slate-700 w-10 text-right">87</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-10-09</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">上海商办、公寓土地费用续期：补缴7折地价，算完账我劝你别急着签</span>
+        <span class="font-bold text-slate-700 w-10 text-right">627</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-10-07</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">无锡某园区300亩工业用地，压了8年，终于等来政策，我为什么劝他赶紧「出货」？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">527</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-10-05</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">「保租房REITs申报指南」—我见过90%的项目死在第一关</span>
+        <span class="font-bold text-slate-700 w-10 text-right">275</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-10-03</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">「保租房」光靠租金活不下去，但增值服务也不是万能药</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1385</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-10-01</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">聪明的城投，已经在用补助资金做杠杆，撬动代建方对赌承诺</span>
+        <span class="font-bold text-slate-700 w-10 text-right">20</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-09-30</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投总部和城投资产部想要的东西根本不是一回事，代建方进来也不知道该听谁的</span>
+        <span class="font-bold text-slate-700 w-10 text-right">10</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-09-29</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">📢 公众号更名公告</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-09-28</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投以为自己是在求人，其实代建方也在求城投</span>
+        <span class="font-bold text-slate-700 w-10 text-right">129</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-09-26</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投最缺的不是钱，是一个能帮它把资产REITs化的“代建方”</span>
+        <span class="font-bold text-slate-700 w-10 text-right">161</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-09-24</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">房地产止跌回稳，对城投手里的存量资产意味着什么——我判断分水岭已经出现</span>
+        <span class="font-bold text-slate-700 w-10 text-right">137</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-09-22</span>
+        <span class="text-xs font-bold" style="color:#f59e0b">城市更新</span>
+        <span class="flex-1 text-slate-800 truncate">城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力</span>
+        <span class="font-bold text-slate-700 w-10 text-right">194</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-08-14</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">老厂房改算力，真有那么赚钱？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">33</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-08-04</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">Costco/山姆代购仓：园区的另类招商</span>
+        <span class="font-bold text-slate-700 w-10 text-right">19</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-08-02</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">厦门"5年5折租房"出台一个月——我越看越觉得：这事不是补贴，是城市的"人才金融工具"</span>
+        <span class="font-bold text-slate-700 w-10 text-right">11</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-31</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">接手一个空置率67%的产业园，他前30天做的5个错决策</span>
+        <span class="font-bold text-slate-700 w-10 text-right">36</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-29</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">那个闲置校舍，城投想盘，教育局不放手，财政局不出钱</span>
+        <span class="font-bold text-slate-700 w-10 text-right">33</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-27</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">2026城投年中报数据复盘：繁荣的B面</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-23</span>
+        <span class="text-xs font-bold" style="color:#f59e0b">城市更新</span>
+        <span class="flex-1 text-slate-800 truncate">47亿砸进一个片区更新项目，出租率只有41%，这账怎么算？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">31</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-22</span>
+        <span class="text-xs font-bold" style="color:#f59e0b">城市更新</span>
+        <span class="flex-1 text-slate-800 truncate">拆了卖地，还是改了运营？城中村改造新逻辑</span>
+        <span class="font-bold text-slate-700 w-10 text-right">3</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-21</span>
+        <span class="text-xs font-bold" style="color:#8b5cf6">REITs与新资产</span>
+        <span class="flex-1 text-slate-800 truncate">浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚</span>
+        <span class="font-bold text-slate-700 w-10 text-right">3</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-18</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">900万拍综艺收益8600元：国企资产为什么总在“打水漂”</span>
+        <span class="font-bold text-slate-700 w-10 text-right">20</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-17</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">产业园以房养园：算完账发现这事还是要靠补贴</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-16</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的</span>
+        <span class="font-bold text-slate-700 w-10 text-right">18</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-15</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">产业园招商为什么总完不成：不是条件差，是没有招商体系</span>
+        <span class="font-bold text-slate-700 w-10 text-right">23</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-14</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投债·展期不是躺平，是战术性收缩</span>
+        <span class="font-bold text-slate-700 w-10 text-right">3</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-13</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点</span>
+        <span class="font-bold text-slate-700 w-10 text-right">34</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-11</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</span>
+        <span class="font-bold text-slate-700 w-10 text-right">9</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-10</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投到底能不能当LP？我见过最诚实的算账</span>
+        <span class="font-bold text-slate-700 w-10 text-right">22</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-08</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投选运营商的尽调清单：怎么识破PPT里的水分</span>
+        <span class="font-bold text-slate-700 w-10 text-right">21</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-07</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投做轻资产运营，我见过最冤的一次合规整改</span>
+        <span class="font-bold text-slate-700 w-10 text-right">19</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-03</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪</span>
+        <span class="font-bold text-slate-700 w-10 text-right">197</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-02</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">商改住动了真格，这次比以往任何一次都具体</span>
+        <span class="font-bold text-slate-700 w-10 text-right">17</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-07-01</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">[湘]城投收商品房作保障房，这次真要下场了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">23</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-30</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">电竞酒店：城投公寓的00后新生意</span>
+        <span class="font-bold text-slate-700 w-10 text-right">26</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-29</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账</span>
+        <span class="font-bold text-slate-700 w-10 text-right">23</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-22</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">卖园区：5000万卖出去了，1.2亿的血亏是怎么漏掉的？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">25</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-21</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">45</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-20</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">35万亿十五五规划落地：城投手里有哪些还没被讨论的机会？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">13</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-19</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投做能源托管，本质上是一场圈地运动——圈的是用电用户</span>
+        <span class="font-bold text-slate-700 w-10 text-right">16</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-18</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">商办批量改公寓：一场豪赌，正在拉开差距</span>
+        <span class="font-bold text-slate-700 w-10 text-right">31</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-16</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">经营性债务来袭：那120亿的债转股是怎么谈下来的</span>
+        <span class="font-bold text-slate-700 w-10 text-right">16</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-15</span>
+        <span class="text-xs font-bold" style="color:#ec4899">委托运营</span>
+        <span class="flex-1 text-slate-800 truncate">“代建、代运营”的尽头，是自己下场做生意</span>
+        <span class="font-bold text-slate-700 w-10 text-right">36</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-14</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">园区的“流量”金矿，城投只挖了1%</span>
+        <span class="font-bold text-slate-700 w-10 text-right">36</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-13</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">「六张网」7万亿砸下来，城投能接住哪一张？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">23</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-12</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投资产盘活：五个坑，踩了三个就翻不了身</span>
+        <span class="font-bold text-slate-700 w-10 text-right">32</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-11</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">13号文落地一个月，城投的三笔账怎么算？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">27</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-10</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">产业园运营：三种模式，有的城投算完账就放弃了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">66</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-09</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切</span>
+        <span class="font-bold text-slate-700 w-10 text-right">60</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-08</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">EOD 真实案例：某长三角地市 14 亿生态项目，3 年回本怎么算的</span>
+        <span class="font-bold text-slate-700 w-10 text-right">33</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-07</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">13号文落地一个月：城投被剥马甲后，还有几条活路</span>
+        <span class="font-bold text-slate-700 w-10 text-right">74</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-06</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">"35%"上缴大棒：国企利润上交新规后，城投还剩多少肉？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">20</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-05</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">停车场运营：我见过最狠的算账，有城投月收38万还亏60万</span>
+        <span class="font-bold text-slate-700 w-10 text-right">81</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-04</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">帮城投做REITs预审材料，我总结了5个被拒原因，第3个最不应该</span>
+        <span class="font-bold text-slate-700 w-10 text-right">28</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-03</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">两业融合三年：城投的钱投进去了，效果怎么样？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">23</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-02</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">工业上楼：城投跟不跟？算完这笔账，答案清楚了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">40</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-06-01</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">招商率卡在60%，问题不在招商——城投园区最常见的那个第一个错</span>
+        <span class="font-bold text-slate-700 w-10 text-right">30</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-31</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">保障房运营的三个生死线：空置率、租金差、运营成本</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1154</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-30</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">“算力”这趟车，城投上了到底是乘客还是燃料</span>
+        <span class="font-bold text-slate-700 w-10 text-right">59</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-28</span>
+        <span class="text-xs font-bold" style="color:#f59e0b">城市更新</span>
+        <span class="flex-1 text-slate-800 truncate">城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1457</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-27</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1042</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-25</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1153</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-24</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">144亿收入，4.5%利润率：城投年报最薄利的一幕</span>
+        <span class="font-bold text-slate-700 w-10 text-right">10</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-23</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1031</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-22</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">曲江撤销管委会：过多少文旅城投，死在这条路上</span>
+        <span class="font-bold text-slate-700 w-10 text-right">22</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-21</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">保租房定价：租金怎么定才不踩红线？一套算法模型</span>
+        <span class="font-bold text-slate-700 w-10 text-right">17</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-20</span>
+        <span class="text-xs font-bold" style="color:#ec4899">委托运营</span>
+        <span class="flex-1 text-slate-800 truncate">委托运营3年后，租户续约率从40%提到78%：我做对了什么？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1359</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-19</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">产业园同质化：100个园区99个长得一样，凭什么选你？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">322</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-19</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">某地级市城投"委托运营"3年后：500万教训换来的复盘</span>
+        <span class="font-bold text-slate-700 w-10 text-right">52</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-18</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">园区轻资产运营：如何让入驻企业"留下来、多消费"？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">982</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-17</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">某城投园区从"烂尾"到"满租"，三年复盘</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1090</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-16</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">某地级市城投：如何用"委托运营"撬动民营资本</span>
+        <span class="font-bold text-slate-700 w-10 text-right">26</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-15</span>
+        <span class="text-xs font-bold" style="color:#ec4899">委托运营</span>
+        <span class="flex-1 text-slate-800 truncate">委托运营合同怎么签：三个条款不写进去，后面全是坑</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1325</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-14</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">跟政府谈了100次：我发现有1条规矩，破了就全盘皆输</span>
+        <span class="font-bold text-slate-700 w-10 text-right">7</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-13</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">3.6亿平米烂尾土地，城投最后的底牌快没了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-12</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">80万亿资产睡在账上：城投守着金矿，却挣扎在温饱问题里</span>
+        <span class="font-bold text-slate-700 w-10 text-right">9</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-11</span>
+        <span class="text-xs font-bold" style="color:#8b5cf6">REITs与新资产</span>
+        <span class="flex-1 text-slate-800 truncate">REITs/ABS/委托运营：三条路选错一条，白干十年</span>
+        <span class="font-bold text-slate-700 w-10 text-right">13</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-10</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">国企利润上交中央：城投又得多掏多少钱？算完惊了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">5</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-06</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">长沙保障房改造：领导算完账当场沉默了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">186</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-05</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">土储专项债重启：有人已经拿到钱了，你还在等什么？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-05-02</span>
+        <span class="text-xs font-bold" style="color:#3b82f6">产业园运营</span>
+        <span class="flex-1 text-slate-800 truncate">为什么你的园区招了三年还招不满</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-30</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">三资盘活：湖北安徽模式，对其他城投有什么启发</span>
+        <span class="font-bold text-slate-700 w-10 text-right">9</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-29</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">政府资产盘活的真相：不是没钱，是没人敢担事</span>
+        <span class="font-bold text-slate-700 w-10 text-right">3</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-28</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投轻资产运营，你可能连第一步就走错了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">14</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-27</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">化债后半场的城投融资：哪些路通了，哪些路堵了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-26</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">城投年报里的"增收不增利"，到底什么意思</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-25</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">政府资产运维的钱，都花在哪里了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">4</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-24</span>
+        <span class="text-xs font-bold" style="color:#f59e0b">城市更新</span>
+        <span class="flex-1 text-slate-800 truncate">REITs扩围：城市更新和商业楼宇，这次真的能上市了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">9</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-23</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">化债进入"主动化债"时代：各地的债务高风险地区，现在都怎么样了</span>
+        <span class="font-bold text-slate-700 w-10 text-right">7</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-04-13</span>
+        <span class="text-xs font-bold" style="color:#ef4444">城投转型</span>
+        <span class="flex-1 text-slate-800 truncate">2026年政府资产盘活：为什么"轻资产模式"才是城投转型的救命稻草？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-02-28</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">【内部整理】保租房投资决策“秘籍”：2大模式优劣分析+可套用测算模型，直接抄作业！</span>
+        <span class="font-bold text-slate-700 w-10 text-right">14</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-02-20</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">轻骑逐火，盘活生金｜「轻资运营局」2026新年寄语 & 年度内容规划</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-02-16</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">🧨 岁序更新，金马迎春</span>
+        <span class="font-bold text-slate-700 w-10 text-right">5</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-02-05</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">上海的“老破小”，最终会被谁“买断”？答案将影响你未来10年的财富！</span>
+        <span class="font-bold text-slate-700 w-10 text-right">8</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded font-bold">2026</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2026-01-16</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！</span>
+        <span class="font-bold text-slate-700 w-10 text-right">7</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-12-20</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">关于印发《长沙市城镇房屋结构安全体检技术指南（试行）》的通知_长住建发[2025]57号</span>
+        <span class="font-bold text-slate-700 w-10 text-right">10</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-12-16</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">别只盯着学区房了！湖南“养老新赛道”官宣，未来5年，城市里最值钱的不是房，是这个……</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-12-12</span>
+        <span class="text-xs font-bold" style="color:#f59e0b">城市更新</span>
+        <span class="flex-1 text-slate-800 truncate">湖南省人民政府办公厅关于持续推进城市更新行动的实施意见 （湘政办发〔2025〕49号）</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-12-01</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">2026年巨变！保障性租赁住房主力房源，原来是它！</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-11-23</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">重磅！长沙大批“国资”入场，“十五五”黄金窗口期来了！</span>
+        <span class="font-bold text-slate-700 w-10 text-right">4</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-11-14</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">黄金地段“老破小”的生死局：是彻底倒下，还是即将“焕发二春”？</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-11-05</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">十五五规划下，保障性租赁住房的“破圈”与“升级”</span>
+        <span class="font-bold text-slate-700 w-10 text-right">3</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-11-01</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">812号令正式生效！租赁住房想‘活下来’，这3道‘报建生死关’必须闯——尤其是消防验收</span>
+        <span class="font-bold text-slate-700 w-10 text-right">51</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-11-01</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">“人工智能+”时代，轻资产如何“智”取保障性租赁住房新蓝海？——一位运营者的深度思考</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-10-27</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">长沙国有老资产变身“青年社区”：一场政策与市场的双赢实验</span>
+        <span class="font-bold text-slate-700 w-10 text-right">33</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-10-25</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单</span>
+        <span class="font-bold text-slate-700 w-10 text-right">8</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-10-25</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">湘江新区保障性租赁住房项目2024年12月公示名单</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-10-25</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">湘江新区保障性租赁住房项目2025年8月公示名单</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-10-16</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">湖南省人民政府办公厅关于加快湖南省公共数据资源开发利用的实施意见</span>
+        <span class="font-bold text-slate-700 w-10 text-right">8</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-10-08</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">长沙市住房和城乡建设局等12部门 关于进一步优化房地产发展措施的通知</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-10-08</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">长沙市住房和城乡建设局 关于加快推进住宅小区智慧物业建设的通知</span>
+        <span class="font-bold text-slate-700 w-10 text-right">4</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-09-30</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">喜迎中秋，欢度国庆！</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-09-25</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">《长沙市中央财政支持住房租赁市场发展试点资金分配方案》的通知  长财综[2020]2号</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-09-25</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">长沙市保障性租赁住房项目申请认定申报实施细则  (长住建发〔2025〕10号文件)</span>
+        <span class="font-bold text-slate-700 w-10 text-right">6</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-09-25</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知</span>
+        <span class="font-bold text-slate-700 w-10 text-right">2</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-09-25</span>
+        <span class="text-xs font-bold" style="color:#94a3b8">其他</span>
+        <span class="flex-1 text-slate-800 truncate">长沙市住房租赁合同范本（2025版）</span>
+        <span class="font-bold text-slate-700 w-10 text-right">9</span>
+      </div>
+      <div class="flex items-center gap-2 p-1.5 hover:bg-slate-50 rounded text-sm">
+        <span class="text-xs bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded font-bold">2025</span>
+        <span class="text-xs text-slate-500 w-20 flex-shrink-0">2025-09-25</span>
+        <span class="text-xs font-bold" style="color:#10b981">保租房</span>
+        <span class="flex-1 text-slate-800 truncate">关于组织申报住房租赁试点企业和租赁住房奖补项目的通知</span>
+        <span class="font-bold text-slate-700 w-10 text-right">1</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- TAB 4: 流量来源 -->
+<div id="tab-traffic" class="tab-content">
+
+  <!-- 年度统计 -->
+  <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl shadow-md p-5 mb-6">
+    <h3 class="text-lg font-black mb-3">📊 截止目前本年度流量来源统计（2026年）</h3>
+    <div class="text-sm opacity-90 mb-3">总阅读 17,472（含渠道交叉去重前的总和）</div>
+    <div class="space-y-2">
+      <div class="bg-white/20 rounded-lg p-2.5">
+        <div class="flex items-center justify-between text-sm mb-1">
+          <span class="font-bold">推荐</span>
+          <span class="font-black">13,363 · 76.5%</span>
+        </div>
+        <div class="bg-white/30 rounded-full h-2 overflow-hidden">
+          <div class="bg-white h-full" style="width:100%"></div>
+        </div>
+      </div>
+      <div class="bg-white/20 rounded-lg p-2.5">
+        <div class="flex items-center justify-between text-sm mb-1">
+          <span class="font-bold">公众号消息</span>
+          <span class="font-black">1,383 · 7.9%</span>
+        </div>
+        <div class="bg-white/30 rounded-full h-2 overflow-hidden">
+          <div class="bg-white h-full" style="width:10%"></div>
+        </div>
+      </div>
+      <div class="bg-white/20 rounded-lg p-2.5">
+        <div class="flex items-center justify-between text-sm mb-1">
+          <span class="font-bold">聊天会话</span>
+          <span class="font-black">1,247 · 7.1%</span>
+        </div>
+        <div class="bg-white/30 rounded-full h-2 overflow-hidden">
+          <div class="bg-white h-full" style="width:9%"></div>
+        </div>
+      </div>
+      <div class="bg-white/20 rounded-lg p-2.5">
+        <div class="flex items-center justify-between text-sm mb-1">
+          <span class="font-bold">朋友圈</span>
+          <span class="font-black">733 · 4.2%</span>
+        </div>
+        <div class="bg-white/30 rounded-full h-2 overflow-hidden">
+          <div class="bg-white h-full" style="width:5%"></div>
+        </div>
+      </div>
+      <div class="bg-white/20 rounded-lg p-2.5">
+        <div class="flex items-center justify-between text-sm mb-1">
+          <span class="font-bold">公众号主页</span>
+          <span class="font-black">370 · 2.1%</span>
+        </div>
+        <div class="bg-white/30 rounded-full h-2 overflow-hidden">
+          <div class="bg-white h-full" style="width:2%"></div>
+        </div>
+      </div>
+      <div class="bg-white/20 rounded-lg p-2.5">
+        <div class="flex items-center justify-between text-sm mb-1">
+          <span class="font-bold">搜一搜</span>
+          <span class="font-black">191 · 1.1%</span>
+        </div>
+        <div class="bg-white/30 rounded-full h-2 overflow-hidden">
+          <div class="bg-white h-full" style="width:1%"></div>
+        </div>
+      </div>
+      <div class="bg-white/20 rounded-lg p-2.5">
+        <div class="flex items-center justify-between text-sm mb-1">
+          <span class="font-bold">其他</span>
+          <span class="font-black">185 · 1.1%</span>
+        </div>
+        <div class="bg-white/30 rounded-full h-2 overflow-hidden">
+          <div class="bg-white h-full" style="width:1%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 月度细分 -->
+  <h3 class="text-lg font-black text-slate-800 mb-3">📅 月度细分（2026年）</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-01</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总6</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:50.0%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">3</span>
+          <span class="w-10 text-right text-slate-500">50.0%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:33.3%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">2</span>
+          <span class="w-10 text-right text-slate-500">33.3%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:16.7%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">1</span>
+          <span class="w-10 text-right text-slate-500">16.7%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-02</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总36</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:38.9%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">14</span>
+          <span class="w-10 text-right text-slate-500">38.9%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:30.6%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">11</span>
+          <span class="w-10 text-right text-slate-500">30.6%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:16.7%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">6</span>
+          <span class="w-10 text-right text-slate-500">16.7%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:11.1%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">4</span>
+          <span class="w-10 text-right text-slate-500">11.1%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">聊天会话</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:2.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">1</span>
+          <span class="w-10 text-right text-slate-500">2.8%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-04</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总61</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:29.5%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">18</span>
+          <span class="w-10 text-right text-slate-500">29.5%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">聊天会话</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:19.7%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">12</span>
+          <span class="w-10 text-right text-slate-500">19.7%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:18.0%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">11</span>
+          <span class="w-10 text-right text-slate-500">18.0%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:13.1%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">8</span>
+          <span class="w-10 text-right text-slate-500">13.1%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:9.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">6</span>
+          <span class="w-10 text-right text-slate-500">9.8%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">推荐</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:9.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">6</span>
+          <span class="w-10 text-right text-slate-500">9.8%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-05</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总11,097</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">推荐</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:82.4%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">9143</span>
+          <span class="w-10 text-right text-slate-500">82.4%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">聊天会话</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:7.7%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">858</span>
+          <span class="w-10 text-right text-slate-500">7.7%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">朋友圈</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:4.6%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">506</span>
+          <span class="w-10 text-right text-slate-500">4.6%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:1.9%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">216</span>
+          <span class="w-10 text-right text-slate-500">1.9%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:1.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">199</span>
+          <span class="w-10 text-right text-slate-500">1.8%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:1.0%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">114</span>
+          <span class="w-10 text-right text-slate-500">1.0%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:0.5%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">61</span>
+          <span class="w-10 text-right text-slate-500">0.5%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-06</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总979</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:76.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">752</span>
+          <span class="w-10 text-right text-slate-500">76.8%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">朋友圈</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:13.9%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">136</span>
+          <span class="w-10 text-right text-slate-500">13.9%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:5.4%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">53</span>
+          <span class="w-10 text-right text-slate-500">5.4%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:2.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">27</span>
+          <span class="w-10 text-right text-slate-500">2.8%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:1.1%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">11</span>
+          <span class="w-10 text-right text-slate-500">1.1%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-07</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总475</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">聊天会话</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:40.6%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">193</span>
+          <span class="w-10 text-right text-slate-500">40.6%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:40.2%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">191</span>
+          <span class="w-10 text-right text-slate-500">40.2%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:7.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">37</span>
+          <span class="w-10 text-right text-slate-500">7.8%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:6.1%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">29</span>
+          <span class="w-10 text-right text-slate-500">6.1%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">朋友圈</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:4.2%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">20</span>
+          <span class="w-10 text-right text-slate-500">4.2%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:1.1%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">5</span>
+          <span class="w-10 text-right text-slate-500">1.1%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-08</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总76</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:82.9%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">63</span>
+          <span class="w-10 text-right text-slate-500">82.9%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:15.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">12</span>
+          <span class="w-10 text-right text-slate-500">15.8%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:1.3%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">1</span>
+          <span class="w-10 text-right text-slate-500">1.3%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-09</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总646</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">推荐</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:81.6%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">527</span>
+          <span class="w-10 text-right text-slate-500">81.6%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:8.2%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">53</span>
+          <span class="w-10 text-right text-slate-500">8.2%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">聊天会话</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:3.1%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">20</span>
+          <span class="w-10 text-right text-slate-500">3.1%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:3.1%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">20</span>
+          <span class="w-10 text-right text-slate-500">3.1%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">朋友圈</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:2.8%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">18</span>
+          <span class="w-10 text-right text-slate-500">2.8%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:0.9%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">6</span>
+          <span class="w-10 text-right text-slate-500">0.9%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:0.3%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">2</span>
+          <span class="w-10 text-right text-slate-500">0.3%</span>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h4 class="font-black text-slate-800">2026-10</h4>
+        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold">总4,096</span>
+      </div>
+      <div class="space-y-1.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">推荐</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:90.0%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">3687</span>
+          <span class="w-10 text-right text-slate-500">90.0%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">聊天会话</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:4.0%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">163</span>
+          <span class="w-10 text-right text-slate-500">4.0%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号消息</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:2.5%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">103</span>
+          <span class="w-10 text-right text-slate-500">2.5%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">朋友圈</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:1.3%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">53</span>
+          <span class="w-10 text-right text-slate-500">1.3%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">公众号主页</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:0.9%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">36</span>
+          <span class="w-10 text-right text-slate-500">0.9%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">其他</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:0.9%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">35</span>
+          <span class="w-10 text-right text-slate-500">0.9%</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-20 text-slate-600">搜一搜</span>
+          <div class="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
+            <div class="bg-blue-500 h-full" style="width:0.5%"></div>
+          </div>
+          <span class="w-12 text-right font-bold text-slate-700">19</span>
+          <span class="w-10 text-right text-slate-500">0.5%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 流量诊断 -->
+  <div class="bg-red-50 border-l-4 border-red-500 rounded-r-2xl p-5 mt-6">
+    <h3 class="font-black text-red-700 mb-2">🚨 流量来源诊断</h3>
+    <ul class="space-y-1 text-sm text-slate-700">
+      <li>• <span class="font-bold">5月爆款期</span>：<span class="text-emerald-700 font-bold">"推荐"渠道占比超70%</span>，单篇推荐可达1000+</li>
+      <li>• <span class="font-bold">6-7月限流期</span>：推荐渠道基本归零，<span class="text-red-700 font-bold">公众号消息占比85%+</span>，完全依赖私域</li>
+      <li>• <span class="font-bold">朋友圈</span>：5月单篇可达89次，7月几乎为零</li>
+      <li>• <span class="font-bold">搜一搜</span>：长尾流量较稳定（每月几十），是基础盘</li>
+    </ul>
+  </div>
+</div>
+
+
+
+<!-- TAB 5: 话题地图 -->
+<div id="tab-topic" class="tab-content">
+
+  <!-- 年度统计 -->
+  <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl shadow-md p-5 mb-6">
+    <h3 class="text-lg font-black mb-3">🗺️ 截止目前本年度话题地图（2026年）</h3>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div class="bg-white/20 rounded-xl p-3">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-3 h-3 rounded-full" style="background:#ef4444"></span>
+          <span class="font-bold text-sm">城投转型</span>
+        </div>
+        <div class="text-2xl font-black">49<span class="text-sm opacity-90 ml-1">篇</span></div>
+        <div class="text-xs opacity-90 mt-1">阅读5,781</div>
+      </div>
+      <div class="bg-white/20 rounded-xl p-3">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-3 h-3 rounded-full" style="background:#94a3b8"></span>
+          <span class="font-bold text-sm">其他</span>
+        </div>
+        <div class="text-2xl font-black">19<span class="text-sm opacity-90 ml-1">篇</span></div>
+        <div class="text-xs opacity-90 mt-1">阅读2,220</div>
+      </div>
+      <div class="bg-white/20 rounded-xl p-3">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-3 h-3 rounded-full" style="background:#3b82f6"></span>
+          <span class="font-bold text-sm">产业园运营</span>
+        </div>
+        <div class="text-2xl font-black">9<span class="text-sm opacity-90 ml-1">篇</span></div>
+        <div class="text-xs opacity-90 mt-1">阅读1,942</div>
+      </div>
+      <div class="bg-white/20 rounded-xl p-3">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-3 h-3 rounded-full" style="background:#10b981"></span>
+          <span class="font-bold text-sm">保租房</span>
+        </div>
+        <div class="text-2xl font-black">8<span class="text-sm opacity-90 ml-1">篇</span></div>
+        <div class="text-xs opacity-90 mt-1">阅读3,047</div>
+      </div>
+      <div class="bg-white/20 rounded-xl p-3">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-3 h-3 rounded-full" style="background:#f59e0b"></span>
+          <span class="font-bold text-sm">城市更新</span>
+        </div>
+        <div class="text-2xl font-black">5<span class="text-sm opacity-90 ml-1">篇</span></div>
+        <div class="text-xs opacity-90 mt-1">阅读1,694</div>
+      </div>
+      <div class="bg-white/20 rounded-xl p-3">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-3 h-3 rounded-full" style="background:#ec4899"></span>
+          <span class="font-bold text-sm">委托运营</span>
+        </div>
+        <div class="text-2xl font-black">4<span class="text-sm opacity-90 ml-1">篇</span></div>
+        <div class="text-xs opacity-90 mt-1">阅读2,807</div>
+      </div>
+      <div class="bg-white/20 rounded-xl p-3">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-3 h-3 rounded-full" style="background:#8b5cf6"></span>
+          <span class="font-bold text-sm">REITs与新资产</span>
+        </div>
+        <div class="text-2xl font-black">2<span class="text-sm opacity-90 ml-1">篇</span></div>
+        <div class="text-xs opacity-90 mt-1">阅读16</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 月度细分 -->
+  <h3 class="text-lg font-black text-slate-800 mb-3">📅 月度话题细分</h3>
+  <div class="space-y-4">
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-01</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">1篇 · 阅读7</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">1篇 · 7阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-02</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">4篇 · 阅读33</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">3篇 · 19阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#10b981;background:#10b98115">
+          <div class="text-xs font-bold" style="color:#10b981">● 保租房</div>
+          <div class="text-base font-black text-slate-800">1篇 · 14阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-04</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">9篇 · 阅读60</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ef4444;background:#ef444415">
+          <div class="text-xs font-bold" style="color:#ef4444">● 城投转型</div>
+          <div class="text-base font-black text-slate-800">6篇 · 44阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">2篇 · 7阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#f59e0b;background:#f59e0b15">
+          <div class="text-xs font-bold" style="color:#f59e0b">● 城市更新</div>
+          <div class="text-base font-black text-slate-800">1篇 · 9阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-05</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">24篇 · 阅读11,335</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ef4444;background:#ef444415">
+          <div class="text-xs font-bold" style="color:#ef4444">● 城投转型</div>
+          <div class="text-base font-black text-slate-800">12篇 · 4,501阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">4篇 · 1,353阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#3b82f6;background:#3b82f615">
+          <div class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</div>
+          <div class="text-base font-black text-slate-800">3篇 · 1,310阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ec4899;background:#ec489915">
+          <div class="text-xs font-bold" style="color:#ec4899">● 委托运营</div>
+          <div class="text-base font-black text-slate-800">2篇 · 2,684阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#8b5cf6;background:#8b5cf615">
+          <div class="text-xs font-bold" style="color:#8b5cf6">● REITs与新资产</div>
+          <div class="text-base font-black text-slate-800">1篇 · 13阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#10b981;background:#10b98115">
+          <div class="text-xs font-bold" style="color:#10b981">● 保租房</div>
+          <div class="text-base font-black text-slate-800">1篇 · 17阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#f59e0b;background:#f59e0b15">
+          <div class="text-xs font-bold" style="color:#f59e0b">● 城市更新</div>
+          <div class="text-base font-black text-slate-800">1篇 · 1,457阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-06</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">23篇 · 阅读804</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ef4444;background:#ef444415">
+          <div class="text-xs font-bold" style="color:#ef4444">● 城投转型</div>
+          <div class="text-base font-black text-slate-800">16篇 · 580阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">4篇 · 140阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ec4899;background:#ec489915">
+          <div class="text-xs font-bold" style="color:#ec4899">● 委托运营</div>
+          <div class="text-base font-black text-slate-800">1篇 · 36阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#3b82f6;background:#3b82f615">
+          <div class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</div>
+          <div class="text-base font-black text-slate-800">1篇 · 25阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#10b981;background:#10b98115">
+          <div class="text-xs font-bold" style="color:#10b981">● 保租房</div>
+          <div class="text-base font-black text-slate-800">1篇 · 23阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-07</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">19篇 · 阅读520</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ef4444;background:#ef444415">
+          <div class="text-xs font-bold" style="color:#ef4444">● 城投转型</div>
+          <div class="text-base font-black text-slate-800">10篇 · 199阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#3b82f6;background:#3b82f615">
+          <div class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</div>
+          <div class="text-base font-black text-slate-800">3篇 · 61阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#10b981;background:#10b98115">
+          <div class="text-xs font-bold" style="color:#10b981">● 保租房</div>
+          <div class="text-base font-black text-slate-800">2篇 · 206阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#f59e0b;background:#f59e0b15">
+          <div class="text-xs font-bold" style="color:#f59e0b">● 城市更新</div>
+          <div class="text-base font-black text-slate-800">2篇 · 34阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">1篇 · 17阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#8b5cf6;background:#8b5cf615">
+          <div class="text-xs font-bold" style="color:#8b5cf6">● REITs与新资产</div>
+          <div class="text-base font-black text-slate-800">1篇 · 3阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-08</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">3篇 · 阅读63</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">2篇 · 44阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#3b82f6;background:#3b82f615">
+          <div class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</div>
+          <div class="text-base font-black text-slate-800">1篇 · 19阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-09</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">6篇 · 阅读637</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ef4444;background:#ef444415">
+          <div class="text-xs font-bold" style="color:#ef4444">● 城投转型</div>
+          <div class="text-base font-black text-slate-800">4篇 · 437阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#f59e0b;background:#f59e0b15">
+          <div class="text-xs font-bold" style="color:#f59e0b">● 城市更新</div>
+          <div class="text-base font-black text-slate-800">1篇 · 194阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">1篇 · 6阅读</div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl shadow-md p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="font-black text-slate-800">2026-10</h4>
+        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">7篇 · 阅读4,048</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#10b981;background:#10b98115">
+          <div class="text-xs font-bold" style="color:#10b981">● 保租房</div>
+          <div class="text-base font-black text-slate-800">3篇 · 2,787阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ef4444;background:#ef444415">
+          <div class="text-xs font-bold" style="color:#ef4444">● 城投转型</div>
+          <div class="text-base font-black text-slate-800">1篇 · 20阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#3b82f6;background:#3b82f615">
+          <div class="text-xs font-bold" style="color:#3b82f6">● 产业园运营</div>
+          <div class="text-base font-black text-slate-800">1篇 · 527阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#94a3b8;background:#94a3b815">
+          <div class="text-xs font-bold" style="color:#94a3b8">● 其他</div>
+          <div class="text-base font-black text-slate-800">1篇 · 627阅读</div>
+        </div>
+        <div class="border-2 rounded-xl px-3 py-2" style="border-color:#ec4899;background:#ec489915">
+          <div class="text-xs font-bold" style="color:#ec4899">● 委托运营</div>
+          <div class="text-base font-black text-slate-800">1篇 · 87阅读</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 话题诊断 -->
+  <div class="bg-blue-50 border-l-4 border-blue-500 rounded-r-2xl p-5 mt-6">
+    <h3 class="font-black text-blue-700 mb-2">💡 话题分布诊断</h3>
+    <ul class="space-y-1 text-sm text-slate-700">
+      <li>• <span class="font-bold">城投转型</span>是绝对主力话题，2026年贡献近一半爆款</li>
+      <li>• <span class="font-bold">产业园运营</span>在5月爆发（29篇中含多篇园区招商/续约爆款）</li>
+      <li>• <span class="font-bold">保租房</span>内容占比稳定，但爆款率不高</li>
+      <li>• <span class="font-bold">城市更新</span>是隐藏冠军，TOP1爆款（1450阅读）属此赛道</li>
+      <li>• <span class="font-bold">委托运营</span>多篇进入TOP10，是高ROI话题</li>
+    </ul>
+  </div>
+</div>
+
+
+    <!-- FOOTER -->
+    <div class="mt-8 text-center text-xs text-slate-400 pb-4">
+      数据来源：微信公众号后台 · 统计口径：2026.01.01 ~ 2026.07.22 · 数据每週五同步
+    </div>
+
+  </div>
+
+  <script>
+    function showTab(id, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // 月度阅读趋势图
+    const ctx = document.getElementById('chartMonthlyTrend');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["2026-01", "2026-02", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09", "2026-10"],
+          datasets: [
+            {
+              label: '总阅读',
+              data: [7, 33, 60, 11335, 804, 520, 63, 637, 4048],
+              backgroundColor: 'rgba(79, 70, 229, 0.7)',
+              borderColor: 'rgba(79, 70, 229, 1)',
+              borderWidth: 2,
+              borderRadius: 8,
+              yAxisID: 'y'
+            },
+            {
+              label: '篇均',
+              data: [7.0, 8.2, 6.7, 472.3, 35.0, 27.4, 21.0, 106.2, 578.3],
+              type: 'line',
+              borderColor: 'rgba(239, 68, 68, 1)',
+              backgroundColor: 'rgba(239, 68, 68, 0.2)',
+              borderWidth: 3,
+              tension: 0.3,
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'top', labels: { font: { size: 12, weight: 'bold' } } }
+          },
+          scales: {
+            y: { type: 'linear', position: 'left', beginAtZero: true, title: { display: true, text: '总阅读' } },
+            y1: { type: 'linear', position: 'right', beginAtZero: true, title: { display: true, text: '篇均' }, grid: { drawOnChartArea: false } }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
