@@ -8,22 +8,20 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
-  body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; }
-  .card { background: #1e293b; border-radius: 12px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-  .tab-btn { padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-  .tab-btn.active { background: #4f46e5; color: white; }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
-  .kpi-card { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border: 1px solid #334155; }
-  table { width: 100%; border-collapse: collapse; }
-  th { background: #334155; padding: 10px 12px; text-align: left; font-size: 12px; color: #94a3b8; }
-  td { padding: 10px 12px; border-bottom: 1px solid #1e293b; font-size: 13px; }
-  tr:hover { background: #1e293b; }
+  body{font-family:Inter,sans-serif;background:#0f172a;color:#e2e8f0}
+  .card{background:#1e293b;border-radius:12px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+  .tab-btn{padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s}
+  .tab-btn.active{background:#4f46e5;color:#fff}
+  .tab-content{display:none}.tab-content.active{display:block}
+  .kpi-card{background:linear-gradient(135deg,#1e293b,#334155);border:1px solid #334155}
+  table{width:100%;border-collapse:collapse}
+  th{background:#334155;padding:10px 12px;text-align:left;font-size:12px;color:#94a3b8}
+  td{padding:10px 12px;border-bottom:1px solid #1e293b;font-size:13px}
+  tr:hover{background:#1e293b}
 </style>
 </head>
 <body class="min-h-screen p-6">
 
-<!-- HEADER -->
 <div class="max-w-7xl mx-auto mb-6">
   <div class="flex items-center justify-between">
     <div>
@@ -38,346 +36,224 @@
   </div>
 </div>
 
-<!-- KPI -->
 <div class="max-w-7xl mx-auto grid grid-cols-4 gap-4 mb-6">
-  <div class="kpi-card rounded-xl p-5">
-    <p class="text-slate-400 text-xs mb-1">本周</p>
-    <p class="text-2xl font-bold text-white">5 <span class="text-sm font-normal text-slate-400">篇</span></p>
-    <p class="text-indigo-400 text-lg font-semibold">59 阅读</p>
-    <p class="text-slate-500 text-xs">篇均 11.8</p>
-  </div>
-  <div class="kpi-card rounded-xl p-5">
-    <p class="text-slate-400 text-xs mb-1">本月</p>
-    <p class="text-2xl font-bold text-white">16 <span class="text-sm font-normal text-slate-400">篇</span></p>
-    <p class="text-indigo-400 text-lg font-semibold">445 阅读</p>
-    <p class="text-slate-500 text-xs">篇均 27.8</p>
-  </div>
-  <div class="kpi-card rounded-xl p-5">
-    <p class="text-slate-400 text-xs mb-1">本年</p>
-    <p class="text-2xl font-bold text-white">96 <span class="text-sm font-normal text-slate-400">篇</span></p>
-    <p class="text-indigo-400 text-lg font-semibold">17,507 阅读</p>
-    <p class="text-slate-500 text-xs">篇均 182.4</p>
-  </div>
-  <div class="kpi-card rounded-xl p-5">
-    <p class="text-slate-400 text-xs mb-1">历史合计</p>
-    <p class="text-2xl font-bold text-white">118 <span class="text-sm font-normal text-slate-400">篇</span></p>
-    <p class="text-emerald-400 text-lg font-semibold">17,669 阅读</p>
-    <p class="text-slate-500 text-xs">篇均 149.7</p>
-  </div>
+  <div class="kpi-card rounded-xl p-5"><p class="text-slate-400 text-xs mb-1">本周</p><p class="text-2xl font-bold text-white">5 <span class="text-sm font-normal text-slate-400">篇</span></p><p class="text-indigo-400 text-lg font-semibold">59 阅读</p><p class="text-slate-500 text-xs">篇均 11.8</p></div>
+  <div class="kpi-card rounded-xl p-5"><p class="text-slate-400 text-xs mb-1">本月</p><p class="text-2xl font-bold text-white">16 <span class="text-sm font-normal text-slate-400">篇</span></p><p class="text-indigo-400 text-lg font-semibold">445 阅读</p><p class="text-slate-500 text-xs">篇均 27.8</p></div>
+  <div class="kpi-card rounded-xl p-5"><p class="text-slate-400 text-xs mb-1">本年</p><p class="text-2xl font-bold text-white">96 <span class="text-sm font-normal text-slate-400">篇</span></p><p class="text-indigo-400 text-lg font-semibold">17,507 阅读</p><p class="text-slate-500 text-xs">篇均 182.4</p></div>
+  <div class="kpi-card rounded-xl p-5"><p class="text-slate-400 text-xs mb-1">历史合计</p><p class="text-2xl font-bold text-white">118 <span class="text-sm font-normal text-slate-400">篇</span></p><p class="text-emerald-400 text-lg font-semibold">17,669 阅读</p><p class="text-slate-500 text-xs">篇均 149.7</p></div>
 </div>
 
-<!-- TABS -->
 <div class="max-w-7xl mx-auto">
   <div class="flex gap-2 mb-4">
-    <button class="tab-btn active" onclick="showTab('kpi', this)">数据概览</button>
-    <button class="tab-btn" onclick="showTab('articles', this)">全部文章</button>
-    <button class="tab-btn" onclick="showTab('top', this)">TOP10</button>
+    <button class="tab-btn active" onclick="showTab('kpi',this)">数据概览</button>
+    <button class="tab-btn" onclick="showTab('articles',this)">全部文章</button>
+    <button class="tab-btn" onclick="showTab('top',this)">TOP10</button>
   </div>
 
-  <!-- TAB1: 数据概览 -->
   <div id="tab-kpi" class="tab-content active">
     <div class="grid grid-cols-2 gap-6">
-      <div class="card">
-        <h3 class="text-white font-semibold mb-4">月度阅读趋势</h3>
-        <canvas id="chartMonthlyTrend"></canvas>
-      </div>
-      <div class="card">
-        <h3 class="text-white font-semibold mb-4">渠道分布</h3>
-        <canvas id="chartSource"></canvas>
-      </div>
-      <div class="card">
-        <h3 class="text-white font-semibold mb-4">话题分布</h3>
-        <canvas id="chartTopic"></canvas>
-      </div>
-      <div class="card">
-        <h3 class="text-white font-semibold mb-4">话题×阅读</h3>
-        <canvas id="chartTopicReads"></canvas>
-      </div>
+      <div class="card"><h3 class="text-white font-semibold mb-4">月度阅读趋势</h3><canvas id="chartMonthlyTrend"></canvas></div>
+      <div class="card"><h3 class="text-white font-semibold mb-4">渠道分布</h3><canvas id="chartSource"></canvas></div>
+      <div class="card"><h3 class="text-white font-semibold mb-4">话题分布(篇数)</h3><canvas id="chartTopic"></canvas></div>
+      <div class="card"><h3 class="text-white font-semibold mb-4">话题×阅读</h3><canvas id="chartTopicReads"></canvas></div>
     </div>
   </div>
 
-  <!-- TAB2: 全部文章 -->
   <div id="tab-articles" class="tab-content">
-    <div class="card">
-      <table>
-        <thead>
-          <tr>
-            <th>日期</th><th>标题</th><th>赛道</th><th>阅读</th><th>篇均</th>
-          </tr>
-        </thead>
-        <tbody id="articlesTable"></tbody>
-      </table>
-    </div>
+    <div class="card"><table><thead><tr><th>日期</th><th>标题</th><th>赛道</th><th>阅读</th></tr></thead><tbody id="articlesTable"></tbody></table></div>
   </div>
 
-  <!-- TAB3: TOP10 -->
   <div id="tab-top" class="tab-content">
-    <div class="card">
-      <table>
-        <thead>
-          <tr><th>排名</th><th>日期</th><th>标题</th><th>赛道</th><th>阅读</th></tr>
-        </thead>
-        <tbody id="topTable"></tbody>
-      </table>
-    </div>
+    <div class="card"><table><thead><tr><th>排名</th><th>日期</th><th>标题</th><th>赛道</th><th>阅读</th></tr></thead><tbody id="topTable"></tbody></table></div>
   </div>
 </div>
 
 <script>
-function showTab(id, btn) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  btn.classList.add('active');
-}
+function showTab(id,btn){document.querySelectorAll(".tab-content").forEach(e=>e.classList.remove("active"));document.querySelectorAll(".tab-btn").forEach(e=>e.classList.remove("active"));document.getElementById("tab-"+id).classList.add("active");btn.classList.add("active")}
 
-// DATA
 const DATA = {
-  kpi: 5,59,11.8,31,
+  kpi: {"week": {"count": 5, "total_reads": 59, "avg_reads": 11.8, "max_reads": 31}, "month": {"count": 16, "total_reads": 445, "avg_reads": 27.8, "max_reads": 197}, "year": {"count": 96, "total_reads": 17507, "avg_reads": 182.4, "max_reads": 1457}, "history": {"count": 118, "total_reads": 17669, "avg_reads": 149.7, "max_reads": 1457}},
   monthly: [
-      { month: "2026-01", count: 1, reads: 7, avg: 7.0},
-      { month: "2026-02", count: 4, reads: 33, avg: 8.2},
-      { month: "2026-04", count: 9, reads: 60, avg: 6.7},
-      { month: "2026-05", count: 24, reads: 11335, avg: 472.3},
-      { month: "2026-06", count: 23, reads: 804, avg: 35.0},
-      { month: "2026-07", count: 19, reads: 520, avg: 27.4},
-      { month: "2026-08", count: 3, reads: 63, avg: 21.0},
-      { month: "2026-09", count: 6, reads: 637, avg: 106.2},
-      { month: "2026-10", count: 7, reads: 4048, avg: 578.3}
+      {"month": "2026-01", "count": 1, "reads": 7, "avg": 7.0},
+      {"month": "2026-02", "count": 4, "reads": 33, "avg": 8.2},
+      {"month": "2026-04", "count": 9, "reads": 60, "avg": 6.7},
+      {"month": "2026-05", "count": 24, "reads": 11335, "avg": 472.3},
+      {"month": "2026-06", "count": 23, "reads": 804, "avg": 35.0},
+      {"month": "2026-07", "count": 19, "reads": 520, "avg": 27.4},
+      {"month": "2026-08", "count": 3, "reads": 63, "avg": 21.0},
+      {"month": "2026-09", "count": 6, "reads": 637, "avg": 106.2},
+      {"month": "2026-10", "count": 7, "reads": 4048, "avg": 578.3}
   ],
   sources: [
-      { name: "公众号主页", value: 370},
-      { name: "其他", value: 185},
-      { name: "搜一搜", value: 191},
-      { name: "公众号消息", value: 1383},
-      { name: "聊天会话", value: 1247},
-      { name: "推荐", value: 13363},
-      { name: "朋友圈", value: 733}
+      {"name": "公众号主页", "value": 370},
+      {"name": "其他", "value": 185},
+      {"name": "搜一搜", "value": 191},
+      {"name": "公众号消息", "value": 1383},
+      {"name": "聊天会话", "value": 1247},
+      {"name": "推荐", "value": 13363},
+      {"name": "朋友圈", "value": 733}
   ],
   topics: [
-      { name: "其他", count: 19, reads: 2220},
-      { name: "保租房", count: 8, reads: 3047},
-      { name: "城投转型", count: 49, reads: 5781},
-      { name: "城市更新", count: 5, reads: 1694},
-      { name: "产业园运营", count: 9, reads: 1942},
-      { name: "REITs与新资产", count: 2, reads: 16},
-      { name: "委托运营", count: 4, reads: 2807}
+      {"name": "其他", "count": 19, "reads": 2220},
+      {"name": "保租房", "count": 8, "reads": 3047},
+      {"name": "城投转型", "count": 49, "reads": 5781},
+      {"name": "城市更新", "count": 5, "reads": 1694},
+      {"name": "产业园运营", "count": 9, "reads": 1942},
+      {"name": "REITs与新资产", "count": 2, "reads": 16},
+      {"name": "委托运营", "count": 4, "reads": 2807}
   ],
   articles: [
-      { date: "2026-10-13", title: "央妈下发的“银发〔2026〕171号”：「长租房」租赁企业终于不再是隐形人", reads: 1127, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-10-11", title: "「大代建」的账本，能算得过来吗？我拿长沙五一路上的一栋老破小算了三天", reads: 87, track: "委托运营", topic: "委托运营", status: "已发布" },
-      { date: "2026-10-09", title: "上海商办、公寓土地费用续期：补缴7折地价，算完账我劝你别急着签", reads: 627, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-10-07", title: "无锡某园区300亩工业用地，压了8年，终于等来政策，我为什么劝他赶紧「出货」？", reads: 527, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-10-05", title: "「保租房REITs申报指南」—我见过90%的项目死在第一关", reads: 275, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-10-03", title: "「保租房」光靠租金活不下去，但增值服务也不是万能药", reads: 1385, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-10-01", title: "聪明的城投，已经在用补助资金做杠杆，撬动代建方对赌承诺", reads: 20, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-09-30", title: "城投总部和城投资产部想要的东西根本不是一回事，代建方进来也不知道该听谁的", reads: 10, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-09-29", title: "📢 公众号更名公告", reads: 6, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-09-28", title: "城投以为自己是在求人，其实代建方也在求城投", reads: 129, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-09-26", title: "城投最缺的不是钱，是一个能帮它把资产REITs化的“代建方”", reads: 161, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-09-24", title: "房地产止跌回稳，对城投手里的存量资产意味着什么——我判断分水岭已经出现", reads: 137, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-09-22", title: "城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力", reads: 194, track: "城市更新", topic: "城市更新", status: "已发布" },
-      { date: "2026-08-14", title: "老厂房改算力，真有那么赚钱？", reads: 33, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-08-04", title: "Costco/山姆代购仓：园区的另类招商", reads: 19, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-08-02", title: "厦门"5年5折租房"出台一个月——我越看越觉得：这事不是补贴，是城市的"人才金融工具"", reads: 11, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-07-31", title: "接手一个空置率67%的产业园，他前30天做的5个错决策", reads: 36, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-07-29", title: "那个闲置校舍，城投想盘，教育局不放手，财政局不出钱", reads: 33, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-27", title: "2026城投年中报数据复盘：繁荣的B面", reads: 6, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-23", title: "47亿砸进一个片区更新项目，出租率只有41%，这账怎么算？", reads: 31, track: "城市更新", topic: "城市更新", status: "已发布" },
-      { date: "2026-07-22", title: "拆了卖地，还是改了运营？城中村改造新逻辑", reads: 3, track: "城市更新", topic: "城市更新", status: "已发布" },
-      { date: "2026-07-21", title: "浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚", reads: 3, track: "REITs与新资产", topic: "REITs与新资产", status: "已发布" },
-      { date: "2026-07-18", title: "900万拍综艺收益8600元：国企资产为什么总在“打水漂”", reads: 20, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-17", title: "产业园以房养园：算完账发现这事还是要靠补贴", reads: 2, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-07-16", title: "AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的", reads: 18, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-15", title: "产业园招商为什么总完不成：不是条件差，是没有招商体系", reads: 23, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-07-14", title: "城投债·展期不是躺平，是战术性收缩", reads: 3, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-13", title: "约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点", reads: 34, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-11", title: "酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账", reads: 23, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-07-10", title: "城投到底能不能当LP？我见过最诚实的算账", reads: 22, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-08", title: "城投选运营商的尽调清单：怎么识破PPT里的水分", reads: 21, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-07", title: "城投做轻资产运营，我见过最冤的一次合规整改", reads: 19, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-07-03", title: "买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪", reads: 197, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-07-02", title: "商改住动了真格，这次比以往任何一次都具体", reads: 17, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-07-01", title: "[湘]城投收商品房作保障房，这次真要下场了", reads: 23, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-30", title: "电竞酒店：城投公寓的00后新生意", reads: 26, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-29", title: "酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账", reads: 23, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-06-22", title: "卖园区：5000万卖出去了，1.2亿的血亏是怎么漏掉的？", reads: 25, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-06-21", title: "写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了", reads: 45, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-20", title: "35万亿十五五规划落地：城投手里有哪些还没被讨论的机会？", reads: 13, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-19", title: "城投做能源托管，本质上是一场圈地运动——圈的是用电用户", reads: 16, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-18", title: "商办批量改公寓：一场豪赌，正在拉开差距", reads: 31, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-06-16", title: "经营性债务来袭：那120亿的债转股是怎么谈下来的", reads: 16, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-06-15", title: "“代建、代运营”的尽头，是自己下场做生意", reads: 36, track: "委托运营", topic: "委托运营", status: "已发布" },
-      { date: "2026-06-14", title: "园区的“流量”金矿，城投只挖了1%", reads: 36, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-13", title: "「六张网」7万亿砸下来，城投能接住哪一张？", reads: 23, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-12", title: "城投资产盘活：五个坑，踩了三个就翻不了身", reads: 32, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-11", title: "13号文落地一个月，城投的三笔账怎么算？", reads: 27, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-10", title: "产业园运营：三种模式，有的城投算完账就放弃了", reads: 66, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-09", title: "京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切", reads: 60, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-06-08", title: "EOD 真实案例：某长三角地市 14 亿生态项目，3 年回本怎么算的", reads: 33, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-06-07", title: "13号文落地一个月：城投被剥马甲后，还有几条活路", reads: 74, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-06", title: ""35%"上缴大棒：国企利润上交新规后，城投还剩多少肉？", reads: 20, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-05", title: "停车场运营：我见过最狠的算账，有城投月收38万还亏60万", reads: 81, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-04", title: "帮城投做REITs预审材料，我总结了5个被拒原因，第3个最不应该", reads: 28, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-03", title: "两业融合三年：城投的钱投进去了，效果怎么样？", reads: 23, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-02", title: "工业上楼：城投跟不跟？算完这笔账，答案清楚了", reads: 40, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-06-01", title: "招商率卡在60%，问题不在招商——城投园区最常见的那个第一个错", reads: 30, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-31", title: "保障房运营的三个生死线：空置率、租金差、运营成本", reads: 1154, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-05-30", title: "“算力”这趟车，城投上了到底是乘客还是燃料", reads: 59, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-28", title: "城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了", reads: 1457, track: "城市更新", topic: "城市更新", status: "已发布" },
-      { date: "2026-05-27", title: "7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？", reads: 1042, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-25", title: "非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱", reads: 1153, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-24", title: "144亿收入，4.5%利润率：城投年报最薄利的一幕", reads: 10, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-23", title: "光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来", reads: 1031, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-22", title: "曲江撤销管委会：过多少文旅城投，死在这条路上", reads: 22, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-21", title: "保租房定价：租金怎么定才不踩红线？一套算法模型", reads: 17, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-05-20", title: "委托运营3年后，租户续约率从40%提到78%：我做对了什么？", reads: 1359, track: "委托运营", topic: "委托运营", status: "已发布" },
-      { date: "2026-05-19", title: "产业园同质化：100个园区99个长得一样，凭什么选你？", reads: 322, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-05-19", title: "某地级市城投"委托运营"3年后：500万教训换来的复盘", reads: 52, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-18", title: "园区轻资产运营：如何让入驻企业"留下来、多消费"？", reads: 982, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-05-17", title: "某城投园区从"烂尾"到"满租"，三年复盘", reads: 1090, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-16", title: "某地级市城投：如何用"委托运营"撬动民营资本", reads: 26, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-15", title: "委托运营合同怎么签：三个条款不写进去，后面全是坑", reads: 1325, track: "委托运营", topic: "委托运营", status: "已发布" },
-      { date: "2026-05-14", title: "跟政府谈了100次：我发现有1条规矩，破了就全盘皆输", reads: 7, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-05-13", title: "3.6亿平米烂尾土地，城投最后的底牌快没了", reads: 2, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-12", title: "80万亿资产睡在账上：城投守着金矿，却挣扎在温饱问题里", reads: 9, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-11", title: "REITs/ABS/委托运营：三条路选错一条，白干十年", reads: 13, track: "REITs与新资产", topic: "REITs与新资产", status: "已发布" },
-      { date: "2026-05-10", title: "国企利润上交中央：城投又得多掏多少钱？算完惊了", reads: 5, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-05-06", title: "长沙保障房改造：领导算完账当场沉默了", reads: 186, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-05-05", title: "土储专项债重启：有人已经拿到钱了，你还在等什么？", reads: 6, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-05-02", title: "为什么你的园区招了三年还招不满", reads: 6, track: "产业园运营", topic: "产业园运营", status: "已发布" },
-      { date: "2026-04-30", title: "三资盘活：湖北安徽模式，对其他城投有什么启发", reads: 9, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-04-29", title: "政府资产盘活的真相：不是没钱，是没人敢担事", reads: 3, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-04-28", title: "城投轻资产运营，你可能连第一步就走错了", reads: 14, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-04-27", title: "化债后半场的城投融资：哪些路通了，哪些路堵了", reads: 2, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-04-26", title: "城投年报里的"增收不增利"，到底什么意思", reads: 6, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-04-25", title: "政府资产运维的钱，都花在哪里了", reads: 4, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-04-24", title: "REITs扩围：城市更新和商业楼宇，这次真的能上市了", reads: 9, track: "城市更新", topic: "城市更新", status: "已发布" },
-      { date: "2026-04-23", title: "化债进入"主动化债"时代：各地的债务高风险地区，现在都怎么样了", reads: 7, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-04-13", title: "2026年政府资产盘活：为什么"轻资产模式"才是城投转型的救命稻草？", reads: 6, track: "城投转型", topic: "城投转型", status: "已发布" },
-      { date: "2026-02-28", title: "【内部整理】保租房投资决策“秘籍”：2大模式优劣分析+可套用测算模型，直接抄作业！", reads: 14, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2026-02-20", title: "轻骑逐火，盘活生金｜「轻资运营局」2026新年寄语 & 年度内容规划", reads: 6, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-02-16", title: "🧨 岁序更新，金马迎春", reads: 5, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-02-05", title: "上海的“老破小”，最终会被谁“买断”？答案将影响你未来10年的财富！", reads: 8, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2026-01-16", title: "别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！", reads: 7, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-12-20", title: "关于印发《长沙市城镇房屋结构安全体检技术指南（试行）》的通知_长住建发[2025]57号", reads: 10, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-12-16", title: "别只盯着学区房了！湖南“养老新赛道”官宣，未来5年，城市里最值钱的不是房，是这个……", reads: 1, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-12-12", title: "湖南省人民政府办公厅关于持续推进城市更新行动的实施意见 （湘政办发〔2025〕49号）", reads: 6, track: "城市更新", topic: "城市更新", status: "已发布" },
-      { date: "2025-12-01", title: "2026年巨变！保障性租赁住房主力房源，原来是它！", reads: 2, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-11-23", title: "重磅！长沙大批“国资”入场，“十五五”黄金窗口期来了！", reads: 4, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-11-14", title: "黄金地段“老破小”的生死局：是彻底倒下，还是即将“焕发二春”？", reads: 2, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-11-05", title: "十五五规划下，保障性租赁住房的“破圈”与“升级”", reads: 3, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-11-01", title: "812号令正式生效！租赁住房想‘活下来’，这3道‘报建生死关’必须闯——尤其是消防验收", reads: 51, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-11-01", title: "“人工智能+”时代，轻资产如何“智”取保障性租赁住房新蓝海？——一位运营者的深度思考", reads: 2, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-10-27", title: "长沙国有老资产变身“青年社区”：一场政策与市场的双赢实验", reads: 33, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-10-25", title: "长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单", reads: 8, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-10-25", title: "湘江新区保障性租赁住房项目2024年12月公示名单", reads: 2, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-10-25", title: "湘江新区保障性租赁住房项目2025年8月公示名单", reads: 2, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-10-16", title: "湖南省人民政府办公厅关于加快湖南省公共数据资源开发利用的实施意见", reads: 8, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-10-08", title: "长沙市住房和城乡建设局等12部门 关于进一步优化房地产发展措施的通知", reads: 2, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-10-08", title: "长沙市住房和城乡建设局 关于加快推进住宅小区智慧物业建设的通知", reads: 4, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-09-30", title: "喜迎中秋，欢度国庆！", reads: 2, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-09-25", title: "《长沙市中央财政支持住房租赁市场发展试点资金分配方案》的通知  长财综[2020]2号", reads: 2, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-09-25", title: "长沙市保障性租赁住房项目申请认定申报实施细则  (长住建发〔2025〕10号文件)", reads: 6, track: "保租房", topic: "保租房", status: "已发布" },
-      { date: "2025-09-25", title: "中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知", reads: 2, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-09-25", title: "长沙市住房租赁合同范本（2025版）", reads: 9, track: "其他", topic: "其他", status: "已发布" },
-      { date: "2025-09-25", title: "关于组织申报住房租赁试点企业和租赁住房奖补项目的通知", reads: 1, track: "保租房", topic: "保租房", status: "已发布" }
+      {"date": "2026-10-13", "title": "央妈下发的“银发〔2026〕171号”：「长租房」租赁企业终于不再是隐形人", "reads": 1127, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-10-11", "title": "「大代建」的账本，能算得过来吗？我拿长沙五一路上的一栋老破小算了三天", "reads": 87, "track": "委托运营", "topic": "委托运营", "status": "已发布"},
+      {"date": "2026-10-09", "title": "上海商办、公寓土地费用续期：补缴7折地价，算完账我劝你别急着签", "reads": 627, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-10-07", "title": "无锡某园区300亩工业用地，压了8年，终于等来政策，我为什么劝他赶紧「出货」？", "reads": 527, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-10-05", "title": "「保租房REITs申报指南」—我见过90%的项目死在第一关", "reads": 275, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-10-03", "title": "「保租房」光靠租金活不下去，但增值服务也不是万能药", "reads": 1385, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-10-01", "title": "聪明的城投，已经在用补助资金做杠杆，撬动代建方对赌承诺", "reads": 20, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-09-30", "title": "城投总部和城投资产部想要的东西根本不是一回事，代建方进来也不知道该听谁的", "reads": 10, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-09-29", "title": "📢 公众号更名公告", "reads": 6, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-09-28", "title": "城投以为自己是在求人，其实代建方也在求城投", "reads": 129, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-09-26", "title": "城投最缺的不是钱，是一个能帮它把资产REITs化的“代建方”", "reads": 161, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-09-24", "title": "房地产止跌回稳，对城投手里的存量资产意味着什么——我判断分水岭已经出现", "reads": 137, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-09-22", "title": "城市更新，社会资本只占12%——我判断这12%里，谁才是真正的主力", "reads": 194, "track": "城市更新", "topic": "城市更新", "status": "已发布"},
+      {"date": "2026-08-14", "title": "老厂房改算力，真有那么赚钱？", "reads": 33, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-08-04", "title": "Costco/山姆代购仓：园区的另类招商", "reads": 19, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-08-02", "title": "厦门\"5年5折租房\"出台一个月——我越看越觉得：这事不是补贴，是城市的\"人才金融工具\"", "reads": 11, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-07-31", "title": "接手一个空置率67%的产业园，他前30天做的5个错决策", "reads": 36, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-07-29", "title": "那个闲置校舍，城投想盘，教育局不放手，财政局不出钱", "reads": 33, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-27", "title": "2026城投年中报数据复盘：繁荣的B面", "reads": 6, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-23", "title": "47亿砸进一个片区更新项目，出租率只有41%，这账怎么算？", "reads": 31, "track": "城市更新", "topic": "城市更新", "status": "已发布"},
+      {"date": "2026-07-22", "title": "拆了卖地，还是改了运营？城中村改造新逻辑", "reads": 3, "track": "城市更新", "topic": "城市更新", "status": "已发布"},
+      {"date": "2026-07-21", "title": "浙江工业光伏强制覆盖：10GW大饼背后，三笔账没算清楚", "reads": 3, "track": "REITs与新资产", "topic": "REITs与新资产", "status": "已发布"},
+      {"date": "2026-07-18", "title": "900万拍综艺收益8600元：国企资产为什么总在“打水漂”", "reads": 20, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-17", "title": "产业园以房养园：算完账发现这事还是要靠补贴", "reads": 2, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-07-16", "title": "AMC接盘城投旧改：停摆三年的项目，AMC是怎么算账的", "reads": 18, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-15", "title": "产业园招商为什么总完不成：不是条件差，是没有招商体系", "reads": 23, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-07-14", "title": "城投债·展期不是躺平，是战术性收缩", "reads": 3, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-13", "title": "约定10%年化，审计署还是翻出了隐性债务：城投做LP的真实风险点", "reads": 34, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-11", "title": "酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账", "reads": 23, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-07-10", "title": "城投到底能不能当LP？我见过最诚实的算账", "reads": 22, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-08", "title": "城投选运营商的尽调清单：怎么识破PPT里的水分", "reads": 21, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-07", "title": "城投做轻资产运营，我见过最冤的一次合规整改", "reads": 19, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-07-03", "title": "买了深圳共有产权房，5年后想卖发现卖不掉：封闭流转动了谁的奶酪", "reads": 197, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-07-02", "title": "商改住动了真格，这次比以往任何一次都具体", "reads": 17, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-07-01", "title": "[湘]城投收商品房作保障房，这次真要下场了", "reads": 23, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-30", "title": "电竞酒店：城投公寓的00后新生意", "reads": 26, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-29", "title": "酒店都能发REITs了：养老院、商场、租赁住房，新赛道怎么算账", "reads": 23, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-06-22", "title": "卖园区：5000万卖出去了，1.2亿的血亏是怎么漏掉的？", "reads": 25, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-06-21", "title": "写字楼空置率29%、保租房缺口还差200万套——有些城投，已经在闷声捡漏了", "reads": 45, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-20", "title": "35万亿十五五规划落地：城投手里有哪些还没被讨论的机会？", "reads": 13, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-19", "title": "城投做能源托管，本质上是一场圈地运动——圈的是用电用户", "reads": 16, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-18", "title": "商办批量改公寓：一场豪赌，正在拉开差距", "reads": 31, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-06-16", "title": "经营性债务来袭：那120亿的债转股是怎么谈下来的", "reads": 16, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-06-15", "title": "“代建、代运营”的尽头，是自己下场做生意", "reads": 36, "track": "委托运营", "topic": "委托运营", "status": "已发布"},
+      {"date": "2026-06-14", "title": "园区的“流量”金矿，城投只挖了1%", "reads": 36, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-13", "title": "「六张网」7万亿砸下来，城投能接住哪一张？", "reads": 23, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-12", "title": "城投资产盘活：五个坑，踩了三个就翻不了身", "reads": 32, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-11", "title": "13号文落地一个月，城投的三笔账怎么算？", "reads": 27, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-10", "title": "产业园运营：三种模式，有的城投算完账就放弃了", "reads": 66, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-09", "title": "京东廊坊仓续约崩了：烂尾到满租的800天，3个关键决策改变一切", "reads": 60, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-06-08", "title": "EOD 真实案例：某长三角地市 14 亿生态项目，3 年回本怎么算的", "reads": 33, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-06-07", "title": "13号文落地一个月：城投被剥马甲后，还有几条活路", "reads": 74, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-06", "title": "\"35%\"上缴大棒：国企利润上交新规后，城投还剩多少肉？", "reads": 20, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-05", "title": "停车场运营：我见过最狠的算账，有城投月收38万还亏60万", "reads": 81, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-04", "title": "帮城投做REITs预审材料，我总结了5个被拒原因，第3个最不应该", "reads": 28, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-03", "title": "两业融合三年：城投的钱投进去了，效果怎么样？", "reads": 23, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-02", "title": "工业上楼：城投跟不跟？算完这笔账，答案清楚了", "reads": 40, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-06-01", "title": "招商率卡在60%，问题不在招商——城投园区最常见的那个第一个错", "reads": 30, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-31", "title": "保障房运营的三个生死线：空置率、租金差、运营成本", "reads": 1154, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-05-30", "title": "“算力”这趟车，城投上了到底是乘客还是燃料", "reads": 59, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-28", "title": "城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了", "reads": 1457, "track": "城市更新", "topic": "城市更新", "status": "已发布"},
+      {"date": "2026-05-27", "title": "7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？", "reads": 1042, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-25", "title": "非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱", "reads": 1153, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-24", "title": "144亿收入，4.5%利润率：城投年报最薄利的一幕", "reads": 10, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-23", "title": "光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来", "reads": 1031, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-22", "title": "曲江撤销管委会：过多少文旅城投，死在这条路上", "reads": 22, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-21", "title": "保租房定价：租金怎么定才不踩红线？一套算法模型", "reads": 17, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-05-20", "title": "委托运营3年后，租户续约率从40%提到78%：我做对了什么？", "reads": 1359, "track": "委托运营", "topic": "委托运营", "status": "已发布"},
+      {"date": "2026-05-19", "title": "产业园同质化：100个园区99个长得一样，凭什么选你？", "reads": 322, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-05-19", "title": "某地级市城投\"委托运营\"3年后：500万教训换来的复盘", "reads": 52, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-18", "title": "园区轻资产运营：如何让入驻企业\"留下来、多消费\"？", "reads": 982, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-05-17", "title": "某城投园区从\"烂尾\"到\"满租\"，三年复盘", "reads": 1090, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-16", "title": "某地级市城投：如何用\"委托运营\"撬动民营资本", "reads": 26, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-15", "title": "委托运营合同怎么签：三个条款不写进去，后面全是坑", "reads": 1325, "track": "委托运营", "topic": "委托运营", "status": "已发布"},
+      {"date": "2026-05-14", "title": "跟政府谈了100次：我发现有1条规矩，破了就全盘皆输", "reads": 7, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-05-13", "title": "3.6亿平米烂尾土地，城投最后的底牌快没了", "reads": 2, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-12", "title": "80万亿资产睡在账上：城投守着金矿，却挣扎在温饱问题里", "reads": 9, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-11", "title": "REITs/ABS/委托运营：三条路选错一条，白干十年", "reads": 13, "track": "REITs与新资产", "topic": "REITs与新资产", "status": "已发布"},
+      {"date": "2026-05-10", "title": "国企利润上交中央：城投又得多掏多少钱？算完惊了", "reads": 5, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-05-06", "title": "长沙保障房改造：领导算完账当场沉默了", "reads": 186, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-05-05", "title": "土储专项债重启：有人已经拿到钱了，你还在等什么？", "reads": 6, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-05-02", "title": "为什么你的园区招了三年还招不满", "reads": 6, "track": "产业园运营", "topic": "产业园运营", "status": "已发布"},
+      {"date": "2026-04-30", "title": "三资盘活：湖北安徽模式，对其他城投有什么启发", "reads": 9, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-04-29", "title": "政府资产盘活的真相：不是没钱，是没人敢担事", "reads": 3, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-04-28", "title": "城投轻资产运营，你可能连第一步就走错了", "reads": 14, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-04-27", "title": "化债后半场的城投融资：哪些路通了，哪些路堵了", "reads": 2, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-04-26", "title": "城投年报里的\"增收不增利\"，到底什么意思", "reads": 6, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-04-25", "title": "政府资产运维的钱，都花在哪里了", "reads": 4, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-04-24", "title": "REITs扩围：城市更新和商业楼宇，这次真的能上市了", "reads": 9, "track": "城市更新", "topic": "城市更新", "status": "已发布"},
+      {"date": "2026-04-23", "title": "化债进入\"主动化债\"时代：各地的债务高风险地区，现在都怎么样了", "reads": 7, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-04-13", "title": "2026年政府资产盘活：为什么\"轻资产模式\"才是城投转型的救命稻草？", "reads": 6, "track": "城投转型", "topic": "城投转型", "status": "已发布"},
+      {"date": "2026-02-28", "title": "【内部整理】保租房投资决策“秘籍”：2大模式优劣分析+可套用测算模型，直接抄作业！", "reads": 14, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2026-02-20", "title": "轻骑逐火，盘活生金｜「轻资运营局」2026新年寄语 & 年度内容规划", "reads": 6, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-02-16", "title": "🧨 岁序更新，金马迎春", "reads": 5, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-02-05", "title": "上海的“老破小”，最终会被谁“买断”？答案将影响你未来10年的财富！", "reads": 8, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2026-01-16", "title": "别再叫“二房东”了！从“收租”到“运营”，不动产的下一个十年，将彻底颠覆你的认知！", "reads": 7, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-12-20", "title": "关于印发《长沙市城镇房屋结构安全体检技术指南（试行）》的通知_长住建发[2025]57号", "reads": 10, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-12-16", "title": "别只盯着学区房了！湖南“养老新赛道”官宣，未来5年，城市里最值钱的不是房，是这个……", "reads": 1, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-12-12", "title": "湖南省人民政府办公厅关于持续推进城市更新行动的实施意见 （湘政办发〔2025〕49号）", "reads": 6, "track": "城市更新", "topic": "城市更新", "status": "已发布"},
+      {"date": "2025-12-01", "title": "2026年巨变！保障性租赁住房主力房源，原来是它！", "reads": 2, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-11-23", "title": "重磅！长沙大批“国资”入场，“十五五”黄金窗口期来了！", "reads": 4, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-11-14", "title": "黄金地段“老破小”的生死局：是彻底倒下，还是即将“焕发二春”？", "reads": 2, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-11-05", "title": "十五五规划下，保障性租赁住房的“破圈”与“升级”", "reads": 3, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-11-01", "title": "812号令正式生效！租赁住房想‘活下来’，这3道‘报建生死关’必须闯——尤其是消防验收", "reads": 51, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-11-01", "title": "“人工智能+”时代，轻资产如何“智”取保障性租赁住房新蓝海？——一位运营者的深度思考", "reads": 2, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-10-27", "title": "长沙国有老资产变身“青年社区”：一场政策与市场的双赢实验", "reads": 33, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-10-25", "title": "长沙市·湘江新区2023年第一批保障性租赁住房以及租赁住房奖补项目公示名单", "reads": 8, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-10-25", "title": "湘江新区保障性租赁住房项目2024年12月公示名单", "reads": 2, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-10-25", "title": "湘江新区保障性租赁住房项目2025年8月公示名单", "reads": 2, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-10-16", "title": "湖南省人民政府办公厅关于加快湖南省公共数据资源开发利用的实施意见", "reads": 8, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-10-08", "title": "长沙市住房和城乡建设局等12部门 关于进一步优化房地产发展措施的通知", "reads": 2, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-10-08", "title": "长沙市住房和城乡建设局 关于加快推进住宅小区智慧物业建设的通知", "reads": 4, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-09-30", "title": "喜迎中秋，欢度国庆！", "reads": 2, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-09-25", "title": "《长沙市中央财政支持住房租赁市场发展试点资金分配方案》的通知  长财综[2020]2号", "reads": 2, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-09-25", "title": "长沙市保障性租赁住房项目申请认定申报实施细则  (长住建发〔2025〕10号文件)", "reads": 6, "track": "保租房", "topic": "保租房", "status": "已发布"},
+      {"date": "2025-09-25", "title": "中国人民银行办公厅关于优化保障性住房再贷款有关要求的通知", "reads": 2, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-09-25", "title": "长沙市住房租赁合同范本（2025版）", "reads": 9, "track": "其他", "topic": "其他", "status": "已发布"},
+      {"date": "2025-09-25", "title": "关于组织申报住房租赁试点企业和租赁住房奖补项目的通知", "reads": 1, "track": "保租房", "topic": "保租房", "status": "已发布"}
   ],
   top10: [
-      { date: "2026-05-28", title: "城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了", reads: 1457, topic: "城市更新" },
-      { date: "2026-10-03", title: "「保租房」光靠租金活不下去，但增值服务也不是万能药", reads: 1385, topic: "保租房" },
-      { date: "2026-05-20", title: "委托运营3年后，租户续约率从40%提到78%：我做对了什么？", reads: 1359, topic: "委托运营" },
-      { date: "2026-05-15", title: "委托运营合同怎么签：三个条款不写进去，后面全是坑", reads: 1325, topic: "委托运营" },
-      { date: "2026-05-31", title: "保障房运营的三个生死线：空置率、租金差、运营成本", reads: 1154, topic: "其他" },
-      { date: "2026-05-25", title: "非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱", reads: 1153, topic: "城投转型" },
-      { date: "2026-10-13", title: "央妈下发的“银发〔2026〕171号”：「长租房」租赁企业终于不再是隐形人", reads: 1127, topic: "保租房" },
-      { date: "2026-05-17", title: "某城投园区从"烂尾"到"满租"，三年复盘", reads: 1090, topic: "城投转型" },
-      { date: "2026-05-27", title: "7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？", reads: 1042, topic: "城投转型" },
-      { date: "2026-05-23", title: "光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来", reads: 1031, topic: "城投转型" }
+      {"date": "2026-05-28", "title": "城市更新算账：2.3亿改造成本，最后算出的数字让领导沉默了", "reads": 1457, "topic": "城市更新"},
+      {"date": "2026-10-03", "title": "「保租房」光靠租金活不下去，但增值服务也不是万能药", "reads": 1385, "topic": "保租房"},
+      {"date": "2026-05-20", "title": "委托运营3年后，租户续约率从40%提到78%：我做对了什么？", "reads": 1359, "topic": "委托运营"},
+      {"date": "2026-05-15", "title": "委托运营合同怎么签：三个条款不写进去，后面全是坑", "reads": 1325, "topic": "委托运营"},
+      {"date": "2026-05-31", "title": "保障房运营的三个生死线：空置率、租金差、运营成本", "reads": 1154, "topic": "其他"},
+      {"date": "2026-05-25", "title": "非标没人接、发债没人要、信用还在降——但有些城投照样能借到钱", "reads": 1153, "topic": "城投转型"},
+      {"date": "2026-10-13", "title": "央妈下发的“银发〔2026〕171号”：「长租房」租赁企业终于不再是隐形人", "reads": 1127, "topic": "保租房"},
+      {"date": "2026-05-17", "title": "某城投园区从\"烂尾\"到\"满租\"，三年复盘", "reads": 1090, "topic": "城投转型"},
+      {"date": "2026-05-27", "title": "7000家城投消失后，剩下的城投在选：退平台/转型/合并，哪条路走得通？", "reads": 1042, "topic": "城投转型"},
+      {"date": "2026-05-23", "title": "光储充赛道：我见过最狠的算账，有城投3个月回本，也有城投砸进去就再没出来", "reads": 1031, "topic": "城投转型"}
   ]
 };
 
-// CHARTS
-const monthlyLabels = DATA.monthly.map(m => m.month);
-const monthlyReads  = DATA.monthly.map(m => m.reads);
-const monthlyAvgs   = DATA.monthly.map(m => m.avg);
-
 // 月度趋势
-new Chart(document.getElementById('chartMonthlyTrend'), {
-  type: 'bar',
-  data: {
-    labels: monthlyLabels,
-    datasets: [
-      { label: '总阅读', data: monthlyReads, backgroundColor: 'rgba(79,70,229,0.7)', borderRadius: 8, yAxisID: 'y' },
-      { label: '篇均', data: monthlyAvgs, type: 'line', borderColor: 'rgba(239,68,68,1)', backgroundColor: 'rgba(239,68,68,0.2)', borderWidth: 3, tension: 0.3, yAxisID: 'y1' }
-    ]
-  },
-  options: {
-    responsive: true,
-    interaction: { mode: 'index', intersect: false },
-    plugins: { legend: { position: 'top', labels: { font: { size: 12 } } } },
-    scales: {
-      y: { type: 'linear', position: 'left', beginAtZero: true, title: { display: true, text: '总阅读' } },
-      y1: { type: 'linear', position: 'right', beginAtZero: true, title: { display: true, text: '篇均' }, grid: { drawOnChartArea: false } }
-    }
-  }
-});
+new Chart(document.getElementById("chartMonthlyTrend"),{type:"bar",data:{labels:DATA.monthly.map(m=>m.month),datasets:[{label:"总阅读",data:DATA.monthly.map(m=>m.reads),backgroundColor:"rgba(79,70,229,0.7)",borderRadius:8,yAxisID:"y"},{label:"篇均",data:DATA.monthly.map(m=>m.avg),type:"line",borderColor:"rgba(239,68,68,1)",backgroundColor:"rgba(239,68,68,0.2)",borderWidth:3,tension:0.3,yAxisID:"y1"}]},options:{responsive:true,interaction:{mode:"index",intersect:false},plugins:{legend:{position:"top",labels:{font:{size:12}}}},scales:{y:{type:"linear",position:"left",beginAtZero:true,title:{display:true,text:"总阅读"}},y1:{type:"linear",position:"right",beginAtZero:true,title:{display:true,text:"篇均"},grid:{drawOnChartArea:false}}}}}});
 
-// 渠道分布
-new Chart(document.getElementById('chartSource'), {
-  type: 'doughnut',
-  data: {
-    labels: DATA.sources.map(s => s.name),
-    datasets: [{ data: DATA.sources.map(s => s.value), backgroundColor: ['#4f46e5','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#06b6d4'] }]
-  },
-  options: { responsive: true, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
-});
+// 渠道
+new Chart(document.getElementById("chartSource"),{type:"doughnut",data:{labels:DATA.sources.map(s=>s.name),datasets:[{data:DATA.sources.map(s=>s.value),backgroundColor:["#4f46e5","#0ea5e9","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899","#06b6d4"]}]},options:{responsive:true,plugins:{legend:{position:"right",labels:{font:{size:11}}}}}});
 
-// 话题分布（篇数饼图）
-new Chart(document.getElementById('chartTopic'), {
-  type: 'pie',
-  data: {
-    labels: DATA.topics.map(t => t.name),
-    datasets: [{ data: DATA.topics.map(t => t.count), backgroundColor: ['#4f46e5','#0ea5e9','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899'] }]
-  },
-  options: { responsive: true, plugins: { legend: { position: 'right', labels: { font: { size: 11 } } } } }
-});
+// 话题(篇数)
+new Chart(document.getElementById("chartTopic"),{type:"pie",data:{labels:DATA.topics.map(t=>t.name),datasets:[{data:DATA.topics.map(t=>t.count),backgroundColor:["#4f46e5","#0ea5e9","#10b981","#f59e0b","#ef4444","#8b5cf6","#ec4899"]}]},options:{responsive:true,plugins:{legend:{position:"right",labels:{font:{size:11}}}}}});
 
 // 话题×阅读
-new Chart(document.getElementById('chartTopicReads'), {
-  type: 'bar',
-  data: {
-    labels: DATA.topics.map(t => t.name),
-    datasets: [{ label: '阅读量', data: DATA.topics.map(t => t.reads), backgroundColor: 'rgba(16,185,129,0.7)', borderRadius: 8 }]
-  },
-  options: { responsive: true, indexAxis: 'y', plugins: { legend: { display: false } } }
-});
+new Chart(document.getElementById("chartTopicReads"),{type:"bar",data:{labels:DATA.topics.map(t=>t.name),datasets:[{label:"阅读量",data:DATA.topics.map(t=>t.reads),backgroundColor:"rgba(16,185,129,0.7)",borderRadius:8}]},options:{responsive:true,indexAxis:"y",plugins:{legend:{display:false}}}});
 
 // 文章列表
-const tbody = document.getElementById('articlesTable');
-const totalReads = DATA.articles.reduce((s, a) => s + a.reads, 0);
-DATA.articles.forEach(a => {
-  const avgStr = (a.reads / 1).toFixed(0);
-  tbody.innerHTML += `<tr>
-    <td class="text-slate-400">${a.date}</td>
-    <td class="text-white">${a.title}</td>
-    <td><span class="px-2 py-0.5 rounded text-xs" style="background:#334155;color:#94a3b8">${a.track}</span></td>
-    <td class="text-indigo-400 font-semibold">${a.reads.toLocaleString()}</td>
-    <td class="text-slate-500">${avgStr}</td>
-  </tr>`;
-});
+DATA.articles.forEach(a=>{document.getElementById("articlesTable").innerHTML+="<tr><td class='text-slate-400'>"+a.date+"</td><td class='text-white'>"+a.title+"</td><td><span class='px-2 py-0.5 rounded text-xs' style='background:#334155;color:#94a3b8'>"+a.track+"</span></td><td class='text-indigo-400 font-semibold'>"+a.reads.toLocaleString()+"</td></tr>"});
 
 // TOP10
-const topBody = document.getElementById('topTable');
-DATA.top10.forEach((a, i) => {
-  topBody.innerHTML += `<tr>
-    <td><span class="px-2 py-0.5 rounded text-xs font-bold" style="background:${i<3?'#4f46e5':'#334155'};color:white">${i+1}</span></td>
-    <td class="text-slate-400">${a.date}</td>
-    <td class="text-white">${a.title}</td>
-    <td><span class="px-2 py-0.5 rounded text-xs" style="background:#334155;color:#94a3b8">${a.topic}</span></td>
-    <td class="text-indigo-400 font-semibold">${a.reads.toLocaleString()}</td>
-  </tr>`;
-});
+DATA.top10.forEach((a,i)=>{document.getElementById("topTable").innerHTML+="<tr><td><span class='px-2 py-0.5 rounded text-xs font-bold' style='background:"+(i<3?"#4f46e5":"#334155")+";color:white'>"+(i+1)+"</span></td><td class='text-slate-400'>"+a.date+"</td><td class='text-white'>"+a.title+"</td><td><span class='px-2 py-0.5 rounded text-xs' style='background:#334155;color:#94a3b8'>"+a.topic+"</span></td><td class='text-indigo-400 font-semibold'>"+a.reads.toLocaleString()+"</td></tr>"});
 </script>
+
 </body>
 </html>
