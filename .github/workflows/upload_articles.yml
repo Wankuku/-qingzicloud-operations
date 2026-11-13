@@ -3,9 +3,10 @@ name: Upload Articles
 on:
   workflow_dispatch:
     inputs:
-      payload:
-        description: 'JSON payload'
-        required: true
+      tags:
+        description: 'Comma separated tags, e.g. 01,02,03'
+        required: false
+        default: '01,02,03'
 
 permissions:
   contents: write
@@ -14,6 +15,11 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Get WeChat Token
         id: token
         run: |
@@ -28,21 +34,26 @@ jobs:
 
       - name: Upload
         env:
-          PAYLOAD: ${{ inputs.payload }}
+          TAGS: ${{ inputs.tags }}
         run: |
           python3 << 'PYEOF'
-          import json, os, base64, time, urllib.request
+          import json, os, base64, time, urllib.request, importlib.util
 
-          payload = json.loads(os.environ["PAYLOAD"])
+          tags = [t.strip() for t in os.environ.get("TAGS","01,02,03").split(",") if t.strip()]
           token = "${{ steps.token.outputs.token }}"
           BASE = "https://api.weixin.qq.com"
 
-          def upload_img(b64):
-              is_png = b64.startswith("iVBOR")
-              data = base64.b64decode(b64)
-              boundary = "wx%d" % int(time.time()*1000)
-              ct = "image/png" if is_png else "image/jpeg"
+          spec = importlib.util.spec_from_file_location("u", "renderer.py")
+          mod = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+
+          def upload_img(path):
+              with open(path, "rb") as f:
+                  data = f.read()
+              is_png = path.lower().endswith(".png")
               ext = "png" if is_png else "jpeg"
+              ct = "image/png" if is_png else "image/jpeg"
+              boundary = "wx%d" % int(time.time()*1000)
               body = (("--" + boundary + "\r\n"
                        'Content-Disposition: form-data; name="media"; filename="img.' + ext + '"\r\n'
                        "Content-Type: " + ct + "\r\n\r\n").encode()
@@ -50,34 +61,38 @@ jobs:
               url = BASE + "/cgi-bin/material/add_material?access_token=" + token + "&type=image"
               req = urllib.request.Request(url, data=body,
                   headers={"Content-Type": "multipart/form-data; boundary=" + boundary})
-              with urllib.request.urlopen(req, timeout=120) as r:
+              with urllib.request.urlopen(req, timeout=180) as r:
                   res = json.loads(r.read())
               if "media_id" not in res:
-                  raise SystemExit("upload_img failed: " + str(res))
+                  raise SystemExit("upload_img failed " + path + ": " + str(res))
               return res
 
           results = []
-          for art in payload:
-              print("=== uploading:", art["title"])
-              md = base64.b64decode(art["md_b64"]).decode("utf-8")
-              with open("article.md", "w", encoding="utf-8") as f:
-                  f.write(md)
-              import importlib.util
-              spec = importlib.util.spec_from_file_location("u", "renderer.py")
-              mod = importlib.util.module_from_spec(spec)
-              spec.loader.exec_module(mod)
+          for tag in tags:
+              md_path = "articles/%s.md" % tag
+              if not os.path.exists(md_path):
+                  print("skip missing", md_path); continue
+              with open(md_path, encoding="utf-8") as f:
+                  md = f.read()
+              title = ""
+              digest = ""
+              for line in md.split("\n"):
+                  if line.startswith("title:"): title = line[6:].strip()
+                  if line.startswith("abstract:"): digest = line[9:].strip()
+              print("=== uploading", tag, title)
               urls = []
               mid = None
-              for i, b in enumerate([art["cover_b64"]] + art["imgs_b64"]):
-                  r = upload_img(b)
-                  if i == 0:
-                      mid = r["media_id"]
-                  else:
-                      urls.append(r["url"])
+              for i in range(4):
+                  p = "articles/%s_%d.jpg" % (tag, i)
+                  if not os.path.exists(p):
+                      p = "articles/%s_%d.png" % (tag, i)
+                  r = upload_img(p)
+                  if i == 0: mid = r["media_id"]
+                  else: urls.append(r["url"])
                   print("  img", i, "ok")
-              html = mod.build_article("article.md", urls[0] if urls else "", mid, urls)
-              article = {"title": art["title"], "author": "轻资运营牛马路",
-                         "digest": art["digest"], "content": html,
+              html = mod.build_article(md_path, urls[0] if urls else "", mid, urls)
+              article = {"title": title, "author": "轻资运营牛马路",
+                         "digest": digest, "content": html,
                          "thumb_media_id": mid, "need_open_comment": 1, "only_fans": 0}
               req = urllib.request.Request(BASE + "/cgi-bin/draft/add?access_token=" + token,
                   data=json.dumps({"articles": [article]}, ensure_ascii=False).encode("utf-8"),
@@ -85,10 +100,11 @@ jobs:
               with urllib.request.urlopen(req, timeout=180) as r:
                   res = json.loads(r.read())
               print("  draft/add ->", str(res)[:300])
-              results.append({"title": art["title"], "res": res})
+              results.append({"tag": tag, "title": title, "res": res})
 
           with open("result.json", "w", encoding="utf-8") as f:
               json.dump(results, f, ensure_ascii=False, indent=2)
+          print("RESULT_FILE_WRITTEN")
           PYEOF
 
       - name: Upload result
