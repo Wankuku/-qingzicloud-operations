@@ -1,21 +1,98 @@
-{
-  "name": "upload_articles",
-  "on": {
-    "workflow_dispatch": {}
-  },
-  "permissions": {
-    "contents": "write"
-  },
-  "jobs": {
-    "t": {
-      "runs-on": "ubuntu-latest",
-      "steps": [
-        {
-          "name": "Get WeChat Token",
-          "id": "token",
-          "run": "RESP=$(curl -s --get -d \"appid=${{ secrets.WX_APPID }}\" -d \"secret=${{ secrets.WX_APPSECRET }}\" -d \"grant_type=client_credential\" \"https://api.weixin.qq.com/cgi-bin/token\")\necho \"Token resp: $RESP\"\nTOKEN=\"$(echo $RESP | python3 -c 'import sys,json;print(json.load(sys.stdin).get(\"access_token\",\"\"))')\"\necho \"token=$TOKEN\" >> $GITHUB_OUTPUT"
-        }
-      ]
-    }
-  }
-}
+name: Upload Articles
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: 'JSON payload'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get WeChat Token
+        id: token
+        run: |
+          RESP=$(curl -s --get \
+            -d "appid=${{ secrets.WX_APPID }}" \
+            -d "secret=${{ secrets.WX_APPSECRET }}" \
+            -d "grant_type=client_credential" \
+            "https://api.weixin.qq.com/cgi-bin/token")
+          echo "Token resp: $RESP"
+          TOKEN="$(echo $RESP | python3 -c 'import sys,json;print(json.load(sys.stdin).get("access_token",""))')"
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT
+
+      - name: Upload
+        env:
+          PAYLOAD: ${{ inputs.payload }}
+        run: |
+          python3 << 'PYEOF'
+          import json, os, base64, time, urllib.request
+
+          payload = json.loads(os.environ["PAYLOAD"])
+          token = "${{ steps.token.outputs.token }}"
+          BASE = "https://api.weixin.qq.com"
+
+          def upload_img(b64):
+              is_png = b64.startswith("iVBOR")
+              data = base64.b64decode(b64)
+              boundary = "wx%d" % int(time.time()*1000)
+              ct = "image/png" if is_png else "image/jpeg"
+              ext = "png" if is_png else "jpeg"
+              body = (("--" + boundary + "\r\n"
+                       'Content-Disposition: form-data; name="media"; filename="img.' + ext + '"\r\n'
+                       "Content-Type: " + ct + "\r\n\r\n").encode()
+                      + data + ("\r\n--" + boundary + "--\r\n").encode())
+              url = BASE + "/cgi-bin/material/add_material?access_token=" + token + "&type=image"
+              req = urllib.request.Request(url, data=body,
+                  headers={"Content-Type": "multipart/form-data; boundary=" + boundary})
+              with urllib.request.urlopen(req, timeout=120) as r:
+                  res = json.loads(r.read())
+              if "media_id" not in res:
+                  raise SystemExit("upload_img failed: " + str(res))
+              return res
+
+          results = []
+          for art in payload:
+              print("=== uploading:", art["title"])
+              md = base64.b64decode(art["md_b64"]).decode("utf-8")
+              with open("article.md", "w", encoding="utf-8") as f:
+                  f.write(md)
+              import importlib.util
+              spec = importlib.util.spec_from_file_location("u", "renderer.py")
+              mod = importlib.util.module_from_spec(spec)
+              spec.loader.exec_module(mod)
+              urls = []
+              mid = None
+              for i, b in enumerate([art["cover_b64"]] + art["imgs_b64"]):
+                  r = upload_img(b)
+                  if i == 0:
+                      mid = r["media_id"]
+                  else:
+                      urls.append(r["url"])
+                  print("  img", i, "ok")
+              html = mod.build_article("article.md", urls[0] if urls else "", mid, urls)
+              article = {"title": art["title"], "author": "轻资运营牛马路",
+                         "digest": art["digest"], "content": html,
+                         "thumb_media_id": mid, "need_open_comment": 1, "only_fans": 0}
+              req = urllib.request.Request(BASE + "/cgi-bin/draft/add?access_token=" + token,
+                  data=json.dumps({"articles": [article]}, ensure_ascii=False).encode("utf-8"),
+                  headers={"Content-Type": "application/json"})
+              with urllib.request.urlopen(req, timeout=180) as r:
+                  res = json.loads(r.read())
+              print("  draft/add ->", str(res)[:300])
+              results.append({"title": art["title"], "res": res})
+
+          with open("result.json", "w", encoding="utf-8") as f:
+              json.dump(results, f, ensure_ascii=False, indent=2)
+          PYEOF
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: upload-result
+          path: result.json
