@@ -1,0 +1,21 @@
+{
+  "name": "upload_articles",
+  "on": {
+    "workflow_dispatch": {}
+  },
+  "permissions": {
+    "contents": "write"
+  },
+  "jobs": {
+    "t": {
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "name": "Get WeChat Token",
+          "id": "token",
+          "run": "RESP=$(curl -s --get -d \"appid=${{ secrets.WX_APPID }}\" -d \"secret=${{ secrets.WX_APPSECRET }}\" -d \"grant_type=client_credential\" \"https://api.weixin.qq.com/cgi-bin/token\")\necho \"Token resp: $RESP\"\nTOKEN=\"$(echo $RESP | python3 -c 'import sys,json;print(json.load(sys.stdin).get(\"access_token\",\"\"))')\"\necho \"token=$TOKEN\" >> $GITHUB_OUTPUT"
+        }
+      ]
+    }
+  }
+}
