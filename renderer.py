@@ -15,10 +15,16 @@ import sys, os, json, time, re, mimetypes, subprocess
 
 # ── 密钥读取（唯一入口）────────────────────────────────────────
 def load_config():
-    config_path = os.path.join("state/wechat_config.json")
-    with open(config_path, encoding="utf-8") as f:
-        d = json.load(f)
-    return d["appid"], d["appsecret"]
+    config_path = os.path.join(os.path.dirname(__file__), "state", "wechat_config.json")
+    if not os.path.exists(config_path):
+        config_path = os.path.join(os.path.dirname(__file__), "../state/wechat_config.json")
+    try:
+        with open(config_path, encoding="utf-8") as f:
+            d = json.load(f)
+        return d["appid"], d["appsecret"]
+    except Exception:
+        # GitHub Actions 环境无本地配置文件，token 由 workflow 直接注入
+        return "", ""
 
 APPID, APPSECRET = load_config()
 
